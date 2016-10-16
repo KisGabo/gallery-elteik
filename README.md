@@ -66,4 +66,4 @@
 ## Szakterületi fogalomjegyzék
 
 * **galéria**: összefüggő képek csoportja
-* **kulcsszó**: egy rövid (1-2 szavas) kifejezés, amely összefüggésbe hozható egy galériával vagy képpelUpdate
+* **kulcsszó**: egy rövid (1-2 szavas) kifejezés, amely összefüggésbe hozható egy galériával vagy képpel
