@@ -56,6 +56,17 @@
 * Leggyakoribb kulcsszavak és helyszínek listázása
 * Képek like-olása
 
+### Moderátorok
+
+* A publikus képek ellenőrzése: ha egy kép nem felel meg a "szabályzatnak", akkor véglegesen priváttá állíthatja
+
+### Adminisztrátor
+
+* Moderátori feladatok ellátása
+* Felhasználók listázása
+* Felhasználóknak moderátori jog adása
+* Felhasználóktól moderátori jog elvétele
+
 ## Nem funkcionális követelmények
 
 * Felhasználóbarát, egyszerű, letisztult felület
