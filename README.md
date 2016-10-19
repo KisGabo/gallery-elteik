@@ -1,6 +1,22 @@
 # Gallery
 
-**Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el.**
+**Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
+
+Ez a projekt egy beadandó feladat az ELTE Informatikai Karon, az Alkalmazások fejlesztése nevű tárgyból.
+
+## Konfigurálás
+
+1. Függőségek telepítése: `npm i`
+2. Adatbázis migrációk futtatása: `node ace migration:run`
+3. _(opcionális)_ Példa adatok beszúrása az adatbázisba: `node ace db:seed --files initial`
+4. _(opcionális)_ express-admin telepítése:
+  1. Telepítés: `npm i express-admin`
+  2. Konfigurálás / indítás: `npm run sqladmin`
+    - Adatbázis típusa: `sqlite`
+    - Adatbázisfájl: `database/db.sqlite`
+5. **Indítás**: `npm start` vagy `npm run dev`
+
+--------------------
 
 ## Funkcionális követelmények
 
