@@ -430,5 +430,169 @@
         "editview": {
             "readonly": false
         }
+    },
+    "galleries": {
+        "slug": "galleries",
+        "table": {
+            "name": "galleries",
+            "pk": "id",
+            "verbose": "galleries"
+        },
+        "columns": [
+            {
+                "name": "id",
+                "verbose": "id",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": false,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "uid",
+                "verbose": "uid",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": false,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "name",
+                "verbose": "name",
+                "control": {
+                    "text": true
+                },
+                "type": "varchar(254)",
+                "allowNull": false,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "about",
+                "verbose": "about",
+                "control": {
+                    "text": true
+                },
+                "type": "text",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "date_from",
+                "verbose": "date_from",
+                "control": {
+                    "text": true
+                },
+                "type": "datetime",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "date_to",
+                "verbose": "date_to",
+                "control": {
+                    "text": true
+                },
+                "type": "datetime",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "public",
+                "verbose": "public",
+                "control": {
+                    "text": true
+                },
+                "type": "boolean",
+                "allowNull": false,
+                "defaultValue": "'0'",
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "created_at",
+                "verbose": "created_at",
+                "control": {
+                    "text": true
+                },
+                "type": "datetime",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "updated_at",
+                "verbose": "updated_at",
+                "control": {
+                    "text": true
+                },
+                "type": "datetime",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            }
+        ],
+        "mainview": {
+            "show": true
+        },
+        "listview": {
+            "order": {},
+            "page": 25
+        },
+        "editview": {
+            "readonly": false
+        }
     }
 }
