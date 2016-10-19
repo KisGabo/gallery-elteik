@@ -26,3 +26,4 @@ lib-cov
 .DS_Store
 
 ace
+database/db.sqlite

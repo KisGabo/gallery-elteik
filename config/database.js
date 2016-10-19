@@ -5,6 +5,8 @@ const Helpers = use('Helpers')
 
 module.exports = {
 
+  debug: true,
+
   /*
   |--------------------------------------------------------------------------
   | Default Connection
@@ -30,7 +32,7 @@ module.exports = {
   sqlite: {
     client: 'sqlite3',
     connection: {
-      filename: Helpers.databasePath('development.sqlite')
+      filename: Helpers.databasePath('db.sqlite')
     },
     useNullAsDefault: true
   },

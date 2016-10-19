@@ -1,10 +1,11 @@
 {
-  "name": "adonis-app",
+  "name": "gallery-elteik",
   "version": "3.1.0",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x \"node --harmony_proxies\" server.js",
     "start": "node --harmony_proxies server.js",
+    "sqladmin": "node node_modules/express-admin/app.js config/express-admin",
     "lint": "standard"
   },
   "author": "",
@@ -19,6 +20,7 @@
     "adonis-framework": "^3.0.3",
     "adonis-lucid": "^3.0.8",
     "adonis-middleware": "^1.0.8",
+    "sqlite3": "^3.1.6",
     "standard": "^8.4.0",
     "youch": "^1.0.1"
   },
@@ -32,6 +34,7 @@
     "App": "./app"
   },
   "devDependencies": {
+    "express-admin": "^1.2.8",
     "nodemon": "^1.11.0",
     "standard": "^8.3.0"
   }
