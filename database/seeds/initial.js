@@ -35,9 +35,23 @@ const galleries = [
 
 class InitialDbSeeder {
 
+  
   * run () {
-    yield User.createMany(users)
-    yield Gallery.createMany(galleries);
+    yield this._table(User, users)
+    yield this._table(Gallery, galleries)
+  }
+
+  /**
+   * Feltölt egy táblát, ha üres. 
+   * @param model A Lucid objektum
+   * @param data Sorok tömbje, melyet a createMany(..) kap meg
+   */
+  
+  * _table(model, data) {
+    if ((yield model.query().count('* as c'))[0].c == 0)
+      yield model.createMany(data)
+    else
+      console.log('"' + model.table + '" tábla feltöltése kihagyva')
   }
 
 }
