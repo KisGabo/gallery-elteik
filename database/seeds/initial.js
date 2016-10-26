@@ -48,7 +48,7 @@ class InitialDbSeeder {
    */
   
   * _table(model, data) {
-    if ((yield model.query().count('* as c'))[0].c == 0)
+    if ((yield model.query().first()) == null)
       yield model.createMany(data)
     else
       console.log('"' + model.table + '" tábla feltöltése kihagyva')
