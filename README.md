@@ -3,6 +3,7 @@
 **Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
 
 Ez a projekt egy beadandó feladat az ELTE Informatikai Karon, az Alkalmazások fejlesztése nevű tárgyból.
+**Jelenleg fejlesztés alatt.**
 
 ## Konfigurálás
 
@@ -30,7 +31,6 @@ Ez a projekt egy beadandó feladat az ELTE Informatikai Karon, az Alkalmazások 
   - név
   - leírás
   - dátum (tól-ig)
-  - helyszín(ek)
   - kulcsszavak
 * A galéria lehet publikus vagy privát
 * Egy galéria dátumát a program automatikusan beállíthatja a képek alapján
@@ -49,7 +49,6 @@ Ez a projekt egy beadandó feladat az ELTE Informatikai Karon, az Alkalmazások 
   - cím
   - leírás
   - dátum
-  - helyszín
   - kulcsszavak
   - személynevek (a képbeli pozícióval együtt tárolva)
     * a képen kattintva kijelölhető az adott személy
@@ -88,7 +87,6 @@ Ez a projekt egy beadandó feladat az ELTE Informatikai Karon, az Alkalmazások 
 * Felhasználóbarát, egyszerű, letisztult felület
 * Keresési eredmények gyors megjelenítése
 * Jelszavas azonosítás, jelszavak biztonságos tárolása
-* Elegendően nagy háttértár(ak) a képek tárolásához
 
 ## Szakterületi fogalomjegyzék
 
