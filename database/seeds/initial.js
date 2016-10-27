@@ -28,7 +28,7 @@ const users = [
 
 const galleries = [
   {
-    uid: 1,
+    user_id: 1,
     name: 'Próba',
   }
 ]
