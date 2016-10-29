@@ -14,8 +14,9 @@ class ImagesTableSchema extends Schema {
       table.timestamp('date_taken')
       table.boolean('public').notNullable().defaultTo(false)
       table.boolean('force_private').notNullable().defaultTo(false)
-      table.integer('views').unsigned().notNullable()
-      table.integer('likes').unsigned().notNullable() // gyorsítás
+      // added defaultTo(0), since no modify-column :(
+      table.integer('views').unsigned().notNullable().defaultTo(0)
+      table.integer('likes').unsigned().notNullable().defaultTo(0)
       table.timestamps()
     })
   }
