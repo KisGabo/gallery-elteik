@@ -1,10 +1,6 @@
 'use strict'
 
-const User = use('App/Model/User')
-const Gallery = use('App/Model/Gallery')
-const Image = use('App/Model/Image')
-const Like = use('App/Model/Like')
-const Keyword = use('App/Model/Keyword')
+const Db = use('Database')
 
 // Itt szándékosan nem akarom a Factoryt használni
 
@@ -90,7 +86,7 @@ const images = [
     gallery_id: 3,
     title: 'kéééééép',
     date_taken: '2016-10-29 10:06:21',
-    pubilc: true,
+    public: true,
   },
 ]
 
@@ -124,24 +120,30 @@ class InitialDbSeeder {
 
   
   * run () {
-    yield this._table(User, users)
-    yield this._table(Gallery, galleries)
-    yield this._table(Image, images)
-    yield this._table(Like, likes)
-    yield this._table(Keyword, keywords)
+    yield this._table('users', users)
+    yield this._table('galleries', galleries)
+    yield this._table('images', images)
+    yield this._table('likes', likes)
+    yield this._table('keywords', keywords)
   }
 
   /**
-   * Feltölt egy táblát, ha üres. 
-   * @param model A Lucid objektum
-   * @param data Sorok tömbje, melyet a createMany(..) kap meg
+   * Seeds a table, if empty.
+   * @param tblname Name of table
+   * @param data Array of rows
    */
   
-  * _table(model, data) {
-    if ((yield model.query().first()) == null)
-      yield model.createMany(data)
-    else
-      console.log('"' + model.table + '" tábla feltöltése kihagyva')
+  * _table(tblname, data) {
+    if ((yield Db.table(tblname).limit(1)).length == 0) {
+      // insert one by one, because generated SQL of multirow insert for sqlite
+      // tries to set explicit NULL values for columns that are omitted from the data object
+      for (let row of data) {
+        yield Db.table(tblname).insert(row)
+      }
+    }
+    else {
+      console.log('Seeding "' + tblname + '" skipped')
+    }
   }
 
 }
