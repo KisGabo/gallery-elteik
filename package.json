@@ -6,6 +6,7 @@
     "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x \"node --harmony_proxies\" server.js",
     "start": "node --harmony_proxies server.js",
     "sqladmin": "node node_modules/express-admin/app.js config/express-admin",
+    "dbreset": "node ace migration:refresh && node ace db:seed --files initial",
     "lint": "standard"
   },
   "author": "",
