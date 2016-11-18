@@ -16,6 +16,10 @@ class User extends Lucid {
     return this.hasManyThrough('App/Model/Image', 'App/Model/Gallery')
   }
 
+  likes() {
+    return this.belongsToMany('App/Model/Image', 'p_likes')
+  }
+
 }
 
 module.exports = User
