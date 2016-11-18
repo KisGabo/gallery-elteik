@@ -17,7 +17,7 @@ class ImagesTableSchema extends Schema {
       // added defaultTo(0), since no modify-column :(
       table.integer('views').unsigned().notNullable().defaultTo(0)
       table.integer('likes').unsigned().notNullable().defaultTo(0)
-      table.timestamps()
+      table.timestamps(false, true)
     })
   }
 

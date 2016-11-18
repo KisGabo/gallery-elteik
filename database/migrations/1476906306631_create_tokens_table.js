@@ -12,7 +12,7 @@ class TokensTableSchema extends Schema {
       table.boolean('forever').defaultTo(false)
       table.boolean('is_revoked').defaultTo(false)
       table.timestamp('expiry')
-      table.timestamps()
+      table.timestamps(false, true)
     })
   }
 

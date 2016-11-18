@@ -14,7 +14,7 @@ class GalleriesTableSchema extends Schema {
       table.timestamp('date_from')
       table.timestamp('date_to')
       table.boolean('public').notNullable().defaultTo(false)
-      table.timestamps()
+      table.timestamps(false, true)
     })
   }
 
