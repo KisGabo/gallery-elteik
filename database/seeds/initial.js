@@ -116,6 +116,21 @@ const keywords = [
   { name: 'szó4' },
 ]
 
+const image_keywords = [
+  { image_id: 1, keyword_id: 1 },
+  { image_id: 1, keyword_id: 2 },
+  { image_id: 2, keyword_id: 2 },
+  { image_id: 2, keyword_id: 3 },
+  { image_id: 4, keyword_id: 3 },
+]
+
+const gallery_keywords = [
+  { gallery_id: 1, keyword_id: 1 },
+  { gallery_id: 1, keyword_id: 2 },
+  { gallery_id: 2, keyword_id: 4 },
+  { gallery_id: 3, keyword_id: 1 },
+]
+
 class InitialDbSeeder {
 
   
@@ -125,6 +140,8 @@ class InitialDbSeeder {
     yield this._table('images', images)
     yield this._table('likes', likes)
     yield this._table('keywords', keywords)
+    yield this._table('p_image_keyword', image_keywords)
+    yield this._table('p_gallery_keyword', gallery_keywords)
   }
 
   /**
