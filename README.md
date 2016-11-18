@@ -2,12 +2,13 @@
 
 **Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
 
-Ez a projekt egy beadandó feladat az ELTE Informatikai Karon, az Alkalmazások fejlesztése nevű tárgyból.
+Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkalmazások fejlesztése nevű tárgyból.
 **Jelenleg fejlesztés alatt.**
 
 ## Konfigurálás
 
 1. Függőségek telepítése: `npm i`
+2. `env.example` átnevezése `env`-re, és tartalmának ellenőrzése
 2. Adatbázis migrációk futtatása: `node ace migration:run`
 3. _(opcionális)_ Példa adatok beszúrása az adatbázisba: `node ace db:seed --files initial`
 4. _(opcionális)_ express-admin telepítése:
@@ -16,6 +17,8 @@ Ez a projekt egy beadandó feladat az ELTE Informatikai Karon, az Alkalmazások 
     - Adatbázis típusa: `sqlite`
     - Adatbázisfájl: `database/db.sqlite`
 5. **Indítás**: `npm start` vagy `npm run dev`
+
+Adatbázis reset példaadatokkal: `npm run dbreset`
 
 --------------------
 
@@ -69,7 +72,7 @@ Ez a projekt egy beadandó feladat az ELTE Informatikai Karon, az Alkalmazások 
 * Képek rendezése like-ok száma szerint
 * Keresés a galériák és képek közt név, leírás, dátum, helyszín, kulcsszavak alapján
 * Leggyakoribb kulcsszavak és helyszínek listázása
-* Képek like-olása
+* Felhasználó kedvelt képeinek listázása
 
 ### Moderátorok
 
