@@ -13,7 +13,7 @@ class Gallery extends Lucid {
   }
 
   keywords() {
-    return this.belongsToMany('App/Model/Keyword', 'p_gallery_keyword')
+    return this.belongsToMany('App/Model/Keyword', 'p_gallery_keywords')
   }
 
 }

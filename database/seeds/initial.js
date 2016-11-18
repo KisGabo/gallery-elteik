@@ -138,10 +138,10 @@ class InitialDbSeeder {
     yield this._table('users', users)
     yield this._table('galleries', galleries)
     yield this._table('images', images)
-    yield this._table('likes', likes)
+    yield this._table('p_likes', likes)
     yield this._table('keywords', keywords)
-    yield this._table('p_image_keyword', image_keywords)
-    yield this._table('p_gallery_keyword', gallery_keywords)
+    yield this._table('p_image_keywords', image_keywords)
+    yield this._table('p_gallery_keywords', gallery_keywords)
   }
 
   /**

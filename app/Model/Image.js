@@ -18,7 +18,7 @@ class Image extends Lucid {
   }
 
   keywords() {
-    return this.belongsToMany('App/Model/Keyword', 'p_image_keyword')
+    return this.belongsToMany('App/Model/Keyword', 'p_image_keywords')
   }
 
 }
