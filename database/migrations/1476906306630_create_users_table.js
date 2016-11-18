@@ -12,7 +12,7 @@ class UsersTableSchema extends Schema {
       table.string('password', 60).notNullable()
       table.string('intro')
       table.integer('role').notNullable().defaultTo(0)
-      table.timestamps()
+      table.timestamps(false, true)
     })
   }
 
