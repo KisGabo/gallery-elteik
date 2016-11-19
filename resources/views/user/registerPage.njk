@@ -1,0 +1,57 @@
+{% extends 'master' %}
+{% set headTitle = "Regisztráció" %}
+
+{% block content %}
+
+<h1>Regisztráció</h1>
+
+<form class="form-horizontal" method="post">
+
+  <div class="form-group">
+    <label for="name" class="col-lg-2 control-label">Felhasználói név *</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" name="username" id="username" placeholder="Felhasználói név" value="{{ fd.username }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email" class="col-lg-2 control-label">E-mail *</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" name="email" id="email" placeholder="E-mail cím" value="{{ fd.email }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password" class="col-lg-2 control-label">Jelszó *</label>
+    <div class="col-lg-10">
+      <input type="password" class="form-control" name="password" id="password">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password_confirm" class="col-lg-2 control-label">Jelszó újra *</label>
+    <div class="col-lg-10">
+      <input type="password" class="form-control" name="password_confirm" id="password_confirm">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="intro" class="col-lg-2 control-label">Bemutatkozás</label>
+    <div class="col-lg-10">
+      <textarea class="form-control" rows="5" name="intro" id="intro" placeholder="Pár szó magadról, ha gondolod">{{ fd.intro }}</textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-10 col-lg-offset-2">
+      <button type="reset" class="btn btn-default">Alaphelyzet</button>
+      <button type="submit" class="btn btn-primary">Küldés</button>
+    </div>
+  </div>
+
+  {{ csrfField }}
+
+</form>
+
+
+{% endblock %}
