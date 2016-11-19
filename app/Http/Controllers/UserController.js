@@ -7,10 +7,28 @@ const helpers = require('../../helpers.js')
 
 class UserController {
 
-  * showRegisterPage(req, resp) {
-    yield resp.sendView('user/registerPage', {
-      fd: req.old('fd'),
-    })
+  * login(req, resp) {
+    const email = req.input('email')
+    const password = req.input('password')
+
+    try {
+      yield req.auth.attempt(email, password)
+      yield req.with({ messages: [{
+        type: 'success', message: 'Sikeres bejelentkezés!'
+      }]}).flash()
+      resp.redirect('/')
+    }
+    catch (e) {
+      yield req.with({ messages: [{
+        type: 'danger', message: 'Az e-mail cím vagy a jelszó nem stimmel!'
+      }]}).flash()
+      resp.redirect('/login')
+    }
+  }
+
+  * logout(req, resp) {
+    yield req.auth.logout()
+    resp.redirect('/')
   }
 
   * registerUser(req, resp) {
@@ -51,6 +69,16 @@ class UserController {
     ]}).flash()
     
     resp.redirect('/')
+  }
+
+  * showLoginPage(req, resp) {
+    yield resp.sendView('user/loginPage')
+  }
+
+  * showRegisterPage(req, resp) {
+    yield resp.sendView('user/registerPage', {
+      fd: req.old('fd'),
+    })
   }
 
 }
