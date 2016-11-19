@@ -1,29 +1,30 @@
 'use strict'
 
 const Db = use('Database')
+const Hash = use('Hash')
 
-// Itt szándékosan nem akarom a Factoryt használni
-
-const users = [
-  {
-    username: 'KisGabo',
-    password: 'semmi',
-    email: 'mail@mail.com',
-    intro: 'Ezt az <b>egészet</b> én csinálom',
-    role: 2,
-  },
-  {
-    username: 'Egy mod',
-    password: 'semmi',
-    email: 'mail@mod.com',
-    role: 1,
-  },
-  {
-    username: 'Egy user',
-    password: 'semmi',
-    email: 'mail@user.com',
-  },
-]
+function * users() {
+  return [
+    {
+      username: 'KisGabo',
+      password: (yield Hash.make('pwd')),
+      email: 'mail@mail.com',
+      intro: 'Ezt az <b>egészet</b> én csinálom',
+      role: 2,
+    },
+    {
+      username: 'Egy mod',
+      password: (yield Hash.make('pwd')),
+      email: 'mail@mod.com',
+      role: 1,
+    },
+    {
+      username: 'Egy user',
+      password: (yield Hash.make('pwd')),
+      email: 'mail@user.com',
+    },
+  ]
+}
 
 const galleries = [
   {
@@ -133,9 +134,8 @@ const gallery_keywords = [
 
 class InitialDbSeeder {
 
-  
   * run () {
-    yield this._table('users', users)
+    yield this._table('users', yield users())
     yield this._table('galleries', galleries)
     yield this._table('images', images)
     yield this._table('p_likes', likes)
