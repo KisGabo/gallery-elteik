@@ -19,7 +19,7 @@ class GalleryBrowserController {
     }
 
     const gal = yield img.gallery().fetch()
-    if (img.getIsPrivate() && (!req.currentUser || req.currentUser.id != gal.user_id)) {
+    if (!img.public && (!req.currentUser || req.currentUser.id != gal.user_id)) {
       resp.unauthorized('Ez a kép privát.')
       return
     }
