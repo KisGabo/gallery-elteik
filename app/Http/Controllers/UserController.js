@@ -81,6 +81,22 @@ class UserController {
     })
   }
 
+  * showProfilePage(req, resp) {
+    const user = yield User.find(req.param('id'))
+
+    if (!user) {
+      resp.notFound('A felhasználó nem található.')
+      return
+    }
+
+    const galleries = yield user.galleries().public().fetch()
+
+    yield resp.sendView('user/profilePage', {
+      user: user.toJSON(),
+      galleries: galleries.toJSON(),
+    })
+  }
+
 }
 
 const _mapFieldToLabel = {

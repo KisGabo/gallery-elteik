@@ -1,0 +1,16 @@
+{% extends 'master' %}
+{% set headTitle = user.username %}
+{% from 'galleryBrowser/imageTable.njk' import m as imageTable %}
+{% from 'galleryBrowser/galleryTable.njk' import m as galleryTable %}
+
+{% block content %}
+
+<h1><strong>{{ user.username }}</strong> profilja</h1>
+
+<p>{{ user.intro }}</p>
+
+<h2>Galériái</h2>
+
+{{ galleryTable(galleries) }}
+
+{% endblock %}

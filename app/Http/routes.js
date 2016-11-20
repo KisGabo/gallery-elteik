@@ -9,6 +9,7 @@ Route.post  ('/login',              'UserController.login')
 Route.get   ('/logout',             'UserController.logout')
 Route.get   ('/register',           'UserController.showRegisterPage')
 Route.post  ('/register',           'UserController.registerUser')
+Route.get   ('/user/:id',           'UserController.showProfilePage').as('profile')
 
 Route.get   ('/image/:id/thumb',    'GalleryBrowserController.sendImage').as('thumb')
 Route.get   ('/image/:id/medium',   'GalleryBrowserController.sendImage').as('medium')

@@ -4,19 +4,25 @@
 
 {% for gal in galleries %}
 <tr>
+
+  {% if gal.user %}
   <td>
     <a href="{{ 'profile' | route({id: gal.user_id}) }}">
       {{ gal.user.username }}
     </a>
   </td>
+  {% endif %}
+
   <td>
     <a href="{{ 'gallery' | route({id: gal.id}) }}">
       <strong>{{ gal.name }}</strong>
     </a>
   </td>
+
   <td>
     {{ gal.created_at }}
   </td>
+  
 </tr>
 {% endfor %}
 
