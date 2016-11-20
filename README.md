@@ -1,7 +1,7 @@
 # Gallery
 
 > **2. beadandó határidő lejárta előtti utolsó állapot:**
-> [8f4c048](https://github.com/KisGabo/gallery-elteik/commit/8f4c048bf0601f58164b33dbe90b26e6d2f119aa)
+> [8f4c048](https://github.com/KisGabo/gallery-elteik/commit/8f4c048bf0601f58164b33dbe90b26e6d2f119aa) (félkész)
 
 **Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
 
@@ -11,7 +11,7 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 ## Konfigurálás
 
 1. Függőségek telepítése: `npm i`
-2. `env.example` átnevezése `env`-re, és tartalmának ellenőrzése
+2. `.env.example` átnevezése `.env`-re, és tartalmának ellenőrzése
 3. Adatbázis migrációk futtatása: `node ace migration:run`
 4. **Indítás**: `npm start` vagy `npm run dev`
 
