@@ -1,12 +1,17 @@
 'use strict'
 
+const fs = require('co-fs')
 const AdonisHelpers = use('Helpers')
 const Gallery = use('App/Model/Gallery')
 const Image = use('App/Model/Image')
 
 class GalleryBrowserController {
 
-  * sendOriginalImage(req, resp) {
+  /**
+   * Sends JPG file to client.
+   * @todo Use secret filenames instead of db access
+   */
+  * sendImage(req, resp) {
     const img = yield Image.find(req.param('id'))
     if (!img) {
       resp.notFound('A kép nem létezik.')
@@ -19,7 +24,18 @@ class GalleryBrowserController {
       return
     }
 
-    const path = AdonisHelpers.storagePath(`gallery/${gal.user_id}/${gal.id}/${img.id}.jpg`)
+    let prefix = ''
+    if (req.match('/image/:id/thumb')) prefix = 'th'
+    else if (req.match('/image/:id/medium')) prefix = 'md'
+
+    const path = AdonisHelpers.storagePath(`gallery/${gal.user_id}/${gal.id}/${prefix}${img.id}.jpg`)
+
+    // if thumbnail or medium doesn't exist, send original
+    // @TODO save original size to db, and check that instead of fs access
+    if (!(yield fs.exists(path))) {
+      path = AdonisHelpers.storagePath(`gallery/${gal.user_id}/${gal.id}/${img.id}.jpg`)
+    }
+
     resp.download(path)
 
     img.views++

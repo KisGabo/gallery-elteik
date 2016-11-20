@@ -10,4 +10,6 @@ Route.get   ('/logout',             'UserController.logout')
 Route.get   ('/register',           'UserController.showRegisterPage')
 Route.post  ('/register',           'UserController.registerUser')
 
-Route.get   ('/image/:id/original', 'GalleryBrowserController.sendOriginalImage')
+Route.get   ('/image/:id/thumb',    'GalleryBrowserController.sendImage')
+Route.get   ('/image/:id/medium',   'GalleryBrowserController.sendImage')
+Route.get   ('/image/:id/original', 'GalleryBrowserController.sendImage')
