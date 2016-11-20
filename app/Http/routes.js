@@ -13,7 +13,10 @@ Route.get   ('/user',               'UserController.showListPage')
 Route.get   ('/user/:id',           'UserController.showProfilePage').as('profile')
 
 Route.get   ('/gallery',            'GalleryBrowserController.showGalleryListPage')
+Route.get   ('/gallery/add',        'GalleryManagerController.showFormPage').as('gallery_add').middleware('auth')
 Route.get   ('/gallery/:id',        'GalleryBrowserController.showGalleryPage').as('gallery')
+Route.get   ('/gallery/:id/edit',   'GalleryManagerController.showFormPage').as('gallery_edit').middleware('auth')
+Route.get   ('/gallery/:id/delete', 'GalleryManagerController.delete').as('gallery_delete').middleware('auth')
 
 Route.get   ('/image/:id',          'GalleryBrowserController.showImagePage').as('image')
 Route.get   ('/image/:id/like',     'GalleryBrowserController.likeImage').as('like').middleware('auth')

@@ -1,0 +1,70 @@
+{% extends 'master' %}
+{% set headTitle = 'Galéria' %}
+
+{% block content %}
+
+<form class="form-horizontal" method="post">
+
+  <div class="form-group">
+    <label for="name" class="col-lg-2 control-label">Galéria neve *</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" name="name" id="name" placeholder="Galéria neve" value="{{ gallery.name }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="date_from" class="col-lg-2 control-label">Kezdő dátum</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" name="date_from" id="date_from" placeholder="pl. 2016-11-20 12:15:00" value="{{ gallery.date_from }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="date_from" class="col-lg-2 control-label">Befejező dátum</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" name="date_to" id="date_to" placeholder="pl. 2016-11-20 12:15:00" value="{{ gallery.date_to }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="keywords" class="col-lg-2 control-label">
+      Kulcsszavak
+      <br>
+      <small>Vesszővel elválasztva</small>
+    </label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" name="keywords" id="keywords" placeholder="szó1, szó2, satöbbi" value="{{ keywordNames | join(', ') if keywordNames }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-lg-2 control-label">Láthatóság</label>
+    <div class="col-lg-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="public" id="public" {{ 'checked' if gallery.public }}>
+          Publikus
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="about" class="col-lg-2 control-label">Leírás</label>
+    <div class="col-lg-10">
+      <textarea class="form-control" rows="5" name="about" id="about" placeholder="Pár szó, ha van mit mesélni">{{ gallery.about }}</textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-10 col-lg-offset-2">
+      <button type="reset" class="btn btn-default">Alaphelyzet</button>
+      <button type="submit" class="btn btn-primary">Mentés</button>
+    </div>
+  </div>
+
+  {{ csrfField }}
+
+</form>
+
+{% endblock %}
