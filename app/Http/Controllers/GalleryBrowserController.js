@@ -37,9 +37,6 @@ class GalleryBrowserController {
     }
 
     resp.download(path)
-
-    img.view_count++
-    yield img.save()
   }
 
   * showMainPage(req, resp) {
@@ -127,6 +124,9 @@ class GalleryBrowserController {
     else if (likes.some(user => user.id == req.currentUser.id)) {
       likeStatus = 'liked'
     }
+
+    image.view_count++
+    yield image.save()
 
     yield resp.sendView('galleryBrowser/imagePage', {
       image: image.toJSON(),
