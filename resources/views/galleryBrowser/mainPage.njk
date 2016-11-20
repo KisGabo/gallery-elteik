@@ -1,78 +1,20 @@
 {% extends 'master' %}
 {% set headTitle = "Főoldal" %}
+{% from 'galleryBrowser/imageTable.njk' import m as imageTable %}
+{% from 'galleryBrowser/galleryTable.njk' import m as galleryTable %}
 
 {% block content %}
 
 <h1>Legújabb galériák</h1>
 
-<table class="table table-striped table-hover">
-
-{% for gal in galleries %}
-<tr>
-  <td>
-    <a href="{{ 'profile' | route({id: gal.user_id}) }}">
-      {{ gal.user.username }}
-    </a>
-  </td>
-  <td>
-    <a href="{{ 'gallery' | route({id: gal.id}) }}">
-      <strong>{{ gal.name }}</strong>
-    </a>
-  </td>
-  <td>
-    {{ gal.created_at }}
-  </td>
-</tr>
-{% endfor %}
-
-</table>
-
+{{ galleryTable(galleries) }}
 
 <h1>Legújabb képek</h1>
 
-{% for img in images %}
-<div class="thumbnail">
-
-  <a href="{{ 'image' | route({id: img.id}) }}">
-    <img src="{{ 'thumb' | route({id: img.id}) }}" alt="{{ img.title }}">
-  </a>
-
-  <div class="caption">
-
-    {% if img.title != '' %}
-    <strong>{{ img.title }}</strong>
-    <br>
-    {% endif %}
-
-    <small>{{ img.created_at }}</small>
-
-  </div>
-
-</div>
-{% endfor %}
-
+{{ imageTable(images) }}
 
 <h1>Legkedveltebb képek</h1>
 
-{% for img in topimages %}
-<div class="thumbnail">
-
-  <a href="{{ 'image' | route({id: img.id}) }}">
-    <img src="{{ 'thumb' | route({id: img.id}) }}" alt="{{ img.title }}">
-  </a>
-
-  <div class="caption">
-
-    {% if img.title != '' %}
-    <strong>{{ img.title }}</strong>
-    <br>
-    {% endif %}
-
-    <small>Kedvelések: {{ img.like_count }}</small>
-
-  </div>
-
-</div>
-{% endfor %}
+{{ imageTable(topimages) }}
 
 {% endblock %}
