@@ -57,13 +57,13 @@ const images = [
     title: 'Kép2',
     date_taken: '2016-10-29 10:06:21',
     public: true,
-    likes: 2,
+    like_count: 2,
   },
   {
     gallery_id: 1,
     title: 'Force private kép',
     date_taken: '2016-10-29 01:06:21',
-    public: true,
+    public: false,
     force_private: true,
   },
   {
@@ -76,7 +76,7 @@ const images = [
     title: 'Privi galériában public kép',
     date_taken: '2016-10-29 10:06:21',
     public: true,
-    likes: 1,
+    like_count: 1,
   },
   {
     gallery_id: 3,
