@@ -28,7 +28,7 @@ class GalleryBrowserController {
     if (req.match('/image/:id/thumb')) prefix = 'th'
     else if (req.match('/image/:id/medium')) prefix = 'md'
 
-    const path = AdonisHelpers.storagePath(`gallery/${gal.user_id}/${gal.id}/${prefix}${img.id}.jpg`)
+    let path = AdonisHelpers.storagePath(`gallery/${gal.user_id}/${gal.id}/${prefix}${img.id}.jpg`)
 
     // if thumbnail or medium doesn't exist, send original
     // @TODO save original size to db, and check that instead of fs access
@@ -38,18 +38,33 @@ class GalleryBrowserController {
 
     resp.download(path)
 
-    img.views++
+    img.view_count++
     yield img.save()
   }
 
   * showMainPage(req, resp) {
-    const galleries = yield Gallery.query()
+    const galleries = yield Gallery.query().public()
       .orderBy('created_at', 'desc')
       .limit(5)
-      .with('user').fetch()
+      .with('user')
+      .fetch()
+
+    // TODO query user for images
+
+    const images = yield Image.query().public()
+      .orderBy('created_at', 'desc')
+      .limit(5)
+      .fetch()
+
+    const top = yield Image.query().public()
+      .orderBy('like_count', 'desc')
+      .limit(5)
+      .fetch()
 
     yield resp.sendView('galleryBrowser/mainPage', {
-      galleries: galleries.toJSON()
+      galleries: galleries.toJSON(),
+      images: images.toJSON(),
+      topimages: top.toJSON(),
     })
   }
 

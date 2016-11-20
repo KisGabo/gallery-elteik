@@ -4,6 +4,10 @@ const Lucid = use('Lucid')
 
 class Gallery extends Lucid {
 
+  static scopePublic(q) {
+    q.where('public', true)
+  }
+
   user() {
     return this.belongsTo('App/Model/User')
   }

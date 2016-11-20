@@ -4,6 +4,10 @@ const Lucid = use('Lucid')
 
 class Image extends Lucid {
 
+  static scopePublic(q) {
+    q.where('public', true)
+  }
+
   user() {
     // TODO no hasOneThrough relationship in Lucid
     throw 'Not implemented: please query user through gallery';
