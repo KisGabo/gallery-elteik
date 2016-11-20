@@ -97,6 +97,14 @@ class UserController {
     })
   }
 
+  * showListPage(req, resp) {
+    const users = yield User.all()
+
+    yield resp.sendView('user/profileListPage', {
+      users: users.toJSON(),
+    })
+  }
+
 }
 
 const _mapFieldToLabel = {
