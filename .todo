@@ -1,3 +1,5 @@
+- BUG: messages don't get cleared
+
 - do todos in source
 - pretty error pages
 - escape in output
@@ -6,3 +8,4 @@
 - active menuitem
 - datetime format
 - keyword slugs
+- database hook for password hash
