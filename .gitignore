@@ -1,11 +1,11 @@
 # Node modules
 node_modules
 
-# Ignoring everything inside storage directory
-storage/*
+# Ignoring everything inside upload directory
+storage/gallery/*
 
-# Keeping storage directory
-!storage/.gitkeep
+# Keeping upload directory
+!storage/gallery/.gitkeep
 
 # Environment files should be seperate for each environment
 .env
