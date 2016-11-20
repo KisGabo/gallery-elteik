@@ -20,3 +20,6 @@ Route.get   ('/image/:id/like',     'GalleryBrowserController.likeImage').as('li
 Route.get   ('/image/:id/thumb',    'GalleryBrowserController.sendImage').as('thumb')
 Route.get   ('/image/:id/medium',   'GalleryBrowserController.sendImage').as('medium')
 Route.get   ('/image/:id/original', 'GalleryBrowserController.sendImage').as('original')
+
+Route.get   ('/keyword/:id/gallery','GalleryBrowserController.showKeywordPage').as('gallery_keyword')
+Route.get   ('/keyword/:id/image',  'GalleryBrowserController.showKeywordPage').as('image_keyword')

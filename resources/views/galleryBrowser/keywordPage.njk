@@ -1,0 +1,26 @@
+{% extends 'master' %}
+{% set headTitle = keyword.name %}
+{% from 'galleryBrowser/galleryTable.njk' import m as galleryTable %}
+{% from 'galleryBrowser/imageTable.njk' import m as imageTable %}
+{% from 'macros.njk' import active as a %}
+
+{% block content %}
+
+<h1>{{ keyword.name }}</h1>
+
+<ul class="nav nav-pills">
+  <li role="presentation" {{ a(galleries) }}>
+    <a href="{{ 'gallery_keyword' | route({id: keyword.id}) }}">
+      Galériák
+    </a>
+  </li>
+  <li role="presentation" {{ a(images) }}>
+    <a href="{{ 'image_keyword' | route({id: keyword.id}) }}">
+      Képek
+    </a>
+  </li>
+</ul>
+
+{{ galleryTable(galleries) if galleries else imageTable(images) }}
+
+{% endblock %}

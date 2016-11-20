@@ -1,4 +1,4 @@
-{% macro m(keywords) %}
+{% macro m(keywords, type) %}
 
 <p>
 
@@ -6,7 +6,7 @@
 
 {% for kw in keywords %}
 <span class="label label-default">
-  <a href="{{ 'gallery-keyword' | route({id: kw.id}) }}">
+  <a href="{{ (type + '_keyword') | route({id: kw.id}) }}">
     {{ kw.name }}
   </a>
 </span>

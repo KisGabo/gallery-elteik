@@ -4,6 +4,7 @@ const fs = require('co-fs')
 const AdonisHelpers = use('Helpers')
 const Gallery = use('App/Model/Gallery')
 const Image = use('App/Model/Image')
+const Keyword = use('App/Model/Keyword')
 
 class GalleryBrowserController {
 
@@ -133,6 +134,29 @@ class GalleryBrowserController {
       keywords: keywords.toJSON(),
       likes: likes.toJSON(),
       likeStatus
+    })
+  }
+
+  * showKeywordPage(req, resp) {
+    const keyword = yield Keyword.find(req.param('id'))
+    if (!keyword) {
+      resp.notFound('A kulcsszó nem létezik.')
+      return
+    }
+
+    let galleries = null
+    let images = null
+    if (req.match('/keyword/:id/gallery')) {
+      galleries = (yield keyword.galleries().public().fetch()).toJSON()
+    }
+    else {
+      images = (yield keyword.images().public().fetch()).toJSON()
+    }
+
+    yield resp.sendView('galleryBrowser/keywordPage', {
+      keyword: keyword.toJSON(),
+      galleries,
+      images,
     })
   }
 
