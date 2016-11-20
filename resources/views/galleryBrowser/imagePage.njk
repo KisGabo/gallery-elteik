@@ -1,0 +1,82 @@
+{% extends 'master' %}
+{% set headTitle = image.title if image.title else 'Kép' %}
+{% from 'galleryBrowser/keywordList.njk' import m as keywordList %}
+
+{% block content %}
+
+{% if image.title %}
+<h1>{{ image.title }}</h1>
+{% endif %}
+
+<p>
+  <a href="{{ 'gallery' | route({id: image.gallery.id}) }}">
+    {{ image.gallery.name }}
+  </a>    
+</p>
+
+<div class="row">
+
+  <div class="col-lg-9">
+    <a href="{{ 'original' | route({id: image.id}) }}" target="_blank">
+      <img src="{{ 'medium' | route({id: image.id}) }}" alt="{{ image.title }}">
+    </a>
+  </div>
+
+  <div class="col-lg-3">
+
+    <dl>
+
+      <dt>Készítette</dt>
+      <dd>
+        <a href="{{ 'profile' | route({id: image.gallery.user_id}) }}">
+          {{ image.gallery.user.username }}
+        </a>
+      </dd>
+
+      {% if image.date_taken %}
+      <dt>Fotózva</dt>
+      <dd>{{ image.date_taken }}</dd>
+      {% endif %}
+
+      <dt>Feltöltve</dt>
+      <dd>{{ image.created_at }}</dd>
+
+      <dt>Megtekintések</dt>
+      <dd>{{ image.view_count }}</dd>
+
+      <dt>Kedvelések: {{ image.like_count }}</dt>
+      <dd>
+        {% set comma = joiner() %}
+        {% for user in likes %}
+          {{ comma() }}
+          <a href="{{ 'profile' | route({id: user.id}) }}">
+            {{ user.username }}
+          </a>
+        {% endfor %}
+      </dd>
+
+    </dl>
+
+    {% if likeStatus == 'can-like' %}
+    <p>
+      <strong>
+        <a href="{{ 'like' | route({id: image.id}) }}">
+          Like
+        </a>
+      </strong>
+    </p>
+    {% elif likeStatus == 'liked' %}
+    <p>Már kedvelted ezt a képet.</p>
+    {% endif %}
+
+    {{ keywordList(keywords) }}
+
+    {% if image.about %}
+    <p>{{ image.about }}</p>
+    {% endif %}
+
+  </div>
+
+</div>
+
+{% endblock %}

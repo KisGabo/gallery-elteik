@@ -102,6 +102,64 @@ class GalleryBrowserController {
     })
   }
 
+  * showImagePage(req, resp) {
+    const image = yield Image.find(req.param('id'))
+    if (!image) {
+      resp.notFound('A kép nem létezik.')
+      return
+    }
+
+    yield image.related('gallery').load()
+
+    if (!image.public && (!req.currentUser || req.currentUser.id != image.gallery.user_id)) {
+      resp.unauthorized('Ez a kép privát.')
+      return
+    }
+
+    yield image.related('gallery.user').load()
+    const keywords = yield image.keywords().fetch()
+    const likes = yield image.likes().fetch()
+    
+    let likeStatus = 'can-like'
+    if (!req.currentUser) {
+      likeStatus = 'guest'
+    }
+    else if (likes.some(user => user.id == req.currentUser.id)) {
+      likeStatus = 'liked'
+    }
+
+    yield resp.sendView('galleryBrowser/imagePage', {
+      image: image.toJSON(),
+      keywords: keywords.toJSON(),
+      likes: likes.toJSON(),
+      likeStatus
+    })
+  }
+
+  * likeImage(req, resp) {
+    const image = yield Image.find(req.param('id'))
+    if (!image) {
+      resp.notFound('A kép nem létezik.')
+      return
+    }
+
+    yield image.related('gallery').load()
+
+    if (!image.public && req.currentUser.id != image.gallery.user_id) {
+      resp.unauthorized('Ez a kép privát.')
+      return
+    }
+
+    const liked = yield image.likes().where('id', req.currentUser.id).first()
+    if (!liked) {
+      yield image.likes().attach([ req.currentUser.id ])
+      image.like_count++
+      yield image.save()
+    }
+
+    resp.route('image', { id: image.id })
+  }
+
 }
 
 module.exports = GalleryBrowserController
