@@ -51,6 +51,7 @@ const images = [
     title: 'Kép1',
     date_taken: '2016-10-29 11:06:21',
     public: true,
+    like_count: 1,
   },
   {
     gallery_id: 1,
