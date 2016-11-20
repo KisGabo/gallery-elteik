@@ -4,6 +4,10 @@ const Lucid = use('Lucid')
 
 class Image extends Lucid {
 
+  static get computed() {
+    return [ 'isPrivate' ];
+  }
+
   user() {
     // TODO no hasOneThrough relationship in Lucid
     throw 'Not implemented: please query user through gallery';
@@ -19,6 +23,10 @@ class Image extends Lucid {
 
   keywords() {
     return this.belongsToMany('App/Model/Keyword', 'p_image_keywords')
+  }
+
+  getIsPrivate() {
+    return !this.public || this.force_private;
   }
 
 }
