@@ -1,0 +1,11 @@
+{% extends 'master' %}
+{% set headTitle = 'Galériák' %}
+{% from 'galleryBrowser/galleryTable.njk' import m as galleryTable %}
+
+{% block content %}
+
+<h1>Galériák</h1>
+
+{{ galleryTable(galleries) }}
+
+{% endblock %}

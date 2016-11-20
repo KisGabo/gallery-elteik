@@ -12,6 +12,7 @@ Route.post  ('/register',           'UserController.registerUser')
 Route.get   ('/user',               'UserController.showListPage')
 Route.get   ('/user/:id',           'UserController.showProfilePage').as('profile')
 
+Route.get   ('/gallery',            'GalleryBrowserController.showGalleryListPage')
 Route.get   ('/image/:id/thumb',    'GalleryBrowserController.sendImage').as('thumb')
 Route.get   ('/image/:id/medium',   'GalleryBrowserController.sendImage').as('medium')
 Route.get   ('/image/:id/original', 'GalleryBrowserController.sendImage').as('original')

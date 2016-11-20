@@ -44,7 +44,7 @@ class GalleryBrowserController {
 
   * showMainPage(req, resp) {
     const galleries = yield Gallery.query().public()
-      .orderBy('created_at', 'desc')
+      .orderBy('id', 'desc')
       .limit(5)
       .with('user')
       .fetch()
@@ -52,7 +52,7 @@ class GalleryBrowserController {
     // TODO query user for images
 
     const images = yield Image.query().public()
-      .orderBy('created_at', 'desc')
+      .orderBy('id', 'desc')
       .limit(5)
       .fetch()
 
@@ -65,6 +65,17 @@ class GalleryBrowserController {
       galleries: galleries.toJSON(),
       images: images.toJSON(),
       topimages: top.toJSON(),
+    })
+  }
+
+  * showGalleryListPage(req, resp) {
+    const galleries = yield Gallery.query().public()
+      .orderBy('id', 'desc')
+      .with('user')
+      .fetch()
+
+    yield resp.sendView('galleryBrowser/galleryListPage', {
+      galleries: galleries.toJSON(),
     })
   }
 
