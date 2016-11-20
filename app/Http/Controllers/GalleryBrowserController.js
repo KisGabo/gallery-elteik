@@ -1,6 +1,7 @@
 'use strict'
 
 const AdonisHelpers = use('Helpers')
+const Gallery = use('App/Model/Gallery')
 const Image = use('App/Model/Image')
 
 class GalleryBrowserController {
@@ -20,10 +21,20 @@ class GalleryBrowserController {
 
     const path = AdonisHelpers.storagePath(`gallery/${gal.user_id}/${gal.id}/${img.id}.jpg`)
     resp.download(path)
+
+    img.views++
+    yield img.save()
   }
 
   * showMainPage(req, resp) {
-    yield resp.sendView('galleryBrowser/mainPage')   
+    const galleries = yield Gallery.query()
+      .orderBy('created_at', 'desc')
+      .limit(5)
+      .with('user').fetch()
+
+    yield resp.sendView('galleryBrowser/mainPage', {
+      galleries: galleries.toJSON()
+    })
   }
 
 }

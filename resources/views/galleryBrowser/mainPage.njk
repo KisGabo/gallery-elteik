@@ -3,9 +3,27 @@
 
 {% block content %}
 
-<h1>Hi!</h1>
+<h1>Legújabb galériák</h1>
 
+<table class="table table-striped table-hover">
 
+{% for gal in galleries %}
+<tr>
+  <td>
+    <a href="{{ 'profile' | route({id: gal.user_id}) }}">
+      {{ gal.user.username }}
+    </a>
+  </td>
+  <td>
+    <a href="{{ 'gallery' | route({id: gal.id}) }}">
+      <strong>{{ gal.name }}</strong>
+    </a>
+  </td>
+  <td>
+    {{ gal.created_at }}
+  </td>
+</tr>
+{% endfor %}
 
 
 {% endblock %}
