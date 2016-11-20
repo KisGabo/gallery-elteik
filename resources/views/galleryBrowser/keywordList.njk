@@ -1,0 +1,21 @@
+{% macro m(keywords) %}
+
+<p>
+
+{% if keywords.length > 0 %}
+
+{% for kw in keywords %}
+<span class="label label-default">
+  <a href="{{ 'gallery-keyword' | route({id: kw.id}) }}">
+    {{ kw.name }}
+  </a>
+</span>
+{% endfor %}
+
+{% else %}
+
+<small>Nincsenek kulcsszavak</small>
+
+{% endif %}
+
+{% endmacro %}

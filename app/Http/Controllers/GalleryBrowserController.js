@@ -79,6 +79,29 @@ class GalleryBrowserController {
     })
   }
 
+  * showGalleryPage(req, resp) {
+    const gallery = yield Gallery.find(req.param('id'))
+    if (!gallery) {
+      resp.notFound('A galéria nem létezik.')
+      return
+    }
+
+    if (!gallery.public && (!req.currentUser || req.currentUser.id != gallery.user_id)) {
+      resp.unauthorized('Ez a galéria privát.')
+      return
+    }
+
+    yield gallery.related('user').load()
+    const images = yield gallery.images().public().fetch()
+    const keywords = yield gallery.keywords().fetch()
+
+    yield resp.sendView('galleryBrowser/galleryPage', {
+      gallery: gallery.toJSON(),
+      images: images.toJSON(),
+      keywords: keywords.toJSON(),
+    })
+  }
+
 }
 
 module.exports = GalleryBrowserController

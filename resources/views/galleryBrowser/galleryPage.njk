@@ -1,0 +1,40 @@
+{% extends 'master' %}
+{% set headTitle = gallery.name %}
+{% from 'galleryBrowser/imageTable.njk' import m as imageTable %}
+{% from 'galleryBrowser/keywordList.njk' import m as keywordList %}
+
+{% block content %}
+
+<h1>
+  {{ gallery.name }}
+  <small>
+    <a href="{{ 'profile' | route({id: gallery.user.id}) }}">
+      {{ gallery.user.username }}
+    </a>
+  </small>
+</h1>
+
+{{ keywordList(keywords) }}
+
+<ul>
+
+  {% if gallery.date_from %}
+  <li>
+    <strong>Fotózva:</strong>
+    {{ gallery.date_from }}
+    {% if gallery.date_to %} - {{ gallery.date_to }}{% endif %}
+  </li>
+  {% endif %}
+
+  <li><strong>Létrehozva:</strong> {{ gallery.created_at }}</li>
+  <li><strong>Képek száma:</strong> ##</li>
+
+</ul>
+
+{% if gallery.about %}
+<p>{{ gallery.about }}</p>
+{% endif %}
+
+{{ imageTable(images) }}
+
+{% endblock %}
