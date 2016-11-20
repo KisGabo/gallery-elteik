@@ -1,5 +1,8 @@
 # Gallery
 
+> **2. beadandó határidő lejárta előtti utolsó állapot:**
+> [8f4c048](https://github.com/KisGabo/gallery-elteik/commit/8f4c048bf0601f58164b33dbe90b26e6d2f119aa)
+
 **Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
 
 Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkalmazások fejlesztése nevű tárgyból.
@@ -9,14 +12,17 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 
 1. Függőségek telepítése: `npm i`
 2. `env.example` átnevezése `env`-re, és tartalmának ellenőrzése
-2. Adatbázis migrációk futtatása: `node ace migration:run`
-3. _(opcionális)_ Példa adatok beszúrása az adatbázisba: `node ace db:seed --files initial`
-4. _(opcionális)_ express-admin telepítése:
+3. Adatbázis migrációk futtatása: `node ace migration:run`
+4. **Indítás**: `npm start` vagy `npm run dev`
+
+* _(opcionális)_ Példa adatok beszúrása az adatbázisba: `node ace db:seed --files initial`
+* _(opcionális)_ [Példa képek letöltése](https://dl.dropboxusercontent.com/u/69565179/k%C3%BCld-nagyg%C3%A9p/gallery-elteik/storage.zip) (a zip tartalmát a projektkönyvtárba kell bemásolni)
+* _(opcionális)_ express-admin telepítése:
   1. Telepítés: `npm i express-admin`
   2. Konfigurálás / indítás: `npm run sqladmin`
     - Adatbázis típusa: `sqlite`
     - Adatbázisfájl: `database/db.sqlite`
-5. **Indítás**: `npm start` vagy `npm run dev`
+
 
 Adatbázis reset példaadatokkal: `npm run dbreset`
 
