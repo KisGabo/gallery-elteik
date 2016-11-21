@@ -1,5 +1,3 @@
-- BUG: messages don't get cleared
-
 - do todos in source
 - pretty error pages
 - escape in output
