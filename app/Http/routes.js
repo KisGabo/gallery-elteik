@@ -14,8 +14,10 @@ Route.get   ('/user/:id',           'UserController.showProfilePage').as('profil
 
 Route.get   ('/gallery',            'GalleryBrowserController.showGalleryListPage')
 Route.get   ('/gallery/add',        'GalleryManagerController.showFormPage').as('gallery_add').middleware('auth')
+Route.post  ('/gallery/add',        'GalleryManagerController.saveGallery').middleware('auth')
 Route.get   ('/gallery/:id',        'GalleryBrowserController.showGalleryPage').as('gallery')
 Route.get   ('/gallery/:id/edit',   'GalleryManagerController.showFormPage').as('gallery_edit').middleware('auth')
+Route.post  ('/gallery/:id/edit',   'GalleryManagerController.saveGallery').middleware('auth')
 Route.get   ('/gallery/:id/delete', 'GalleryManagerController.delete').as('gallery_delete').middleware('auth')
 
 Route.get   ('/image/:id',          'GalleryBrowserController.showImagePage').as('image')
