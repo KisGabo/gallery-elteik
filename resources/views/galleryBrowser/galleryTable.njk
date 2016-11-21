@@ -22,6 +22,14 @@
   <td>
     {{ gal.created_at }}
   </td>
+
+  {% if ownerControls %}
+  <td>
+    <a href="{{ 'gallery_upload' | route({id: gal.id}) }}" class="btn btn-success btn-xs">Feltöltés</a>
+    <a href="{{ 'gallery_edit' | route({id: gal.id}) }}" class="btn btn-primary btn-xs">Módosítás</a>
+    <a href="{{ 'gallery_delete' | route({id: gal.id}) }}" class="btn btn-danger btn-xs">Törlés</a>
+  </td>
+  {% endif %}
   
 </tr>
 {% endfor %}

@@ -1,0 +1,16 @@
+{% extends 'master' %}
+{% set headTitle = 'Saját galériák' %}
+{% from 'galleryBrowser/galleryTable.njk' import m as galleryTable %}
+
+{% block content %}
+
+<h1>
+  Saját galériák
+  <a href="/gallery/add" class="btn btn-default">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Új galéria
+  </a>
+</h1>
+
+{{ galleryTable(galleries, true) }}
+
+{% endblock %}

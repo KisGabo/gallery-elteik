@@ -160,6 +160,16 @@ class GalleryBrowserController {
     })
   }
 
+  * showOwnPage(req, resp) {
+    const galleries = yield req.currentUser.galleries()
+      .orderBy('name', 'asc')
+      .fetch()
+
+    yield resp.sendView('galleryBrowser/ownPage', {
+      galleries: galleries.toJSON(),
+    })
+  }
+
   * likeImage(req, resp) {
     const image = yield Image.find(req.param('id'))
     if (!image) {
