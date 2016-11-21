@@ -1,8 +1,22 @@
 'use strict'
 
+const Db = use('Database')
 const Lucid = use('Lucid')
 
 class Image extends Lucid {
+
+  static * setVisibilityByGallery(gallery_id, isPublic) {
+    if (isPublic) {
+      yield Db.table('images')
+        .where({ gallery_id, force_private: false })
+        .update('public', true)
+    }
+    else {
+      yield Db.table('images')
+        .where({ gallery_id })
+        .update('public', false)
+    }
+  }
 
   static scopePublic(q) {
     q.where('public', true)

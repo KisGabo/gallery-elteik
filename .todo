@@ -11,3 +11,4 @@
 - database hook for password hash
 - middleware to check if item belongs to current user
 - something to shorten the query-exists-canview code
+- database hook for setting gallery visibility

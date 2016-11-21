@@ -47,6 +47,11 @@ class GalleryManagerController {
         resp.unauthorized('Ez a galéria nem a tiéd.')
         return
       }
+
+      // if visibility changed, set images' visibility accordingly
+      if (gallery.public == !data.public) {
+        yield Image.setVisibilityByGallery(gallery.id, data.public)
+      }
     }
 
     // save
