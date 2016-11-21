@@ -1,5 +1,6 @@
 'use strict'
 
+const Db = use('Database')
 const Lucid = use('Lucid')
 
 class Gallery extends Lucid {
@@ -29,10 +30,16 @@ class Gallery extends Lucid {
     return this.belongsToMany('App/Model/Keyword', 'p_gallery_keywords')
   }
 
+  * deleteWithPivots() {
+    yield Db.table('p_gallery_keywords')
+      .where('gallery_id', this.id)
+      .delete()
+    yield this.delete()
+  }
+
   * syncKeywords(names) {
     // empty array causes an error in .sync()
     if (names.length == 0) {
-      const Db = use('Database')
       yield Db.table('p_gallery_keywords')
         .where('gallery_id', this.id)
         .delete()

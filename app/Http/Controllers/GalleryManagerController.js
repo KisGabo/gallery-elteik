@@ -8,7 +8,7 @@ const h = require('../../helpers.js')
 
 class GalleryManagerController {
 
-  * saveGallery(req, resp) {
+  * save(req, resp) {
     const data = req.except('_csrf');
 
     // process keywords
@@ -70,6 +70,22 @@ class GalleryManagerController {
       }
     ]}).flash()
     
+    resp.redirect('back')
+  }
+
+  * delete(req, resp) {
+    const gallery = yield Gallery.find(req.param('id'))
+    if (!gallery) {
+      resp.notFound('A galéria nem található.')
+      return
+    }
+
+    if (!h.checkOwn(gallery, req)) {
+      resp.unauthorized('Ez a galéria nem a tiéd.')
+      return
+    }
+
+    yield gallery.deleteWithPivots()
     resp.redirect('back')
   }
 
