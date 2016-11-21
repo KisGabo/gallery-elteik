@@ -13,7 +13,6 @@ storage/gallery/*
 # When npm runs error it write logs to the below file
 npm-debug.log
 
-ace
 database/db.sqlite
 database/db.sqlite-journal
 config/express-admin
