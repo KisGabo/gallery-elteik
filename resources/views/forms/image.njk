@@ -1,0 +1,73 @@
+{% extends 'master' %}
+{% set headTitle = 'Kép szerkesztése' %}
+
+{% block content %}
+
+<form class="form-horizontal" method="post">
+
+  <div class="form-group">
+    <label class="col-lg-2 control-label">Galéria</label>
+    <div class="col-lg-10">
+      <a href="{{ 'gallery' | route({id: image.gallery.id}) }}" class="form-control">{{ image.gallery.name }}</a>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="title" class="col-lg-2 control-label">Cím</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" name="title" id="title" value="{{ image.title }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="date_taken" class="col-lg-2 control-label">Fotózva</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" name="date_taken" id="date_to" placeholder="pl. 2016-11-20 12:15:00" value="{{ image.date_taken }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="keywords" class="col-lg-2 control-label">
+      Kulcsszavak
+      <br>
+      <small>Vesszővel elválasztva</small>
+    </label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" name="keywords" id="keywords" placeholder="szó1, szó2, satöbbi" value="{{ keywordNames | join(', ') if keywordNames }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-lg-2 control-label">Láthatóság</label>
+    <div class="col-lg-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="public" id="public" {{ 'checked' if image.public }} {{ 'disabled' if image.force_private }}>
+          Publikus
+        </label>
+      </div>
+      {% if image.force_private %}
+      <small>A kép közzétételét egy moderátor letiltotta.</small>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="about" class="col-lg-2 control-label">Leírás</label>
+    <div class="col-lg-10">
+      <textarea class="form-control" rows="5" name="about" id="about" placeholder="Pár szó, ha van mit mesélni">{{ image.about }}</textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-10 col-lg-offset-2">
+      <button type="reset" class="btn btn-default">Alaphelyzet</button>
+      <button type="submit" class="btn btn-primary">Mentés</button>
+    </div>
+  </div>
+
+  {{ csrfField }}
+
+</form>
+
+{% endblock %}

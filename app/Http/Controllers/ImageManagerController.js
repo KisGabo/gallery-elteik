@@ -34,6 +34,38 @@ class ImageManagerController {
     })
   }
 
+  * showFormPage(req, resp) {
+    let image = yield Image.find(req.param('id'))
+    if (!image) {
+      resp.notFound('A kép nem található.')
+      return
+    }
+
+    yield image.related('gallery').load()
+
+    // TODO gallery access without toJSON
+    if (!h.checkOwn(image.toJSON().gallery, req)) {
+      resp.unauthorized('Ez a kép nem a tiéd.')
+      return
+    }
+
+    let keywordNames
+    if (req.old('image')) {
+      image = req.old('image')
+      keywordNames = req.old('keywordNames')
+    }
+    else {
+      const keywords = yield image.keywords().fetch()
+      keywordNames = keywords.map(kw => kw.name)
+      image = image.toJSON()
+    }
+
+    yield resp.sendView('forms/image', {
+      image,
+      keywordNames,
+    })
+  }
+
   * handleUpload(req, resp) {
     const gallery = yield Gallery.find(req.param('id'))
     if (!gallery) {
@@ -211,9 +243,6 @@ class ImageManagerController {
         ]}).flash()
     }
 
-    // TODO
-    resp.redirect('back')
-    return
     resp.route('image_edit', { id: firstId })
   }
 
