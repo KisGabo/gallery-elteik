@@ -10,6 +10,14 @@ class Image extends Lucid {
     return [ 'Gallery/Traits/WithKeywords' ]
   }
 
+  static get validationRules() {
+    return {
+      title:     'max:254',
+      date_taken:'datetime',
+      about:     'max:1024',
+    }
+  }
+
   static * setVisibilityByGallery(gallery_id, isPublic) {
     if (isPublic) {
       yield Db.table('images')
@@ -42,6 +50,16 @@ class Image extends Lucid {
 
   keywords() {
     return this.belongsToMany('App/Model/Keyword', 'p_image_keywords')
+  }
+
+  * getNextIdInGallery() {
+    const next = yield Image.query()
+      .select('id')
+      .where('id', '>', this.id)
+      .where('gallery_id', this.gallery_id)
+      .orderBy('id', 'asc')
+      .first()
+    return (next ? next.id : null)
   }
 
   getFile(which) {

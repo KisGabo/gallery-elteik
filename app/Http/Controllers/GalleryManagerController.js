@@ -14,7 +14,8 @@ class GalleryManagerController {
     // process keywords
 
     const keywordNames = data.keywords.split(',')
-      .map(kw => kw.trim()).filter(kw => kw.length > 0)
+      .map(kw => kw.trim())
+      .filter(kw => kw.length > 0)
 
     // validate
 
@@ -69,10 +70,7 @@ class GalleryManagerController {
     // redirect with success message
 
     yield req.with({ messages: [
-      {
-        type: 'success',
-        message: 'A galériát sikeresen elmentetted.'
-      }
+      { type: 'success', message: 'A galériát sikeresen elmentetted.' }
     ]}).flash()
     
     resp.redirect('back')

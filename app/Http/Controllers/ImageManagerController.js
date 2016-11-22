@@ -66,6 +66,82 @@ class ImageManagerController {
     })
   }
 
+  * save(req, resp) {
+    const data = req.except('_csrf');
+
+    // process keywords
+
+    const keywordNames = data.keywords.split(',')
+      .map(kw => kw.trim())
+      .filter(kw => kw.length > 0)
+
+    // validate
+
+    const validation = yield Validator.validateAll(data, Image.validationRules, _validationMessages);
+    
+    if (validation.fails()) {
+      const messages = validation.messages()
+      h.cleanValidationMessages(messages)
+
+      yield req.with({ image: data, keywordNames, messages }).flash()
+      resp.redirect('back')
+      return
+    }
+
+    // get model instance
+
+    const image = yield Image.find(req.param('id'))
+    if (!image) {
+      resp.notFound('A kép nem található.')
+      return
+    }
+
+    const gallery = yield image.gallery().fetch()
+    if (!h.checkOwn(gallery, req)) {
+      resp.unauthorized('Ez a kép nem a tiéd.')
+      return
+    }
+
+    // check force_private
+
+    if (image.force_private && !!data.public) {
+      resp.redirect('back')
+      return
+    }
+
+    // save
+
+    image.title = data.title
+    image.about = data.about
+    image.date_taken = data.date_taken
+    image.public = !!data.public
+
+    yield image.save();
+    yield image.syncKeywords(keywordNames)
+
+    // redirect with success message
+
+    yield req.with({ messages: [
+      { type: 'success', message: 'A képet sikeresen módosítottad.' }
+    ]}).flash()
+    
+    if (data.next) {
+      const nextId = yield image.getNextIdInGallery()
+      if(nextId) {
+        resp.route('image_edit', { id: nextId })
+      }
+      // this is the last image, redirect to gallery
+      else {
+        resp.route('gallery', { id: image.gallery_id })
+      }
+      return
+    }
+    else {
+      resp.redirect('back')
+    }
+
+  }
+
   * handleUpload(req, resp) {
     const gallery = yield Gallery.find(req.param('id'))
     if (!gallery) {
@@ -246,6 +322,17 @@ class ImageManagerController {
     resp.route('image_edit', { id: firstId })
   }
 
+}
+
+const _mapFieldToLabel = {
+  title:            'kép címe',
+  date_taken:       'készítés ideje',
+  about:            'kép leírása',
+}
+
+const _validationMessages = {
+  'max': (field, val, args) => `A(z) ${_mapFieldToLabel[field]} maximum ${args[0]} hosszú lehet.`,
+  'datetime': (field) =>       `A(z) ${_mapFieldToLabel[field]} formátuma rossz.`,
 }
 
 module.exports = ImageManagerController
