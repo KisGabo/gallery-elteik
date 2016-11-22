@@ -5,6 +5,7 @@ const AdonisHelpers = use('Helpers')
 const Gallery = use('App/Model/Gallery')
 const Image = use('App/Model/Image')
 const Keyword = use('App/Model/Keyword')
+const h = require('../../helpers.js')
 
 class GalleryBrowserController {
 
@@ -20,7 +21,8 @@ class GalleryBrowserController {
     }
 
     const gal = yield img.gallery().fetch()
-    if (!img.public && (!req.currentUser || req.currentUser.id != gal.user_id)) {
+
+    if (!img.public && !h.checkOwn(gal, req)) {
       resp.unauthorized('Ez a kép privát.')
       return
     }
@@ -84,7 +86,7 @@ class GalleryBrowserController {
       return
     }
 
-    if (!gallery.public && (!req.currentUser || req.currentUser.id != gallery.user_id)) {
+    if (!gallery.public && !h.checkOwn(gallery, req)) {
       resp.unauthorized('Ez a galéria privát.')
       return
     }
@@ -109,7 +111,8 @@ class GalleryBrowserController {
 
     yield image.related('gallery').load()
 
-    if (!image.public && (!req.currentUser || req.currentUser.id != image.gallery.user_id)) {
+    // TODO access gallery without toJSON
+    if (!image.public && !h.checkOwn(image.toJSON().gallery, req)) {
       resp.unauthorized('Ez a kép privát.')
       return
     }
@@ -179,7 +182,8 @@ class GalleryBrowserController {
 
     yield image.related('gallery').load()
 
-    if (!image.public && req.currentUser.id != image.gallery.user_id) {
+    // TODO access gallery without toJSON
+    if (!image.public && !h.checkOwn(image.toJSON().gallery, req)) {
       resp.unauthorized('Ez a kép privát.')
       return
     }
