@@ -86,13 +86,15 @@ class GalleryBrowserController {
       return
     }
 
-    if (!gallery.public && !h.checkOwn(gallery, req)) {
+    const isOwn = h.checkOwn(gallery, req)
+    if (!gallery.public && !isOwn) {
       resp.unauthorized('Ez a galéria privát.')
       return
     }
 
     yield gallery.related('user').load()
-    const images = yield gallery.images().public().fetch()
+    // if gallery belongs to current user, show private images too
+    const images = yield (isOwn ? gallery.images().fetch() : gallery.images().public().fetch())
     const keywords = yield gallery.keywords().fetch()
 
     yield resp.sendView('galleryBrowser/galleryPage', {
