@@ -11,6 +11,8 @@ Route.get   ('/register',           'UserController.showRegisterPage')
 Route.post  ('/register',           'UserController.registerUser')
 Route.get   ('/user',               'UserController.showListPage')
 Route.get   ('/user/:id',           'UserController.showProfilePage').as('profile')
+Route.get   ('/usersettings',       'UserController.showSettingsPage').middleware('auth')
+Route.post  ('/usersettings',       'UserController.save').middleware('auth')
 
 Route.get   ('/gallery',            'GalleryBrowserController.showGalleryListPage')
 Route.get   ('/gallery/add',        'GalleryManagerController.showFormPage').as('gallery_add').middleware('auth')

@@ -13,6 +13,12 @@ class User extends Lucid {
       intro:    'max:1024',
     }
   }
+  
+  static get settingsRules() {
+    return {
+      intro:    User.validationRules.intro,
+    }
+  }
 
   apiTokens () {
     return this.hasMany('App/Model/Token')

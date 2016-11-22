@@ -1,0 +1,42 @@
+{% extends 'master' %}
+{% set headTitle = "Beállítások" %}
+
+{% block content %}
+
+<h1>Beállítások</h1>
+
+<form class="form-horizontal" method="post">
+
+  <div class="form-group">
+    <label class="col-lg-2 control-label">Felhasználói neved</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" value="{{ user.username }}" disabled>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-lg-2 control-label">E-mail címed</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" value="{{ user.email }}" disabled>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="intro" class="col-lg-2 control-label">Bemutatkozás</label>
+    <div class="col-lg-10">
+      <textarea class="form-control" rows="5" name="intro" id="intro" placeholder="Pár szó magadról, ha gondolod">{{ fd.intro }}</textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-10 col-lg-offset-2">
+      <button type="reset" class="btn btn-default">Alaphelyzet</button>
+      <button type="submit" class="btn btn-primary">Mentés</button>
+    </div>
+  </div>
+
+  {{ csrfField }}
+
+</form>
+
+{% endblock %}

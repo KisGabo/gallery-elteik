@@ -31,7 +31,38 @@ class UserController {
     resp.redirect('/')
   }
 
+  * save(req, resp) {
+
+    // validate
+
+    const data = req.except('_csrf');
+    const validation = yield Validator.validateAll(data, User.settingsRules, _validationMessages);
+    
+    if (validation.fails()) {
+      const messages = validation.messages()
+      helpers.cleanValidationMessages(messages)
+
+      yield req.with({ fd: data, messages }).flash()
+      resp.redirect('back')
+      return
+    }
+
+    // save
+
+    req.currentUser.intro = data.intro
+    yield req.currentUser.save()
+
+    // redirect with success message
+
+    yield req.with({ messages: [
+      { type: 'success', message: 'Sikeresen mentve.' }
+    ]}).flash()
+    
+    resp.redirect('back')
+  }
+
   * registerUser(req, resp) {
+
     // validate
 
     const data = req.except('_csrf');
@@ -62,10 +93,7 @@ class UserController {
     // redirect with success message
 
     yield req.with({ messages: [
-      {
-        type: 'success',
-        message: 'Sikeresen regisztráltál. Üdv a felhasználók között!'
-      }
+      { type: 'success', message: 'Sikeresen regisztráltál. Üdv a felhasználók között!' }
     ]}).flash()
     
     resp.redirect('/')
@@ -94,6 +122,15 @@ class UserController {
     yield resp.sendView('user/profilePage', {
       user: user.toJSON(),
       galleries: galleries.toJSON(),
+    })
+  }
+
+  * showSettingsPage(req, resp) {
+    yield resp.sendView('user/settingsPage', {
+      user: req.currentUser,
+      fd: {
+        intro: (req.old('fd') ? req.old('fd').intro : req.currentUser.intro),
+      },
     })
   }
 
