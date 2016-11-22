@@ -2,6 +2,7 @@
 
 const Db = use('Database')
 const Lucid = use('Lucid')
+const AdonisHelpers = use('Helpers')
 
 class Gallery extends Lucid {
 
@@ -28,6 +29,10 @@ class Gallery extends Lucid {
 
   keywords() {
     return this.belongsToMany('App/Model/Keyword', 'p_gallery_keywords')
+  }
+
+  getFolder() {
+    return AdonisHelpers.storagePath(`gallery/${this.user_id}/${this.id}`)
   }
 
   * deleteWithPivots() {

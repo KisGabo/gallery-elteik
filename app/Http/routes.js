@@ -20,6 +20,7 @@ Route.get   ('/gallery/:id/edit',   'GalleryManagerController.showFormPage').as(
 Route.post  ('/gallery/:id/edit',   'GalleryManagerController.save').middleware('auth')
 Route.get   ('/gallery/:id/delete', 'GalleryManagerController.delete').as('gallery_delete').middleware('auth')
 Route.get   ('/gallery/:id/upload', 'ImageManagerController.showUploadPage').as('gallery_upload').middleware('auth')
+Route.post  ('/gallery/:id/upload', 'ImageManagerController.handleUpload').middleware('auth')
 Route.get   ('/own',                'GalleryBrowserController.showOwnPage').middleware('auth')
 
 Route.get   ('/image/:id',          'GalleryBrowserController.showImagePage').as('image')

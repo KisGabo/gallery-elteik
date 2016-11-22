@@ -2,6 +2,7 @@
 
 const Db = use('Database')
 const Lucid = use('Lucid')
+const AdonisHelpers = use('Helpers')
 
 class Image extends Lucid {
 
@@ -37,6 +38,16 @@ class Image extends Lucid {
 
   keywords() {
     return this.belongsToMany('App/Model/Keyword', 'p_image_keywords')
+  }
+
+  getFile(which) {
+    if (!which) which = 'original'
+    if (which == 'original')
+      return `${this.id}.jpg`
+    else if (which == 'medium') {
+      return `md${this.id}.jpg`}
+    else
+      return `th${this.id}.jpg`
   }
 
 }

@@ -11,3 +11,5 @@
 - something to shorten the query-exists-canview code
 - database hook for setting gallery visibility
 - form builder?
+- unzip, scale, save via service?
+- create/delete gallery/user folder
