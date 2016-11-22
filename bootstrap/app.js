@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path')
+
 /*
 |--------------------------------------------------------------------------
 | Application Providers
@@ -29,7 +31,8 @@ const providers = [
   'adonis-lucid/providers/FactoryProvider',
   'adonis-middleware/providers/AppMiddlewareProvider',
   'adonis-auth/providers/AuthManagerProvider',
-  'adonis-validation-provider/providers/ValidatorProvider'
+  'adonis-validation-provider/providers/ValidatorProvider',
+  path.join(__dirname, '../providers/WithKeywordsTraitProvider')
 ]
 
 /*

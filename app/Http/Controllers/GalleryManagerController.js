@@ -90,7 +90,7 @@ class GalleryManagerController {
       return
     }
 
-    yield gallery.deleteWithPivots()
+    yield gallery.delete()
     resp.redirect('back')
   }
 

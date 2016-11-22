@@ -6,6 +6,10 @@ const AdonisHelpers = use('Helpers')
 
 class Image extends Lucid {
 
+  static get traits () {
+    return [ 'Gallery/Traits/WithKeywords' ]
+  }
+
   static * setVisibilityByGallery(gallery_id, isPublic) {
     if (isPublic) {
       yield Db.table('images')

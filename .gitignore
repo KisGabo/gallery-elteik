@@ -16,3 +16,4 @@ npm-debug.log
 database/db.sqlite
 database/db.sqlite-journal
 config/express-admin
+notes

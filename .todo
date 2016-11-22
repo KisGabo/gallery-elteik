@@ -13,6 +13,5 @@
 - form builder?
 - unzip, scale, save via service?
 - create/delete gallery/user folder
-- keyword traits
 - IMPORTANT: how to access related models without converting to json
 - edit next image button (next/prev links in image page)
