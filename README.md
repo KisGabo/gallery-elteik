@@ -16,9 +16,10 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 1. Függőségek telepítése: `npm i`
 2. `.env.example` átnevezése `.env`-re, és tartalmának ellenőrzése
 3. Adatbázis migrációk futtatása: `node ace migration:run`
-4. **Indítás**: `npm start` vagy `npm run dev`
+4. Konfigurálás: `config/gallery.js` ellenőrzése (főleg az admin felhasználó adatait)
+5. Példa adatok beszúrása az adatbázisba: `node ace db:seed`
+6. **Indítás**: `npm start` vagy `npm run dev`
 
-* _(opcionális)_ Példa adatok beszúrása az adatbázisba: `node ace db:seed --files initial`
 * _(opcionális)_ [Példa képek letöltése](https://dl.dropboxusercontent.com/u/69565179/k%C3%BCld-nagyg%C3%A9p/gallery-elteik/storage.zip) (a zip tartalmát a projektkönyvtárba kell bemásolni)
 * _(opcionális)_ express-admin telepítése:
   1. Telepítés: `npm i express-admin`
