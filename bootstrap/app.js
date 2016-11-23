@@ -32,7 +32,8 @@ const providers = [
   'adonis-middleware/providers/AppMiddlewareProvider',
   'adonis-auth/providers/AuthManagerProvider',
   'adonis-validation-provider/providers/ValidatorProvider',
-  path.join(__dirname, '../providers/WithKeywordsTraitProvider')
+  path.join(__dirname, '../providers/ImagePersistenceProvider'),
+  path.join(__dirname, '../providers/WithKeywordsTraitProvider'),
 ]
 
 /*
