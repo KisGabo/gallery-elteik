@@ -38,12 +38,7 @@ class Gallery extends Lucid {
 
   keywords() {
     return this.belongsToMany('App/Model/Keyword', 'p_gallery_keywords')
-  }
-  
-  getFolder() {
-    return AdonisHelpers.storagePath(`gallery/${this.user_id}/${this.id}`)
-  }
-  
+  }  
 
   static * _hookBeforeDelete(next) {
     yield this.relatedNotLoaded('images').load()

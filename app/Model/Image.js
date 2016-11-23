@@ -68,16 +68,6 @@ class Image extends Lucid {
     return (next ? next.id : null)
   }
 
-  getFile(which) {
-    if (!which) which = 'original'
-    if (which == 'original')
-      return `${this.id}.jpg`
-    else if (which == 'medium') {
-      return `md${this.id}.jpg`}
-    else
-      return `th${this.id}.jpg`
-  }
-
   static * _hookBeforeDelete(next) {
     yield Db.table('p_likes')
       .where('image_id', this.id)

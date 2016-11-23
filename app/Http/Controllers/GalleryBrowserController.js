@@ -2,6 +2,7 @@
 
 const fs = require('co-fs')
 const AdonisHelpers = use('Helpers')
+const ImgPersist = use('Gallery/ImagePersistence')
 const Gallery = use('App/Model/Gallery')
 const Image = use('App/Model/Image')
 const Keyword = use('App/Model/Keyword')
@@ -11,7 +12,6 @@ class GalleryBrowserController {
 
   /**
    * Sends JPG file to client.
-   * @todo Use secret filenames instead of db access
    */
   * sendImage(req, resp) {
     const img = yield Image.find(req.param('id'))
@@ -27,18 +27,11 @@ class GalleryBrowserController {
       return
     }
 
-    let prefix = ''
-    if (req.match('/image/:id/thumb')) prefix = 'th'
-    else if (req.match('/image/:id/medium')) prefix = 'md'
-
-    let path = AdonisHelpers.storagePath(`gallery/${gal.user_id}/${gal.id}/${prefix}${img.id}.jpg`)
-
-    // if thumbnail or medium doesn't exist, send original
-    // @TODO save original size to db, and check that instead of fs access
-    if (!(yield fs.exists(path))) {
-      path = AdonisHelpers.storagePath(`gallery/${gal.user_id}/${gal.id}/${img.id}.jpg`)
-    }
-
+    let which = ''
+    if (req.match('/image/:id/thumb')) which = 'thumb'
+    else if (req.match('/image/:id/medium')) which = 'medium'
+    
+    let path = yield ImgPersist.getImageFileToServe(img, which)
     resp.download(path)
   }
 
@@ -114,7 +107,7 @@ class GalleryBrowserController {
 
     yield image.related('gallery').load()
 
-    if (!image.public && !h.checkOwn(image.relations[gallery], req)) {
+    if (!image.public && !h.checkOwn(image.relations['gallery'], req)) {
       resp.unauthorized('Ez a kép privát.')
       return
     }
