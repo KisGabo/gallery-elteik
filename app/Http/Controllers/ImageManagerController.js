@@ -141,6 +141,24 @@ class ImageManagerController {
 
   }
 
+  * delete(req, resp) {
+    let image = yield Image.find(req.param('id'))
+    if (!image) {
+      resp.notFound('A kép nem található.')
+      return
+    }
+
+    yield image.related('gallery').load()
+
+    if (!h.checkOwn(image.relations['gallery'], req)) {
+      resp.unauthorized('Ez a kép nem a tiéd.')
+      return
+    }
+
+    yield image.delete()
+    resp.redirect('back')
+  }
+
   * forcePrivate(req, resp) {
     const image = yield Image.find(req.param('id'))
     if (!image) {

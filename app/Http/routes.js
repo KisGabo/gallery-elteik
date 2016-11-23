@@ -33,6 +33,7 @@ Route.get   ('/image/:id/medium',   'GalleryBrowserController.sendImage').as('me
 Route.get   ('/image/:id/original', 'GalleryBrowserController.sendImage').as('original')
 Route.get   ('/image/:id/edit',     'ImageManagerController.showFormPage').as('image_edit').middleware('auth')
 Route.post  ('/image/:id/edit',     'ImageManagerController.save').middleware('auth')
+Route.get   ('/image/:id/delete',   'ImageManagerController.delete').as('image_delete').middleware('auth')
 Route.get   ('/image/:id/force',    'ImageManagerController.forcePrivate').middleware('mod').as('image_force')
 
 Route.get   ('/keyword/:id/gallery','GalleryBrowserController.showKeywordPage').as('gallery_keyword')
