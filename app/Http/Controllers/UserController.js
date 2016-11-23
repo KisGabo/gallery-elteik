@@ -49,6 +49,9 @@ class UserController {
 
     // save
 
+    if (data.password) {
+      req.currentUser.password = data.password
+    }
     req.currentUser.intro = data.intro
     yield req.currentUser.save()
 
@@ -173,6 +176,7 @@ const _mapFieldToLabel = {
 
 const _validationMessages = {
   'required': (field) =>       `A(z) ${_mapFieldToLabel[field]} megadása kötelező.`,
+  'required_if':               'Kétszer kell megadni a jelszót.',
   'min': (field, val, args) => `A(z) ${_mapFieldToLabel[field]} legalább ${args[0]} hosszú legyen.`,
   'max': (field, val, args) => `A(z) ${_mapFieldToLabel[field]} maximum ${args[0]} hosszú lehet.`,
 

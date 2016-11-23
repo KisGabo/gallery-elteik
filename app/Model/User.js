@@ -26,6 +26,8 @@ class User extends Lucid {
   static get settingsRules() {
     return {
       intro:    User.validationRules.intro,
+      password: 'required_if:password_confirm',
+      password_confirm: 'required_if:password|same:password',
     }
   }
 
