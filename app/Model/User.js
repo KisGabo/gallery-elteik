@@ -46,7 +46,7 @@ class User extends Lucid {
   }
 
   static * _hookBeforeWrite(next) {
-    if (this.isNew || this.$dirty().indexOf('password') > -1) {
+    if (this.isNew() || this.$dirty.password) {
       this.password = yield Hash.make(this.password)
     }
     yield next
