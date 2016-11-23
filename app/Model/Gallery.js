@@ -9,6 +9,7 @@ class Gallery extends Lucid {
   static boot() {
     super.boot()
     this.addHook('afterCreate', 'create-folder', this._hookAfterCreate)
+    this.addHook('beforeUpdate', 'set-image-visibility', this._hookBeforeUpdate)
     this.addHook('beforeDelete', 'delete-related', this._hookBeforeDelete)
   }
 
@@ -41,8 +42,32 @@ class Gallery extends Lucid {
     return this.belongsToMany('App/Model/Keyword', 'p_gallery_keywords')
   }
 
+  getPublic(val) {
+    return (val ? true : false)
+  }
+
+  setPublic(val) {
+    return (val ? 1 : 0)
+  }
+
   static * _hookAfterCreate(next) {
     yield ImgPersist.createGalleryFolder(this)
+    yield next
+  }
+
+  static * _hookBeforeUpdate(next) {
+    if ((typeof this.$dirty.public) !== 'undefined') {
+      if (this.public) {console.log('public')
+        yield Db.table('images')
+          .where({ gallery_id: this.id, force_private: false })
+          .update('public', true)
+      }
+      else {
+        yield Db.table('images')
+          .where({ gallery_id: this.id })
+          .update('public', false)
+      }
+    }
     yield next
   }
 

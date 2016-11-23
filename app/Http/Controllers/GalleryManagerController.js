@@ -48,11 +48,6 @@ class GalleryManagerController {
         resp.unauthorized('Ez a galéria nem a tiéd.')
         return
       }
-
-      // if visibility changed, set images' visibility accordingly
-      if (gallery.public == !data.public) {
-        yield Image.setVisibilityByGallery(gallery.id, data.public)
-      }
     }
 
     // save
@@ -62,7 +57,7 @@ class GalleryManagerController {
     gallery.about = data.about
     gallery.date_from = data.date_from
     gallery.date_to = data.date_to
-    gallery.public = !!data.public
+    gallery.public = data.public
 
     yield gallery.save();
     yield gallery.syncKeywords(keywordNames)

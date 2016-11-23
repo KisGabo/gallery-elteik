@@ -163,9 +163,7 @@ class ImageManagerController {
     }
 
     image.force_private = true
-    image.public = false
     yield image.save()
-    
     resp.redirect('back')
   }
 
@@ -208,7 +206,6 @@ class ImageManagerController {
     let firstId = 0
     for (let img of validationResult.valid) {
       const imgModel = new Image()
-      imgModel.public = gallery.public
       imgModel.gallery().associate(gallery)
       yield imgModel.save()
       yield ImgPersist.saveImage(img.path, imgModel, img.dimensions)
