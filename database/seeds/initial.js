@@ -2,20 +2,21 @@
 
 const Db = use('Database')
 const Hash = use('Hash')
+const Config = use('Config')
 
 function * users() {
   return [
     {
-      username: 'KisGabo',
-      password: (yield Hash.make('pwd')),
-      email: 'mail@mail.com',
-      intro: 'Ezt az <b>egészet</b> én csinálom',
+      username: Config.get('gallery.admin.username'),
+      password: (yield Hash.make(Config.get('gallery.admin.password'))),
+      email: Config.get('gallery.admin.email'),
       role: 2,
     },
     {
       username: 'Egy mod',
       password: (yield Hash.make('pwd')),
       email: 'mail@mod.com',
+      intro: 'Helloooooooooooooo',
       role: 1,
     },
     {

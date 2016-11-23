@@ -2,6 +2,13 @@
 
 module.exports = {
 
+  // first (the only admin) user inserted into database when seeding
+  admin: {
+    username: 'admin',
+    email: 'admin@admin.com',
+    password: 'pwd',
+  },
+
   scale_params: {
     // long side of medium-sized images (in pixels)
     medium_dim: 800,
