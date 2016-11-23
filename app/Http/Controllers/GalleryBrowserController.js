@@ -114,8 +114,7 @@ class GalleryBrowserController {
 
     yield image.related('gallery').load()
 
-    // TODO access gallery without toJSON
-    if (!image.public && !h.checkOwn(image.toJSON().gallery, req)) {
+    if (!image.public && !h.checkOwn(image.relations[gallery], req)) {
       resp.unauthorized('Ez a kép privát.')
       return
     }
@@ -185,8 +184,7 @@ class GalleryBrowserController {
 
     yield image.related('gallery').load()
 
-    // TODO access gallery without toJSON
-    if (!image.public && !h.checkOwn(image.toJSON().gallery, req)) {
+    if (!image.public && !h.checkOwn(image.relations['gallery'], req)) {
       resp.unauthorized('Ez a kép privát.')
       return
     }

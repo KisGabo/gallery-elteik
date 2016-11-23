@@ -43,8 +43,7 @@ class ImageManagerController {
 
     yield image.related('gallery').load()
 
-    // TODO gallery access without toJSON
-    if (!h.checkOwn(image.toJSON().gallery, req)) {
+    if (!h.checkOwn(image.relations['gallery'], req)) {
       resp.unauthorized('Ez a kép nem a tiéd.')
       return
     }
