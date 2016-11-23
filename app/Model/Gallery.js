@@ -8,6 +8,7 @@ class Gallery extends Lucid {
 
   static boot() {
     super.boot()
+    this.addHook('afterCreate', 'create-folder', this._hookAfterCreate)
     this.addHook('beforeDelete', 'delete-related', this._hookBeforeDelete)
   }
 
@@ -38,7 +39,12 @@ class Gallery extends Lucid {
 
   keywords() {
     return this.belongsToMany('App/Model/Keyword', 'p_gallery_keywords')
-  }  
+  }
+
+  static * _hookAfterCreate(next) {
+    yield ImgPersist.createGalleryFolder(this)
+    yield next
+  }
 
   static * _hookBeforeDelete(next) {
     yield this.relatedNotLoaded('images').load()

@@ -37,6 +37,14 @@ class ImagePersistenceService {
     }
   }
 
+  static * createUserFolder(user) {
+    yield fs.mkdir(AdonisHelpers.storagePath(`gallery/${user.id}`))
+  }
+
+  static * createGalleryFolder(gallery) {
+    yield fs.mkdir(this.getGalleryFolder(gallery))
+  }
+
   static * deleteGallery(gallery) {
     // TODO yield only after for
     const galFolder = this.getGalleryFolder(gallery)

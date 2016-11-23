@@ -1,8 +1,14 @@
 'use strict'
 
 const Lucid = use('Lucid')
+const ImgPersist = use('Gallery/ImagePersistence')
 
 class User extends Lucid {
+
+  static boot() {
+    super.boot()
+    this.addHook('afterCreate', 'create-folder', this._hookAfterCreate)
+  }
 
   static get validationRules() {
     return {
@@ -34,6 +40,11 @@ class User extends Lucid {
 
   likes() {
     return this.belongsToMany('App/Model/Image', 'p_likes')
+  }
+
+  static * _hookAfterCreate(next) {
+    yield ImgPersist.createUserFolder(this)
+    yield next
   }
 
 }
