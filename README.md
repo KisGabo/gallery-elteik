@@ -1,7 +1,10 @@
 # Gallery
 
-> **2. beadandó határidő lejárta előtti utolsó állapot:**
-> [8f4c048](https://github.com/KisGabo/gallery-elteik/commit/8f4c048bf0601f58164b33dbe90b26e6d2f119aa) (félkész)
+> **2. beadandó első viszonylag vállalható és remélhetőleg működő állapota:**
+> [bb7aedd](https://github.com/KisGabo/gallery-elteik/commit/bb7aeddc80eda155f0d7ab0c4ce3a12319aa0d52) (nov. 23. 15:07)
+
+> **2. beadandó határidő lejárta előtti utolsó félkész állapot:**
+> [8f4c048](https://github.com/KisGabo/gallery-elteik/commit/8f4c048bf0601f58164b33dbe90b26e6d2f119aa)
 
 **Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
 

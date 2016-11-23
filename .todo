@@ -16,4 +16,6 @@
 - edit next image button (next/prev links in image page)
 - there should be ONLY http specific code in Http folder ???
 - validate keywords
-- contribute relatedNotLoaded to adonis-lucid repo ? 
+- contribute relatedNotLoaded to adonis-lucid repo ?
+- "nothing to display" message
+- .load() instead of fetch()
