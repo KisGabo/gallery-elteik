@@ -1,20 +1,41 @@
-{% macro m(images, ownerControls = true) %}
+{% macro m(images, ownerControls = false, moderatorControls = false) %}
 
 {% for img in images %}
-<div class="thumbnail">
+<div class="thumbnail image-table-item">
 
-  <a href="{{ 'image' | route({id: img.id}) }}">
+  <a class="image-table-img" href="{{ 'image' | route({id: img.id}) }}">
     <img src="{{ 'thumb' | route({id: img.id}) }}" alt="{{ img.title }}">
   </a>
 
   <div class="caption">
 
-    {% if img.title != '' %}
-    <strong>{{ img.title }}</strong>
-    <br>
-    {% endif %}
+    <div class="image-table-title">
+      <strong>{{ img.title }}</strong>
+    </div>
 
-    <small>Kedvelések: {{ img.like_count }}</small>
+    <small class="image-table-info">
+      <i class="glyphicon glyphicon-eye-open"></i><span>{{ img.like_count }}</span>
+      <i class="glyphicon glyphicon-thumbs-up"></i><span>{{ img.view_count }}</span>
+    </small>
+
+    {% if ownerControls or moderatorControls %}
+    <div class="image-table-buttons">
+      {% if ownerControls %}
+      <a href="{{ 'image_edit' | route({id: img.id}) }}" title="Szerkesztés" class="btn btn-primary btn-xs">
+        <i class="glyphicon glyphicon-pencil"></i>
+      </a>
+      <a href="{{ 'image_delete' | route({id: img.id}) }}" title="Törlés" class="btn btn-danger btn-xs">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+      {% endif %}
+
+      {% if moderatorControls %}
+      <a href="{{ 'image_force' | route({id: img.id}) }}" title="Ne legyen publikus" class="btn btn-warning btn-xs">
+        <i class="glyphicon glyphicon-eye-close"></i>
+      </a>
+      {% endif %}
+    </div>
+    {% endif %}
 
   </div>
 

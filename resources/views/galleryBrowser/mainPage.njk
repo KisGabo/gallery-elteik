@@ -11,10 +11,10 @@
 
 <h1>Legújabb képek</h1>
 
-{{ imageTable(images) }}
+{{ imageTable(images, false, currentUser.role >= 1) }}
 
 <h1>Legkedveltebb képek</h1>
 
-{{ imageTable(topimages) }}
+{{ imageTable(topimages, false, currentUser.role >= 1) }}
 
 {% endblock %}

@@ -101,6 +101,7 @@ class GalleryBrowserController {
       gallery: gallery.toJSON(),
       images: images.toJSON(),
       keywords: keywords.toJSON(),
+      own: isOwn,
     })
   }
 

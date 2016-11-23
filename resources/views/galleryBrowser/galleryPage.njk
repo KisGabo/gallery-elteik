@@ -35,6 +35,6 @@
 <p>{{ gallery.about }}</p>
 {% endif %}
 
-{{ imageTable(images) }}
+{{ imageTable(images, gallery.user_id == currentUser.id, currentUser.role >= 1) }}
 
 {% endblock %}
