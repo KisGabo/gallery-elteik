@@ -3,8 +3,14 @@
 const Db = use('Database')
 const Lucid = use('Lucid')
 const AdonisHelpers = use('Helpers')
+const ImgPersist = use('Gallery/ImagePersistence')
 
 class Image extends Lucid {
+
+  static boot() {
+    super.boot()
+    this.addHook('beforeDelete', 'delete-related', this._hookBeforeDelete)
+  }
 
   static get traits () {
     return [ 'Gallery/Traits/WithKeywords' ]
@@ -70,6 +76,17 @@ class Image extends Lucid {
       return `md${this.id}.jpg`}
     else
       return `th${this.id}.jpg`
+  }
+
+  static * _hookBeforeDelete(next) {
+    yield Db.table('p_likes')
+      .where('image_id', this.id)
+      .delete()
+
+    yield this.relatedNotLoaded('gallery').load()
+    yield ImgPersist.deleteImageFiles(this)
+
+    yield next
   }
 
 }

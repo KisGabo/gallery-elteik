@@ -17,7 +17,7 @@ var Keyword
 
 module.exports.register = function(model) {
   // add database hook by calling .addHook on model CLASS
-  model.addHook('beforeDelete', 'delete-keywords', deleteKeywordsHook)
+  model.addHook('beforeDelete', 'delete-keywords', hookBeforeDelete)
   // add method to model INSTANCE
   model.prototype.syncKeywords = syncKeywords
 }
@@ -27,7 +27,7 @@ module.exports.inject = function(db, keyword) {
   Keyword = keyword
 }
 
-function * deleteKeywordsHook(next) {
+function * hookBeforeDelete(next) {
   const relation = this.keywords()
   yield Db.table(relation.pivotTable)
     .where(relation.pivotLocalKey, this.id)

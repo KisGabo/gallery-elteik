@@ -2,9 +2,14 @@
 
 const Db = use('Database')
 const Lucid = use('Lucid')
-const AdonisHelpers = use('Helpers')
+const ImgPersist = use('Gallery/ImagePersistence')
 
 class Gallery extends Lucid {
+
+  static boot() {
+    super.boot()
+    this.addHook('beforeDelete', 'delete-related', this._hookBeforeDelete)
+  }
 
   static get traits () {
     return [ 'Gallery/Traits/WithKeywords' ]
@@ -34,9 +39,30 @@ class Gallery extends Lucid {
   keywords() {
     return this.belongsToMany('App/Model/Keyword', 'p_gallery_keywords')
   }
-
+  
   getFolder() {
     return AdonisHelpers.storagePath(`gallery/${this.user_id}/${this.id}`)
+  }
+  
+
+  static * _hookBeforeDelete(next) {
+    yield this.relatedNotLoaded('images').load()
+    const imgIds = []
+    this.relations['images'].forEach(img => imgIds.push(img.id))
+
+    yield Db.table('images')
+      .where('gallery_id', this.id)
+      .delete()
+    yield Db.table('p_image_keywords')
+      .whereIn('image_id', imgIds)
+      .delete()
+    yield Db.table('p_likes')
+      .whereIn('image_id', imgIds)
+      .delete()
+
+    yield ImgPersist.deleteGallery(this)
+
+    yield next
   }
 
 }
