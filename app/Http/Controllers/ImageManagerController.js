@@ -142,6 +142,20 @@ class ImageManagerController {
 
   }
 
+  * forcePrivate(req, resp) {
+    const image = yield Image.find(req.param('id'))
+    if (!image) {
+      resp.notFound('A kép nem található.')
+      return
+    }
+
+    image.force_private = true
+    image.public = false
+    yield image.save()
+    
+    resp.redirect('back')
+  }
+
   * handleUpload(req, resp) {
     const gallery = yield Gallery.find(req.param('id'))
     if (!gallery) {
