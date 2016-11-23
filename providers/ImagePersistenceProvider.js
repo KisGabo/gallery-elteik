@@ -7,7 +7,10 @@ class ImagePersistenceServiceProvider extends ServiceProvider {
 
   * register () {
     this.app.bind('Gallery/ImagePersistence', (app) => {
-      imgPersist.inject(use('Adonis/Src/Helpers'))
+      imgPersist.inject(
+        use('Adonis/Src/Config'),
+        use('Adonis/Src/Helpers')
+      )
       return imgPersist
     })
   }
