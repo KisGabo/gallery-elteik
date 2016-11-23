@@ -61,6 +61,23 @@ class UserController {
     resp.redirect('back')
   }
 
+  * setModPrivilege(req, resp) {
+    const user = yield User.find(req.param('id'))
+    if (!user) {
+      resp.notFound('A felhasználó nem található.')
+      return
+    }
+    if (user.role == 2) {
+      resp.redirect('back')
+      return
+    }
+
+    user.role = (user.role == 1 ? 0 : 1)
+    yield user.save()
+
+    resp.redirect('back')
+  }
+
   * registerUser(req, resp) {
 
     // validate

@@ -11,6 +11,7 @@ Route.get   ('/register',           'UserController.showRegisterPage')
 Route.post  ('/register',           'UserController.registerUser')
 Route.get   ('/user',               'UserController.showListPage')
 Route.get   ('/user/:id',           'UserController.showProfilePage').as('profile')
+Route.get   ('/user/:id/moderator', 'UserController.setModPrivilege').as('user_mod').middleware('admin')
 Route.get   ('/usersettings',       'UserController.showSettingsPage').middleware('auth')
 Route.post  ('/usersettings',       'UserController.save').middleware('auth')
 

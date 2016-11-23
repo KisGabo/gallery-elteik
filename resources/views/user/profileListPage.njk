@@ -12,6 +12,7 @@
       <th>#</th>
       <th>Név</th>
       <th>Regisztrált</th>
+      {% if currentUser.role == 2 %}<th>Moderátor</th>{% endif %}
     </tr>
   </thead>
 
@@ -25,6 +26,20 @@
         </a>
       </td>
       <td>{{ user.created_at }}</td>
+
+      {% if currentUser.role == 2 %}
+      <td>
+        {% if user.role == 0 %}
+        <a href="{{ 'user_mod' | route({id: user.id}) }}" class="btn btn-primary btn-xs">
+          Moderátori jog adása
+        </a>
+        {% elif user.role == 1 %}
+        <a href="{{ 'user_mod' | route({id: user.id}) }}" class="btn btn-danger btn-xs">
+          Moderátori jog elvétele
+        </a>
+        {% endif %}
+      </td>
+      {% endif %}
     </tr>
     {% endfor %}
   </tbody>
