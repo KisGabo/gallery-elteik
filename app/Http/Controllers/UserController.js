@@ -135,10 +135,12 @@ class UserController {
     }
 
     const galleries = yield user.galleries().public().fetch()
+    const likedImages = yield user.likes().public().fetch()
 
     yield resp.sendView('user/profilePage', {
       user: user.toJSON(),
       galleries: galleries.toJSON(),
+      likedImages: likedImages.toJSON(),
     })
   }
 
