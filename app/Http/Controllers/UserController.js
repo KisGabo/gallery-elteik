@@ -99,7 +99,7 @@ class UserController {
     const user = new User();
     user.username = data.username
     user.email = data.email
-    user.password = yield Hash.make(data.password);
+    user.password = data.password
     user.intro = data.intro
     yield user.save();
 

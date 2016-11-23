@@ -1,12 +1,15 @@
 'use strict'
 
 const Lucid = use('Lucid')
+const Hash = use('Hash')
 const ImgPersist = use('Gallery/ImagePersistence')
 
 class User extends Lucid {
 
   static boot() {
     super.boot()
+    this.addHook('beforeCreate', 'hash-password', this._hookBeforeWrite)
+    this.addHook('beforeUpdate', 'hash-password', this._hookBeforeWrite)
     this.addHook('afterCreate', 'create-folder', this._hookAfterCreate)
   }
 
@@ -40,6 +43,13 @@ class User extends Lucid {
 
   likes() {
     return this.belongsToMany('App/Model/Image', 'p_likes')
+  }
+
+  static * _hookBeforeWrite(next) {
+    if (this.isNew || this.$dirty().indexOf('password') > -1) {
+      this.password = yield Hash.make(this.password)
+    }
+    yield next
   }
 
   static * _hookAfterCreate(next) {
