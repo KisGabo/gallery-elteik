@@ -11,7 +11,7 @@
 <p>
   <a href="{{ 'gallery' | route({id: image.gallery.id}) }}">
     {{ image.gallery.name }}
-  </a>    
+  </a>
 </p>
 
 <div class="row">
@@ -73,6 +73,21 @@
 
     {% if image.about %}
     <p>{{ image.about }}</p>
+    {% endif %}
+
+    {% if currentUser.id == image.gallery.user_id %}
+    <a href="{{ 'image_edit' | route({id: image.id}) }}" title="Szerkesztés" class="btn btn-primary btn-xs">
+      <i class="glyphicon glyphicon-pencil"></i>
+    </a>
+    <a href="{{ 'image_delete' | route({id: image.id}) }}" title="Törlés" class="btn btn-danger btn-xs">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+    {% endif %}
+
+    {% if currentUser.role >= 1 %}
+    <a href="{{ 'image_force' | route({id: image.id}) }}" title="Ne legyen publikus" class="btn btn-warning btn-xs">
+      <i class="glyphicon glyphicon-eye-close"></i>
+    </a>
     {% endif %}
 
   </div>
