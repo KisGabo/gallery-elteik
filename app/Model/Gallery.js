@@ -30,6 +30,10 @@ class Gallery extends Lucid {
     q.where('public', true)
   }
 
+  static scopeByKeywords(q, names) {
+    q.where(Image._filterByKeywords(names, 'p_gallery_keywords', 'gallery_id'))
+  }
+
   user() {
     return this.belongsTo('App/Model/User')
   }

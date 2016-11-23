@@ -30,6 +30,10 @@ class Image extends Lucid {
     q.where('public', true)
   }
 
+  static scopeByKeywords(q, names) {
+    q.where(Image._filterByKeywords(names, 'p_image_keywords', 'image_id'))
+  }
+
   user() {
     // TODO no hasOneThrough relationship in Lucid
     throw 'Not implemented: please query user through gallery';

@@ -18,6 +18,8 @@ var Keyword
 module.exports.register = function(model) {
   // add database hook by calling .addHook on model CLASS
   model.addHook('beforeDelete', 'delete-keywords', hookBeforeDelete)
+  // add method to model CLASS (static)
+  model._filterByKeywords = _filterByKeywords
   // add method to model INSTANCE
   model.prototype.syncKeywords = syncKeywords
 }
@@ -40,7 +42,8 @@ function * syncKeywords(names) {
 
   // handle empty array because it causes an error in .sync()
   if (names.length == 0) {
-    yield Db.table(relation.pivotTable)
+    yield Db
+      .table(relation.pivotTable)
       .where(relation.pivotLocalKey, this.id)
       .delete()
   }
@@ -49,5 +52,20 @@ function * syncKeywords(names) {
     const Keyword = use('App/Model/Keyword')
     const ids = yield Keyword.getIds(names)
     yield relation.sync(ids)
+  }
+}
+  
+function * _filterByKeywords(names, pivotTable, pivotLocalKey) {
+  const queryKwIds = Db
+    .table('keywords')
+    .whereIn('name', names)
+
+  const queryItemIds = Db
+    .table(pivotTable)
+    .whereIn('keyword_id', queryKwIds)
+    .distinct(pivotLocalKey)
+
+  return function * () {
+    this.whereIn('id', queryItemIds)
   }
 }
