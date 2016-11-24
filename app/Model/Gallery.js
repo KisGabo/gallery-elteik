@@ -27,6 +27,7 @@ class Gallery extends Lucid {
       date_from: 'datetime',
       date_to:   'datetime',
       about:     'max:1024',
+      keywords:  'max:1024',
     }
   }
 

@@ -6,10 +6,9 @@
 - middleware to check if item belongs to current user
 - something to shorten the query-exists-canview code
 - there should be ONLY http specific code in Http folder ???
-- validate keywords
 - contribute relatedNotLoaded to adonis-lucid repo ?
-- .load() instead of fetch()
 - gallery dates
+- keyword list
 - image count
 - unify template variables
 - use | route and .route everywhere

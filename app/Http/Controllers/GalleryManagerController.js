@@ -137,6 +137,7 @@ const _validationMessages = {
   'required': (field) =>       `A(z) ${_mapFieldToLabel[field]} megadása kötelező.`,
   'max': (field, val, args) => `A(z) ${_mapFieldToLabel[field]} maximum ${args[0]} hosszú lehet.`,
   'datetime': (field) =>       `A(z) ${_mapFieldToLabel[field]} formátuma rossz.`,
+  'keywords.max': (field, val, args) => `A kulcsszavak összhosszúsága maximum ${args[0]} lehet.`,
 }
 
 module.exports = GalleryManagerController

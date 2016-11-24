@@ -27,6 +27,7 @@ class Image extends Lucid {
       title:     'max:254',
       date_taken:'datetime',
       about:     'max:1024',
+      keywords:  'max:1024',
     }
   }
 
