@@ -35,7 +35,7 @@ class Gallery extends Lucid {
   }
 
   static scopeByKeywords(q, names) {
-    q.where(Image._filterByKeywords(names, 'p_gallery_keywords', 'gallery_id'))
+    q.where(Gallery._filterByKeywords(names, 'p_gallery_keywords', 'gallery_id'))
   }
 
   user() {
