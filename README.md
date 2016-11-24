@@ -1,10 +1,16 @@
 # Gallery
 
-> **2. beadandó első viszonylag vállalható és remélhetőleg működő állapota:**
-> [bb7aedd](https://github.com/KisGabo/gallery-elteik/commit/bb7aeddc80eda155f0d7ab0c4ce3a12319aa0d52) (nov. 23. 15:07)
+## Állapotok
 
-> **2. beadandó határidő lejárta előtti utolsó félkész állapot:**
-> [8f4c048](https://github.com/KisGabo/gallery-elteik/commit/8f4c048bf0601f58164b33dbe90b26e6d2f119aa)
+* **nov. 24. 19:36**: 
+[7f3e0ab](https://github.com/KisGabo/gallery-elteik/commit/7f3e0ab33dac40d0babe9e359e5db7e6dd323ec3)  
+Na, ez már valami
+* **nov. 23. 15:07**:
+[bb7aedd](https://github.com/KisGabo/gallery-elteik/commit/bb7aeddc80eda155f0d7ab0c4ce3a12319aa0d52)  
+Második beadandó viszonylag vállalható és elvileg működő változata
+* **nov. 20. 23:59**:
+[8f4c048](https://github.com/KisGabo/gallery-elteik/commit/8f4c048bf0601f58164b33dbe90b26e6d2f119aa)  
+Második beadandó lejártakor félkész, de elvileg működő állapot. Key-feature-ök hiányoznak.
 
 **Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
 
@@ -29,6 +35,23 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 
 
 Adatbázis reset példaadatokkal: `npm run dbreset`
+
+## Tervek a közeljövőben
+
+- **doksi, kód kommentelése**
+- todok a kódban
+- templated hibaoldalak
+- lapozás
+- aktív menüelem jelzése
+- middleware-rel ellenőrizzük hogy a cucc a currentuserhez tartozik-e
+- controllerek rövidítése, ismétlődő kódrészletek főleg
+- amit lehet, vegyünk ki a controllerből
+  (validáció, képek mentése menjen modellbe?)
+- galéria updated_at frissítése képfeltöltéskor
+- legnépszerűbb kulcsszavak oldala
+- galériáknál kijelezni, hány kép van bennük (rendezés aszerint)
+- template változók nincsenek összevissza?
+- named route-ok használata mindenhol
 
 --------------------
 

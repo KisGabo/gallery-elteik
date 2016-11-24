@@ -1,14 +1,13 @@
-- do todos in source
-- pretty error pages
-- escape in output
-- pagination
-- active menuitem
-- middleware to check if item belongs to current user
-- something to shorten the query-exists-canview code
-- there should be ONLY http specific code in Http folder ???
-- contribute relatedNotLoaded to adonis-lucid repo ?
-- gallery dates
-- keyword list
-- image count
-- unify template variables
-- use | route and .route everywhere
+- todok a kódban
+- templated hibaoldalak
+- lapozás
+- aktív menüelem jelzése
+- middleware-rel ellenőrizzük hogy a cucc a currentuserhez tartozik-e
+- controllerek rövidítése, ismétlődő kódrészletek főleg
+- amit lehet, vegyünk ki a controllerből
+  (validáció, képek mentése menjen modellbe?)
+- galéria updated_at frissítése képfeltöltéskor
+- legnépszerűbb kulcsszavak oldala
+- galériáknál kijelezni, hány kép van bennük (rendezés aszerint)
+- template változók nincsenek összevissza?
+- named route-ok használata mindenhol
