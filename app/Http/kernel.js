@@ -33,6 +33,8 @@ const namedMiddleware = {
   auth: 'Adonis/Middleware/Auth',
   mod: 'App/Http/Middleware/AuthModerator',
   admin: 'App/Http/Middleware/AuthAdmin',
+  proc_img_filters: 'App/Http/Middleware/ProcImageFilters',
+  proc_gallery_filters: 'App/Http/Middleware/ProcGalleryFilters',
 }
 
 /*
