@@ -2,38 +2,55 @@
 
 <table class="table table-striped table-hover">
 
-{% for gal in galleries %}
-<tr>
+  <thead>
+    <tr>
+      {% if galleries[0].user %}<th>Készítette</th>{% endif %}
+      <th>Galéria neve</th>
+      <th>Frissült</th>
+      {% if ownerControls %}<th>Műveletek</th>{% endif %}
+    </tr>
+  </thead>
 
-  {% if gal.user %}
-  <td>
-    <a href="{{ 'profile' | route({id: gal.user_id}) }}">
-      {{ gal.user.username }}
-    </a>
-  </td>
-  {% endif %}
+  <tbody>
 
-  <td>
-    <a href="{{ 'gallery' | route({id: gal.id}) }}">
-      <strong>{{ gal.name }}</strong>
-    </a>
-  </td>
+    {% for gal in galleries %}
+    <tr>
 
-  <td>
-    {{ gal.created_at | date() }}
-  </td>
+      {% if gal.user %}
+      <td>
+        <a href="{{ 'profile' | route({id: gal.user_id}) }}">
+          {{ gal.user.username }}
+        </a>
+      </td>
+      {% endif %}
 
-  {% if ownerControls %}
-  <td>
-    <a href="{{ 'gallery_upload' | route({id: gal.id}) }}" class="btn btn-success btn-xs">Feltöltés</a>
-    <a href="{{ 'gallery_edit' | route({id: gal.id}) }}" class="btn btn-primary btn-xs">Módosítás</a>
-    <a href="{{ 'gallery_delete' | route({id: gal.id}) }}" class="btn btn-danger btn-xs">Törlés</a>
-  </td>
-  {% endif %}
-  
-</tr>
-{% endfor %}
+      <td>
+        <a href="{{ 'gallery' | route({id: gal.id}) }}">
+          <strong>{{ gal.name }}</strong>
+        </a>
+      </td>
+
+      <td>
+        {{ gal.updated_at | date() }}
+      </td>
+
+      {% if ownerControls %}
+      <td>
+        <a href="{{ 'gallery_upload' | route({id: gal.id}) }}" class="btn btn-success btn-xs">Feltöltés</a>
+        <a href="{{ 'gallery_edit' | route({id: gal.id}) }}" class="btn btn-primary btn-xs">Módosítás</a>
+        <a href="{{ 'gallery_delete' | route({id: gal.id}) }}" class="btn btn-danger btn-xs">Törlés</a>
+      </td>
+      {% endif %}
+      
+    </tr>
+    {% endfor %}
+
+  </tbody>
 
 </table>
+
+{% if galleries.length == 0 %}
+<p><em>Nincs megjeleníthető galéria.</em></p>
+{% endif %}
 
 {% endmacro %}

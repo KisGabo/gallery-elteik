@@ -35,12 +35,12 @@ dd { margin: 5px 0 10px 10px; }
   }
   .image-table-item .caption {
     width: 198px;
-    height: 60px;
+    height: 65px;
     white-space: nowrap;
     overflow: hidden;
   }
-  .image-table-title { height: 21px; }
-  .image-table-info { color: #8ea0b4; float: left; }
+  .image-table-title { height: 21px; margin-bottom:5px; }
+  .image-table-info { color: #8ea0b4; float: left; margin-top: 2px; }
   .image-table-info i { margin-right: 5px; }
   .image-table-info span { margin-right: 10px; }
   .image-table-buttons { float: right; }

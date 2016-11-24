@@ -30,6 +30,14 @@
   <li><strong>Létrehozva:</strong> {{ gallery.created_at | date() }}</li>
   <li><strong>Képek száma:</strong> ##</li>
 
+  {% if gallery.user_id == currentUser.id %}
+  <li>
+    <a href="{{ 'gallery_upload' | route({id: gallery.id}) }}" class="btn btn-success btn-xs">Feltöltés</a>
+    <a href="{{ 'gallery_edit' | route({id: gallery.id}) }}" class="btn btn-primary btn-xs">Módosítás</a>
+    <a href="{{ 'gallery_delete' | route({id: gallery.id}) }}" class="btn btn-danger btn-xs">Törlés</a>
+  </li>
+  {% endif %}
+
 </ul>
 
 {% if gallery.about %}

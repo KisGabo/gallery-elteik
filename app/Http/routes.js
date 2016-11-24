@@ -24,8 +24,9 @@ Route.post  ('/gallery/:id/edit',   'GalleryManagerController.save').middleware(
 Route.get   ('/gallery/:id/delete', 'GalleryManagerController.delete').as('gallery_delete').middleware('auth')
 Route.get   ('/gallery/:id/upload', 'ImageManagerController.showUploadPage').as('gallery_upload').middleware('auth')
 Route.post  ('/gallery/:id/upload', 'ImageManagerController.handleUpload').middleware('auth')
-Route.get   ('/own',                'GalleryBrowserController.showOwnPage').middleware('auth')
+Route.get   ('/own',                'GalleryBrowserController.showOwnPage').middleware('auth', 'proc_gallery_filters')
 
+Route.get   ('/image',              'GalleryBrowserController.showImageListPage').middleware('proc_img_filters')
 Route.get   ('/image/:id',          'GalleryBrowserController.showImagePage').as('image')
 Route.get   ('/image/:id/like',     'GalleryBrowserController.likeImage').as('like').middleware('auth')
 Route.get   ('/image/:id/thumb',    'GalleryBrowserController.sendImage').as('thumb')
@@ -36,5 +37,5 @@ Route.post  ('/image/:id/edit',     'ImageManagerController.save').middleware('a
 Route.get   ('/image/:id/delete',   'ImageManagerController.delete').as('image_delete').middleware('auth')
 Route.get   ('/image/:id/force',    'ImageManagerController.forcePrivate').middleware('mod').as('image_force')
 
-Route.get   ('/keyword/:id/gallery','GalleryBrowserController.showKeywordPage').as('gallery_keyword')
-Route.get   ('/keyword/:id/image',  'GalleryBrowserController.showKeywordPage').as('image_keyword')
+Route.get   ('/keyword/:id/gallery','GalleryBrowserController.showKeywordPage').as('gallery_keyword').middleware('proc_gallery_filters')
+Route.get   ('/keyword/:id/image',  'GalleryBrowserController.showKeywordPage').as('image_keyword').middleware('proc_img_filters')

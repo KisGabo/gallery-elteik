@@ -71,6 +71,14 @@
 
     {{ keywordList(keywords, 'image') }}
 
+    {% if nextImageId %}
+    <p>
+      <a href="{{ 'image' | route({id: nextImageId}) }}" title="Következő" class="btn btn-default btn-xs">
+        Következő kép >>
+      </a>
+    </p>
+    {% endif %}
+
     {% if image.about %}
     <p>{{ image.about }}</p>
     {% endif %}

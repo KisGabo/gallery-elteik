@@ -13,18 +13,13 @@ class ProcImageFilters {
     keywords = (keywords ? h.splitByComma(keywords) : null)
     let dateMode = req.input('filter_date_taken_mode')
     let date = moment(req.input('filter_date_taken'), 'YYYY.MM.DD.').unix()
-    let order = req.input('orderby')
-    if (order) {
-      order = order.split('-')
-      if (order[1] != 'asc' && order[1] != 'desc') {
-        order = null
-      }
-      else {
-        order = { col: order[0], dir: order[1] }
-      }
+    let order = req.input('orderby', 'id-desc')
+    order = order.split('-')
+    if (order[1] != 'asc' && order[1] != 'desc') {
+      order = null
     }
     else {
-      order = null
+      order = { col: order[0], dir: order[1] }
     }
 
     req.imageFilters = { keywords, dateMode, date, order }

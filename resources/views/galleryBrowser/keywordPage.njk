@@ -2,6 +2,8 @@
 {% set headTitle = keyword.name %}
 {% from 'galleryBrowser/galleryTable.njk' import m as galleryTable %}
 {% from 'galleryBrowser/imageTable.njk' import m as imageTable %}
+{% from 'galleryBrowser/galleryTableControls.njk' import m as galleryTableControls %}
+{% from 'galleryBrowser/imageTableControls.njk' import m as imageTableControls %}
 {% from 'macros.njk' import active as a %}
 
 {% block content %}
@@ -21,6 +23,7 @@
   </li>
 </ul>
 
+{{ galleryTableControls(gallery_filter_fd) if galleries else imageTableControls(image_filter_fd) }}
 {{ galleryTable(galleries) if galleries else imageTable(images) }}
 
 {% endblock %}

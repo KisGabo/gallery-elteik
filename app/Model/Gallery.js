@@ -55,7 +55,7 @@ class Gallery extends Lucid {
     // order by
 
     if (filters.order) {
-      const fields = [ 'updated_at', 'id' ]
+      const fields = [ 'updated_at', 'id', 'name' ]
       if (fields.indexOf(filters.order.col) > -1) {
         q.orderBy(filters.order.col, filters.order.dir)
       }

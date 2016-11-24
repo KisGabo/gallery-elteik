@@ -1,0 +1,14 @@
+{% extends 'master' %}
+{% set headTitle = 'Képek' %}
+{% from 'galleryBrowser/imageTable.njk' import m as imageTable %}
+{% from 'galleryBrowser/imageTableControls.njk' import m as controls %}
+
+{% block content %}
+
+<h1>Képek</h1>
+
+{{ controls(image_filter_fd) }}
+
+{{ imageTable(images, false, currentUser.role >= 1) }}
+
+{% endblock %}

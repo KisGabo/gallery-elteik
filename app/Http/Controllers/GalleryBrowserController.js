@@ -42,16 +42,16 @@ class GalleryBrowserController {
       .with('user')
       .fetch()
 
-    // TODO query user for images
-
     const images = yield Image.query().public()
       .orderBy('id', 'desc')
       .limit(5)
+      .with('gallery', 'gallery.user')
       .fetch()
 
     const top = yield Image.query().public()
       .orderBy('like_count', 'desc')
       .limit(5)
+      .with('gallery', 'gallery.user')
       .fetch()
 
     yield resp.sendView('galleryBrowser/mainPage', {
@@ -133,7 +133,19 @@ class GalleryBrowserController {
       image: image.toJSON(),
       keywords: keywords.toJSON(),
       likes: likes.toJSON(),
-      likeStatus
+      likeStatus,
+      nextImageId: yield image.getNextIdInGallery()
+    })
+  }
+
+  * showImageListPage(req, resp) {
+    const images = yield Image.query()
+      .filtered(req.imageFilters)
+      .public()
+      .with('gallery', 'gallery.user')
+      .fetch()
+    yield resp.sendView('galleryBrowser/imageListPage', {
+      images: images.toJSON()
     })
   }
 
@@ -147,10 +159,10 @@ class GalleryBrowserController {
     let galleries = null
     let images = null
     if (req.match('/keyword/:id/gallery')) {
-      galleries = (yield keyword.galleries().public().fetch()).toJSON()
+      galleries = (yield keyword.galleries().filtered(req.galleryFilters).public().fetch()).toJSON()
     }
     else {
-      images = (yield keyword.images().public().fetch()).toJSON()
+      images = (yield keyword.images().filtered(req.imageFilters).public().fetch()).toJSON()
     }
 
     yield resp.sendView('galleryBrowser/keywordPage', {
@@ -162,6 +174,7 @@ class GalleryBrowserController {
 
   * showOwnPage(req, resp) {
     const galleries = yield req.currentUser.galleries()
+      .filtered(req.galleryFilters)
       .orderBy('name', 'asc')
       .fetch()
 

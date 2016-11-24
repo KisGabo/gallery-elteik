@@ -12,18 +12,13 @@ class ProcGalleryFilters {
     let keywords = req.input('filter_keywords')
     keywords = (keywords ? h.splitByComma(keywords) : null)
     let name = req.input('filter_name')
-    let order = req.input('orderby')
-    if (order) {
-      order = order.split('-')
-      if (order[1] != 'asc' && order[1] != 'desc') {
-        order = null
-      }
-      else {
-        order = { col: order[0], dir: order[1] }
-      }
+    let order = req.input('orderby', 'updated_ad-desc')
+    order = order.split('-')
+    if (order[1] != 'asc' && order[1] != 'desc') {
+      order = null
     }
     else {
-      order = null
+      order = { col: order[0], dir: order[1] }
     }
 
     req.galleryFilters = { keywords, name, order }

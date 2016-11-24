@@ -1,6 +1,7 @@
 {% extends 'master' %}
 {% set headTitle = 'Saját galériák' %}
 {% from 'galleryBrowser/galleryTable.njk' import m as galleryTable %}
+{% from 'galleryBrowser/galleryTableControls.njk' import m as controls %}
 
 {% block content %}
 
@@ -10,6 +11,8 @@
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Új galéria
   </a>
 </h1>
+
+{{ controls(gallery_filter_fd) }}
 
 {{ galleryTable(galleries, true) }}
 
