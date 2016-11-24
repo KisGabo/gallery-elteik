@@ -29,7 +29,7 @@ class ProcImageFilters {
     req.imageFilters = { keywords, dateMode, date, order }
 
     View.global('image_filter_fd', {
-      filter_keywords: keywords,
+      filter_keywords: keywords || [],
       filter_date_taken_mode: dateMode,
       filter_date_taken: date,
       orderby: req.input('orderby'),

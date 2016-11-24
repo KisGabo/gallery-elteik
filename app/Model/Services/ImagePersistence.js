@@ -59,7 +59,7 @@ class ImagePersistenceService {
     // iterate over files and move .jpg files to gallery temp folder
 
     for (let file of files) {
-      if (file.ext == 'zip') {
+      if (file.ext.toLowerCase() == 'zip') {
         try {
           yield new Promise((resolve, reject) => {
             extract(file.path, { dir: tmpFolder }, err => {
@@ -72,7 +72,7 @@ class ImagePersistenceService {
           result.skipped.push(file.name)
         }
       }
-      else if (file.ext == 'jpg') {
+      else if (file.ext.toLowerCase() == 'jpg') {
         // it's possible that upload temp dir is on another device,
         // and file.move(..) or fs.rename(..) fails with cross-device link error 
         yield fsx.move(file.path, tmpFolder + '/' + file.name)

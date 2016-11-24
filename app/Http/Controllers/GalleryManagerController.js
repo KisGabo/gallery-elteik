@@ -102,7 +102,8 @@ class GalleryManagerController {
       }
     }
 
-    if (req.old('gallery')) {
+    // this is a mess
+    if (req.old('gallery') && gallery) {
       gallery = gallery.toJSON()
       h.copyInto(req.old('gallery'), gallery)
       keywordNames = req.old('keywordNames')
@@ -111,6 +112,10 @@ class GalleryManagerController {
       const keywords = yield gallery.keywords().fetch()
       keywordNames = keywords.map(kw => kw.name)
       gallery = gallery.toJSON()
+    }
+    else {
+      gallery = req.old('gallery')
+      keywordNames = req.old('keywordNames')
     }
 
     yield resp.sendView('forms/gallery', {

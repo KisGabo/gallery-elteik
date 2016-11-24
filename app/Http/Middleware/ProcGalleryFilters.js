@@ -29,7 +29,7 @@ class ProcGalleryFilters {
     req.galleryFilters = { keywords, name, order }
 
     View.global('gallery_filter_fd', {
-      filter_keywords: keywords,
+      filter_keywords: keywords || [],
       filter_name: name,
       orderby: req.input('orderby'),
     })
