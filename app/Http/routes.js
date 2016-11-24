@@ -15,10 +15,10 @@ Route.get   ('/user/:id/moderator', 'UserController.setModPrivilege').as('user_m
 Route.get   ('/usersettings',       'UserController.showSettingsPage').middleware('auth')
 Route.post  ('/usersettings',       'UserController.save').middleware('auth')
 
-Route.get   ('/gallery',            'GalleryBrowserController.showGalleryListPage')
+Route.get   ('/gallery',            'GalleryBrowserController.showGalleryListPage').middleware('proc_gallery_filters')
 Route.get   ('/gallery/add',        'GalleryManagerController.showFormPage').as('gallery_add').middleware('auth')
 Route.post  ('/gallery/add',        'GalleryManagerController.save').middleware('auth')
-Route.get   ('/gallery/:id',        'GalleryBrowserController.showGalleryPage').as('gallery')
+Route.get   ('/gallery/:id',        'GalleryBrowserController.showGalleryPage').as('gallery').middleware('proc_img_filters')
 Route.get   ('/gallery/:id/edit',   'GalleryManagerController.showFormPage').as('gallery_edit').middleware('auth')
 Route.post  ('/gallery/:id/edit',   'GalleryManagerController.save').middleware('auth')
 Route.get   ('/gallery/:id/delete', 'GalleryManagerController.delete').as('gallery_delete').middleware('auth')

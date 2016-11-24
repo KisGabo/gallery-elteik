@@ -1,10 +1,13 @@
 {% extends 'master' %}
 {% set headTitle = 'Galériák' %}
 {% from 'galleryBrowser/galleryTable.njk' import m as galleryTable %}
+{% from 'galleryBrowser/galleryTableControls.njk' import m as controls %}
 
 {% block content %}
 
 <h1>Galériák</h1>
+
+{{ controls(gallery_filter_fd) }}
 
 {{ galleryTable(galleries) }}
 

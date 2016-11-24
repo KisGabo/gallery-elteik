@@ -1,0 +1,26 @@
+{% from 'macros.njk' import option_value as v %}
+
+{% macro m(fd) %}
+
+<form method="get" class="filter-controls">
+
+  <input type="text" class="form-control" style="width:250px" name="filter_keywords" placeholder="szűrés kulcsszavakra" value="{{ fd.filter_keywords }}">
+
+  <span class="separator"></span>
+
+  <input type="text" class="form-control" style="width:300px" name="filter_name" placeholder="galéria neve" value="{{ fd.filter_name }}">
+
+  <span class="separator"></span>
+
+  <select name="orderby" class="form-control">
+    <option {{ v('updated_at-desc', fd.orderby) }}>Legutóbb frissült előre</option>
+    <option {{ v('updated_at-asc', fd.orderby) }}>Legrégebben frissült előre</option>
+    <option {{ v('id-desc', fd.orderby) }}>Legutóbb létrehozott előre</option>
+    <option {{ v('id-asc', fd.orderby) }}>Legrégebben létrehozott előre</option>
+  </select>
+
+  <button type="submit" class="btn btn-success">Lássuk</button>
+
+</form>
+
+{% endmacro %}

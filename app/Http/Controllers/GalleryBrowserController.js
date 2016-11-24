@@ -62,7 +62,7 @@ class GalleryBrowserController {
   }
 
   * showGalleryListPage(req, resp) {
-    const galleries = yield Gallery.query().public()
+    const galleries = yield Gallery.query().filtered(req.galleryFilters).public()
       .orderBy('id', 'desc')
       .with('user')
       .fetch()
@@ -86,8 +86,10 @@ class GalleryBrowserController {
     }
 
     yield gallery.related('user').load()
+    let imagesQuery = gallery.images().filtered(req.imageFilters)
     // if gallery belongs to current user, show private images too
-    const images = yield (isOwn ? gallery.images().fetch() : gallery.images().public().fetch())
+    if (!isOwn) imagesQuery.public()
+    const images = yield imagesQuery.fetch()
     const keywords = yield gallery.keywords().fetch()
 
     yield resp.sendView('galleryBrowser/galleryPage', {

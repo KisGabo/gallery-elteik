@@ -1,0 +1,36 @@
+{% from 'macros.njk' import option_value as v %}
+
+{% macro m(fd) %}
+
+<form method="get" class="filter-controls">
+
+  <input type="text" class="form-control" style="width:250px" name="filter_keywords" placeholder="szűrés kulcsszavakra" value="{{ fd.filter_keywords }}">
+
+  <span class="separator"></span>
+
+  <select name="filter_date_taken_mode" class="form-control" style="width:130px">
+    <option {{ v('exact', fd.filter_date_taken_mode) }}>Pontosan</option>
+    <option {{ v('older', fd.filter_date_taken_mode) }}>Régebbi, mint</option>
+    <option {{ v('newer', fd.filter_date_taken_mode) }}>Újabb, mint</option>
+  </select>
+
+  <input type="text" class="form-control" style="width:180px" name="filter_date_taken" placeholder="nap, pl. 2016.11.23." value="{{ fd.filter_date_taken | date('YYYY.MM.DD.') }}">
+
+  <span class="separator"></span>
+
+  <select name="orderby" class="form-control">
+    <option {{ v('id-desc', fd.orderby) }}>Legfrissebb előre</option>
+    <option {{ v('id-asc', fd.orderby) }}>Legrégebbi előre</option>
+    <option {{ v('date_taken-desc', fd.orderby) }}>Legutóbb készített előre</option>
+    <option {{ v('date_taken-asc', fd.orderby) }}>Legrégebben készített előre</option>
+    <option {{ v('like_count-desc', fd.orderby) }}>Legkedveltebb előre</option>
+    <option {{ v('like_count-asc', fd.orderby) }}>Legkedveltebb hátra</option>
+    <option {{ v('view_count-desc', fd.orderby) }}>Legnézettebb előre</option>
+    <option {{ v('view_count-asc', fd.orderby) }}>Legnézettebb hátra</option>
+  </select>
+
+  <button type="submit" class="btn btn-success">Lássuk</button>
+
+</form>
+
+{% endmacro %}
