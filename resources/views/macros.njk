@@ -1,3 +1,8 @@
 {% macro active(expr) %}
 {{ 'class=active' if expr }}
 {% endmacro %}
+
+
+{% macro option_value(value, selected) %}
+value="{{ value }}" {{ 'selected' if value == selected }}
+{% endmacro %}

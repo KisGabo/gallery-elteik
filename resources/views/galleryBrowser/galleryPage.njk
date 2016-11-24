@@ -1,6 +1,7 @@
 {% extends 'master' %}
 {% set headTitle = gallery.name %}
 {% from 'galleryBrowser/imageTable.njk' import m as imageTable %}
+{% from 'galleryBrowser/imageTableControls.njk' import m as controls %}
 {% from 'galleryBrowser/keywordList.njk' import m as keywordList %}
 
 {% block content %}
@@ -34,6 +35,8 @@
 {% if gallery.about %}
 <p>{{ gallery.about }}</p>
 {% endif %}
+
+{{ controls() }}
 
 {{ imageTable(images, gallery.user_id == currentUser.id, currentUser.role >= 1) }}
 

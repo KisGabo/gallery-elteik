@@ -1,5 +1,27 @@
 dd { margin: 5px 0 10px 10px; }
 
+.filter-controls {
+  overflow: hidden;
+  margin: 10px 0;
+  padding: 10px 10px 0 10px;
+  background-color: #375a7f;
+}
+  .filter-controls .form-control {
+    float: left;
+    width: 200px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .filter-controls .separator {
+    float: left;
+    width: 2px;
+    height: 45px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background: #8ea0b4;
+  }
+
 .image-table-item {
   display: inline-block;
   width: 220px;
