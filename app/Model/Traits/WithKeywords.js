@@ -55,17 +55,18 @@ function * syncKeywords(names) {
   }
 }
   
-function * _filterByKeywords(names, pivotTable, pivotLocalKey) {
+function _filterByKeywords(names, pivotTable, pivotLocalKey) {
   const queryKwIds = Db
     .table('keywords')
     .whereIn('name', names)
+    .select('id')
 
   const queryItemIds = Db
     .table(pivotTable)
     .whereIn('keyword_id', queryKwIds)
     .distinct(pivotLocalKey)
 
-  return function * () {
+  return function () {
     this.whereIn('id', queryItemIds)
   }
 }
