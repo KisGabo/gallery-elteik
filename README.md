@@ -3,13 +3,13 @@
 ## Állapotok
 
 * **nov. 24. 19:36**: 
-[7f3e0ab](https://github.com/KisGabo/gallery-elteik/commit/7f3e0ab33dac40d0babe9e359e5db7e6dd323ec3)  
+[7f3e0ab](https://github.com/KisGabo/gallery-elteik/tree/7f3e0ab33dac40d0babe9e359e5db7e6dd323ec3)  
 Na, ez már valami
 * **nov. 23. 15:07**:
-[bb7aedd](https://github.com/KisGabo/gallery-elteik/commit/bb7aeddc80eda155f0d7ab0c4ce3a12319aa0d52)  
+[bb7aedd](https://github.com/KisGabo/gallery-elteik/tree/bb7aeddc80eda155f0d7ab0c4ce3a12319aa0d52)  
 Második beadandó viszonylag vállalható és elvileg működő változata
 * **nov. 20. 23:59**:
-[8f4c048](https://github.com/KisGabo/gallery-elteik/commit/8f4c048bf0601f58164b33dbe90b26e6d2f119aa)  
+[8f4c048](https://github.com/KisGabo/gallery-elteik/tree/8f4c048bf0601f58164b33dbe90b26e6d2f119aa)  
 Második beadandó lejártakor félkész, de elvileg működő állapot. Key-feature-ök hiányoznak.
 
 **Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
@@ -69,7 +69,6 @@ Adatbázis reset példaadatokkal: `npm run dbreset`
   - dátum (tól-ig)
   - kulcsszavak
 * A galéria lehet publikus vagy privát
-* Egy galéria dátumát a program automatikusan beállíthatja a képek alapján
 
 #### Képek
 
@@ -84,7 +83,7 @@ Adatbázis reset példaadatokkal: `npm run dbreset`
 * Egy képhez tartozhat:
   - cím
   - leírás
-  - dátum
+  - dátum - exif adatból automatikusan beállítódik
   - kulcsszavak
   - személynevek (a képbeli pozícióval együtt tárolva)
     * a képen kattintva kijelölhető az adott személy
@@ -103,8 +102,8 @@ Adatbázis reset példaadatokkal: `npm run dbreset`
 * Publikus galériák és képek böngészése
 * Galériák és képek rendezése dátum szerint
 * Képek rendezése like-ok száma szerint
-* Keresés a galériák és képek közt név, leírás, dátum, helyszín, kulcsszavak alapján
-* Leggyakoribb kulcsszavak és helyszínek listázása
+* Keresés a galériák és képek közt név, leírás, dátum, kulcsszavak alapján
+* Leggyakoribb kulcsszavak listázása
 * Felhasználó kedvelt képeinek listázása
 
 ### Moderátorok
