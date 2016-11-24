@@ -6,6 +6,8 @@ const ImgPersist = use('Gallery/ImagePersistence')
 const Gallery = use('App/Model/Gallery')
 const Image = use('App/Model/Image')
 const Keyword = use('App/Model/Keyword')
+const exif = require('fast-exif')
+const moment = require('moment')
 const h = require('../../helpers.js')
 
 class ImageManagerController {
@@ -205,6 +207,14 @@ class ImageManagerController {
     let firstId = 0
     for (let img of validationResult.valid) {
       const imgModel = new Image()
+
+      try {
+        const exifData = yield exif.read(img.path)
+        const dateTaken = moment(exifData.exif.DateTimeOriginal).unix()
+        imgModel.date_taken = dateTaken
+      } catch (e) {}
+      
+
       imgModel.gallery().associate(gallery)
       yield imgModel.save()
       yield ImgPersist.saveImage(img.path, imgModel, img.dimensions)
