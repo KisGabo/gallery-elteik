@@ -24,5 +24,5 @@ module.exports.cleanValidationMessages = function(messages) {
 module.exports.toTs = function(string) {
   if (!string) return null
   const moment = require('moment')
-  return moment(string, 'YYYY. MM. DD. HH:mm:ss').unix()
+  return moment(string, 'YYYY.MM.DD. HH:mm:ss').unix()
 }

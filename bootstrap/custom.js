@@ -14,7 +14,7 @@ module.exports.boot = function() {
   const moment = require('moment')
   View.filter('date', (ts, format) => {
     if (!ts) return ''
-    if (!format) format = 'YYYY. MM. DD. HH:mm:ss'
+    if (!format) format = 'YYYY.MM.DD. HH:mm:ss'
     const result = moment.unix(ts)
     return result.isValid() ? result.format(format) : ts
   })
@@ -27,7 +27,7 @@ module.exports.boot = function() {
       let val = get(data, field)
       if (!val) resolve('Empty')
 
-      if (moment(val, 'YYYY. MM. DD. HH:mm:ss', true).isValid()) {
+      if (moment(val, 'YYYY.MM.DD. HH:mm:ss', true).isValid()) {
         resolve('OK')
       }
       else {
