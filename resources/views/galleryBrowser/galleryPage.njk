@@ -21,12 +21,12 @@
   {% if gallery.date_from %}
   <li>
     <strong>Fotózva:</strong>
-    {{ gallery.date_from }}
-    {% if gallery.date_to %} - {{ gallery.date_to }}{% endif %}
+    {{ gallery.date_from | date() }}
+    {% if gallery.date_to %} - {{ gallery.date_to | date() }}{% endif %}
   </li>
   {% endif %}
 
-  <li><strong>Létrehozva:</strong> {{ gallery.created_at }}</li>
+  <li><strong>Létrehozva:</strong> {{ gallery.created_at | date() }}</li>
   <li><strong>Képek száma:</strong> ##</li>
 
 </ul>

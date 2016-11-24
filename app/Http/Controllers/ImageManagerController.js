@@ -46,7 +46,8 @@ class ImageManagerController {
 
     let keywordNames
     if (req.old('image')) {
-      image = req.old('image')
+      image = image.toJSON()
+      h.copyInto(req.old('image'), image)
       keywordNames = req.old('keywordNames')
     }
     else {
@@ -108,7 +109,7 @@ class ImageManagerController {
 
     image.title = data.title
     image.about = data.about
-    image.date_taken = data.date_taken
+    image.date_taken = h.toTs(data.date_taken)
     image.public = !!data.public
 
     yield image.save();

@@ -11,13 +11,14 @@ class ImagesTableSchema extends Schema {
         .references('id').inTable('galleries')
       table.string('title', 100)
       table.text('about')
-      table.timestamp('date_taken')
+      table.integer('date_taken').unsigned()
       table.boolean('public').notNullable().defaultTo(false)
       table.boolean('force_private').notNullable().defaultTo(false)
       // added defaultTo(0), since no modify-column :(
       table.integer('views').unsigned().notNullable().defaultTo(0)
       table.integer('likes').unsigned().notNullable().defaultTo(0)
-      table.timestamps(false, true)
+      table.integer('created_at').unsigned().notNullable()
+      table.integer('updated_at').unsigned().notNullable()
     })
   }
 

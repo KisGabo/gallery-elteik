@@ -13,6 +13,10 @@ class User extends Lucid {
     this.addHook('afterCreate', 'create-folder', this._hookAfterCreate)
   }
 
+  static get dateFormat () {
+    return 'X'
+  }
+
   static get validationRules() {
     return {
       username: 'required|alpha_numeric|unique:users|min:2|max:80',

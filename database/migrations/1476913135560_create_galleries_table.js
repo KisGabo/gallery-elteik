@@ -11,10 +11,11 @@ class GalleriesTableSchema extends Schema {
         .references('id').inTable('users')
       table.string('name', 254).notNullable()
       table.text('about')
-      table.timestamp('date_from')
-      table.timestamp('date_to')
+      table.integer('date_from').unsigned()
+      table.integer('date_to').unsigned()
       table.boolean('public').notNullable().defaultTo(false)
-      table.timestamps(false, true)
+      table.integer('created_at').unsigned().notNullable()
+      table.integer('updated_at').unsigned().notNullable()
     })
   }
 

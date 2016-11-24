@@ -35,11 +35,11 @@
 
       {% if image.date_taken %}
       <dt>Fotózva</dt>
-      <dd>{{ image.date_taken }}</dd>
+      <dd>{{ image.date_taken | date() }}</dd>
       {% endif %}
 
       <dt>Feltöltve</dt>
-      <dd>{{ image.created_at }}</dd>
+      <dd>{{ image.created_at | date() }}</dd>
 
       <dt>Megtekintések</dt>
       <dd>{{ image.view_count }}</dd>

@@ -13,6 +13,10 @@ class Gallery extends Lucid {
     this.addHook('beforeDelete', 'delete-related', this._hookBeforeDelete)
   }
 
+  static get dateFormat () {
+    return 'X'
+  }
+
   static get traits () {
     return [ 'Gallery/Traits/WithKeywords' ]
   }

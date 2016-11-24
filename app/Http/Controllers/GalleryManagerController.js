@@ -55,8 +55,8 @@ class GalleryManagerController {
     gallery.user_id = req.currentUser.id
     gallery.name = data.name
     gallery.about = data.about
-    gallery.date_from = data.date_from
-    gallery.date_to = data.date_to
+    gallery.date_from = h.toTs(data.date_from)
+    gallery.date_to = h.toTs(data.date_to)
     gallery.public = data.public
 
     yield gallery.save();
@@ -105,7 +105,8 @@ class GalleryManagerController {
     }
 
     if (req.old('gallery')) {
-      gallery = req.old('gallery')
+      gallery = gallery.toJSON()
+      h.copyInto(req.old('gallery'), gallery)
       keywordNames = req.old('keywordNames')
     }
     else if (gallery) {
