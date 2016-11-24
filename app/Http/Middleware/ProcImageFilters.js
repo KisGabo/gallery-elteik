@@ -4,6 +4,7 @@ const View = use('Adonis/Src/View')
 const Keyword = use('App/Model/Keyword')
 const Image = use('App/Model/Image')
 const moment = require('moment')
+const h = require('../../helpers.js')
 
 class ProcImageFilters {
 
