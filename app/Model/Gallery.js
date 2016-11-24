@@ -38,6 +38,30 @@ class Gallery extends Lucid {
     q.where(Gallery._filterByKeywords(names, 'p_gallery_keywords', 'gallery_id'))
   }
 
+  static scopeFiltered(q, filters) {
+
+     // keywords
+
+    if (filters.keywords) {
+      Gallery.scopeByKeywords(q, filters.keywords)
+    }
+
+    // name
+
+    if (filters.name) {
+      q.where('name', 'LIKE', '%' + filters.name + '%')
+    }
+
+    // order by
+
+    if (filters.order) {
+      const fields = [ 'updated_at', 'id' ]
+      if (fields.indexOf(filters.order.col) > -1) {
+        q.orderBy(filters.order.col, filters.order.dir)
+      }
+    }
+  }
+
   user() {
     return this.belongsTo('App/Model/User')
   }

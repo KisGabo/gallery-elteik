@@ -38,6 +38,38 @@ class Image extends Lucid {
     q.where(Image._filterByKeywords(names, 'p_image_keywords', 'image_id'))
   }
 
+  static scopeFiltered(q, filters) {
+
+     // keywords
+
+    if (filters.keywords) {
+      Image.scopeByKeywords(q, filters.keywords)
+    }
+
+    // date
+
+    if (filters.date) {
+      if (filters.dateMode == 'exact') {
+        q.whereBetween('date_taken', [ filters.date, filters.date + 24*3600 ])
+      }
+      else if (filters.dateMode == 'older') {
+        q.where('date_taken', '<', filters.date)
+      }
+      else {
+        q.where('date_taken', '>', filters.date)
+      }
+    }
+
+    // order by
+
+    if (filters.order) {
+      const fields = [ 'date_taken', 'view_count', 'like_count', 'id' ]
+      if (fields.indexOf(filters.order.col) > -1) {
+        q.orderBy(filters.order.col, filters.order.dir)
+      }
+    }
+  }
+
   user() {
     // TODO no hasOneThrough relationship in Lucid
     throw 'Not implemented: please query user through gallery';
