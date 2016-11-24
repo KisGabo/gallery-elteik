@@ -13,9 +13,7 @@ class GalleryManagerController {
 
     // process keywords
 
-    const keywordNames = data.keywords.split(',')
-      .map(kw => kw.trim())
-      .filter(kw => kw.length > 0)
+    const keywordNames = h.splitByComma(data.keywords)
 
     // validate
 

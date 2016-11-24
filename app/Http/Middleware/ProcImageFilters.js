@@ -9,7 +9,7 @@ class ProcImageFilters {
 
   * handle (req, resp, next) {
     let keywords = req.input('filter_keywords')
-    keywords = (keywords ? keywords.split(',').map(name => name.trim()) : null)
+    keywords = (keywords ? h.splitByComma(keywords) : null)
     let dateMode = req.input('filter_date_taken_mode')
     let date = moment(req.input('filter_date_taken'), 'YYYY.MM.DD.').unix()
     let order = req.input('orderby')

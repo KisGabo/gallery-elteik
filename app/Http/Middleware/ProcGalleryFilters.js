@@ -4,12 +4,13 @@ const View = use('Adonis/Src/View')
 const Keyword = use('App/Model/Keyword')
 const Gallery = use('App/Model/Image')
 const moment = require('moment')
+const h = require('../../helpers.js')
 
 class ProcGalleryFilters {
 
   * handle (req, resp, next) {
     let keywords = req.input('filter_keywords')
-    keywords = (keywords ? keywords.split(',').map(name => name.trim()) : null)
+    keywords = (keywords ? h.splitByComma(keywords) : null)
     let name = req.input('filter_name')
     let order = req.input('orderby')
     if (order) {

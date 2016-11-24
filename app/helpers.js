@@ -10,6 +10,12 @@ module.exports.copyInto = function(source, dest) {
   }
 }
 
+module.exports.splitByComma = function(string) {
+  return string.split(',')
+    .map(str => str.trim())
+    .filter(str => str.length > 0)
+}
+
 module.exports.checkOwn = function(item, req) {
   return req.currentUser && item.user_id == req.currentUser.id
 }
