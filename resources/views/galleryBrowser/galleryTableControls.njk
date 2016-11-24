@@ -4,7 +4,7 @@
 
 <form method="get" class="filter-controls">
 
-  <input type="text" class="form-control" style="width:250px" name="filter_keywords" placeholder="szűrés kulcsszavakra" value="{{ fd.filter_keywords }}">
+  <input type="text" class="form-control" style="width:250px" name="filter_keywords" placeholder="szűrés kulcsszavakra" value="{{ fd.filter_keywords | join(', ') }}">
 
   <span class="separator"></span>
 
