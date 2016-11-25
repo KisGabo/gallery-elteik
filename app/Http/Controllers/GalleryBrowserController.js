@@ -63,7 +63,6 @@ class GalleryBrowserController {
 
   * showGalleryListPage(req, resp) {
     const galleries = yield Gallery.query().filtered(req.galleryFilters).public()
-      .orderBy('id', 'desc')
       .with('user')
       .fetch()
 
