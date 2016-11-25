@@ -7,6 +7,7 @@
     "start": "node --harmony_proxies server.js",
     "sqladmin": "node node_modules/express-admin/app.js config/express-admin",
     "dbreset": "node ace migration:refresh && node ace db:seed --files initial",
+    "dbreset-f": "node ace migration:refresh --force && node ace db:seed --force --files initial",
     "lint": "standard"
   },
   "author": "",
