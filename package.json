@@ -8,7 +8,7 @@
     "sqladmin": "node node_modules/express-admin/app.js config/express-admin",
     "dbreset": "node ace migration:refresh && node ace db:seed",
     "dbreset-f": "node ace migration:refresh --force && node ace db:seed --force",
-    "lint": "standard"
+    "heroku-postbuild": "npm i pg && npm run dbreset-f && node ace storage:download"
   },
   "author": "",
   "license": "MIT",
@@ -29,7 +29,6 @@
     "fast-exif": "^0.2.0",
     "image-size": "^0.5.0",
     "jimp": "^0.2.27",
-    "pg": "^6.1.0",
     "standard": "^8.4.0",
     "youch": "^1.0.1"
   },
@@ -44,7 +43,6 @@
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
-    "standard": "^8.3.0",
-    "sqlite3": "^3.1.6"
+    "standard": "^8.3.0"
   }
 }
