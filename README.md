@@ -12,6 +12,10 @@ Második beadandó viszonylag vállalható és elvileg működő változata
 [8f4c048](https://github.com/KisGabo/gallery-elteik/tree/8f4c048bf0601f58164b33dbe90b26e6d2f119aa)  
 Második beadandó lejártakor félkész, de elvileg működő állapot. Key-feature-ök hiányoznak.
 
+**Végre megy Herokun is!** A 'deploy' branch van Herokura kötve.  
+**Admin email / pass**: admin@admin.com / pwd  
+https://gallery-elteik.herokuapp.com/
+
 **Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
 
 Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkalmazások fejlesztése nevű tárgyból.
