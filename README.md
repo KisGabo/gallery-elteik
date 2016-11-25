@@ -21,12 +21,13 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 
 1. Függőségek telepítése: `npm i`  
    Függőség az sqlite (dev) és a postgresql is (utóbbi Herokura kell). Igyekszem minél előbb kivenni ezeket, mert a használandó adatbázismotor a környezettől függ, és build scriptben kéne települnie.
-2. `.env.example` átnevezése `.env`-re, és tartalmának ellenőrzése
-3. Adatbázis migrációk futtatása: `node ace migration:run`
-4. Konfigurálás: `config/gallery.js` ellenőrzése (főleg az admin felhasználó adatait)
-5. Példa adatok beszúrása az adatbázisba: `node ace db:seed`
-6. Példa képek letöltése: `node ace storage:download`
-7. **Indítás**: `npm start` vagy `npm run dev`
+2. Kívánt adatbázismotor telepítése, ha még nincs, pl: `npm i sqlite3`
+3. `.env.example` átnevezése `.env`-re, és tartalmának ellenőrzése
+4. Adatbázis migrációk futtatása: `node ace migration:run`
+5. Konfigurálás: `config/gallery.js` ellenőrzése (főleg az admin felhasználó adatait)
+6. Példa adatok beszúrása az adatbázisba: `node ace db:seed`
+7. Példa képek letöltése: `node ace storage:download`
+8. **Indítás**: `npm start` vagy `npm run dev`
 
 * _(opcionális)_ express-admin telepítése:
   1. Telepítés: `npm i express-admin`
