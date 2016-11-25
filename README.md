@@ -20,7 +20,6 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 ## Konfigurálás
 
 1. Függőségek telepítése: `npm i`  
-   Függőség az sqlite (dev) és a postgresql is (utóbbi Herokura kell). Igyekszem minél előbb kivenni ezeket, mert a használandó adatbázismotor a környezettől függ, és build scriptben kéne települnie.
 2. Kívánt adatbázismotor telepítése, ha még nincs, pl: `npm i sqlite3`
 3. `.env.example` átnevezése `.env`-re, és tartalmának ellenőrzése
 4. Adatbázis migrációk futtatása: `node ace migration:run`
