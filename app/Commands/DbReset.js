@@ -63,13 +63,13 @@ class DbReset extends Command {
 
   static get _tables() {
     return [
-      'users',
-      'galleries',
-      'images',
-      'keywords',
       'p_likes',
       'p_gallery_keywords',
       'p_image_keywords',
+      'keywords',
+      'images',
+      'galleries',
+      'users',
     ]
   }
 
