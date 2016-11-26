@@ -41,6 +41,7 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 ## Tervek a közeljövőben
 
 - **doksi, kód kommentelése**
+- valahogy megoldani, hogy a master brancen ne legyenek environment-dependent dolgok, pl PROCILFE meg .profile
 - todok a kódban
 - templated hibaoldalak
 - lapozás
