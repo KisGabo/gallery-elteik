@@ -6,9 +6,7 @@
     "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x \"node --harmony_proxies\" server.js",
     "start": "node --harmony_proxies server.js",
     "sqladmin": "node node_modules/express-admin/app.js config/express-admin",
-    "dbreset": "node ace migration:refresh && node ace db:seed",
-    "dbreset-f": "node ace migration:refresh --force && node ace db:seed --force",
-    "heroku-postbuild": "npm i pg && npm run dbreset-f && node ace storage:download"
+    "heroku-postbuild": "npm i pg && node ace db:reset && node ace storage:download"
   },
   "author": "",
   "license": "MIT",
