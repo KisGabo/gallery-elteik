@@ -27,8 +27,8 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 2. Kívánt adatbázismotor telepítése, ha még nincs, pl: `npm i sqlite3`
 3. `.env.example` átnevezése `.env`-re, és tartalmának ellenőrzése
 4. Konfigurálás: `config/gallery.js` ellenőrzése (főleg az admin felhasználó adatait)
-5. Adatbázis felépítése példaadatokkal: `node ace db:reset`  
-   Ez a parancs futtatható bármikor, ha tiszta adatbázist akarunk
+5. Adatbázis felépítése példaadatokkal: `npm run fresh-db-force`  
+   _Ez a parancs futtatható bármikor, ha tiszta adatbázist akarunk, ekkor figyeljünk a storage könyvtárra_
 6. Példa képek letöltése: `node ace storage:download`
 7. **Indítás**: `npm start` vagy `npm run dev`
 

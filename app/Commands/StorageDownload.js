@@ -1,10 +1,19 @@
 'use strict'
 
-const Command = use('Command')
-const AdonisHelpers = use('Helpers')
+/**
+ * This ace command downloads the example image files
+ * and puts them into the storage folder.
+ * 
+ * This step is strongly recommended if using the db seeder,
+ * or else no galleries nor images can be created
+ * because of missing folders.
+ */
+
 const https = require('https')
 const fs = require('fs')
 const extract = require('extract-zip')
+const Command = use('Command')
+const AdonisHelpers = use('Helpers')
 
 class StorageDownload extends Command {
 
@@ -40,15 +49,15 @@ class StorageDownload extends Command {
 
     // sorry for callbacks
 
-    this.info('Downloading...')
+    this.info('Downloading example images...')
     var file = fs.createWriteStream(storage + '/storage.zip');
     var request = https.get("https://dl.dropboxusercontent.com/u/69565179/k%C3%BCld-nagyg%C3%A9p/gallery-elteik/storage.zip", (resp) => {
       resp.pipe(file);
       resp.on('end', () => {
-        this.info('Extracting...')
+        this.info('Extracting example images...')
         extract(storage + '/storage.zip', { dir: storage + '/..' }, (err) => {
           fs.unlink(storage + '/storage.zip')
-          this.info('Finished!')
+          this.success('Example images saved!')
         })
       })
     });

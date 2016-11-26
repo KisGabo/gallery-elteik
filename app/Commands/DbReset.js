@@ -1,15 +1,20 @@
 'use strict'
 
 /**
-
+ * This ace command drops every table in the database.
+ * 
+ * This is handy when willing to do a full database reset
+ * and there are many migrations, because it skips
+ * the migration rollbacks.
+ * 
+ * Another use-case is when existing migrations change
+ * (which shouldn't happen), and that way rollbacks
+ * wouldn't work.
  */
 
 const Config = use('Config')
 const Command = use('Command')
 const Database = use('Database')
-const Schema = new (use('Schema'))
-const RunnerCommand = use('Adonis/Commands/Migration:Run')
-const SeederCommand = use('Adonis/Commands/DB:Seed')
 
 class DbReset extends Command {
 
@@ -20,7 +25,7 @@ class DbReset extends Command {
    * @return {String}
    */
   get signature () {
-    return 'db:reset'
+    return 'db:reset {-f,--force?}'
   }
 
   /**
@@ -30,7 +35,7 @@ class DbReset extends Command {
    * @return {String}
    */
   get description () {
-    return 'Reset database to initial state with example data seeded'
+    return 'Delete all tables'
   }
 
   /**
@@ -40,25 +45,20 @@ class DbReset extends Command {
    * @param  {Object} args    [description]
    * @param  {Object} options [description]
    */
-  * handle (args, options) {
-
-    // drop tables
+  * handle (args, flags) {
+    if (process.env.NODE_ENV === 'production' && !flags.force) {
+      this.error('Cannot reset db in production. Use --force flag to continue')
+    }
 
     for (let tblName of DbReset._tables) {
       yield Database.schema.dropTableIfExists(tblName)
     }
+
     // migration metatable
     yield Database.schema.dropTableIfExists(Config.get('database.migrationsTable', 'adonis_schema'))
 
-    this.info('Tables dropped')
-
-    // run migrations
-
-    yield RunnerCommand.handle(null, { force: true })
-
-    // seed database
-
-    yield SeederCommand.handle(null, { force: true })
+    Database.close()
+    this.success('Tables dropped!')
   }
 
   static get _tables() {

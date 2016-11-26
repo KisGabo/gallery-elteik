@@ -6,7 +6,8 @@
     "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x \"node --harmony_proxies\" server.js",
     "start": "node --harmony_proxies server.js",
     "sqladmin": "node node_modules/express-admin/app.js config/express-admin",
-    "heroku-postbuild": "npm i pg && node ace db:reset && node ace storage:download"
+    "fresh-db-force": "node ace db:reset -f && node ace migration:run -f && node ace db:seed -f",
+    "heroku-postbuild": "npm i pg && node ace db:reset -f && node ace migration:run -f && node ace db:seed -f && node ace storage:download"
   },
   "author": "",
   "license": "MIT",
