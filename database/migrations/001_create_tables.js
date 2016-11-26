@@ -103,7 +103,7 @@ class TableSchemas extends Schema {
     this.drop('users')
     this.drop('galleries')
     this.drop('images')
-    this.drop('likes')
+    this.drop('p_likes')
     this.drop('keywords')
     this.drop('p_image_keywords')
     this.drop('p_gallery_keywords')
