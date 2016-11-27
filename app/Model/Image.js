@@ -136,6 +136,9 @@ class Image extends Lucid {
   }
 
   static * _hookBeforeDelete(next) {
+    yield Db.table('p_image_keywords')
+      .where('image_id', this.id)
+      .delete()    
     yield Db.table('p_likes')
       .where('image_id', this.id)
       .delete()
