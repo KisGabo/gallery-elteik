@@ -42,7 +42,7 @@ class GalleryManagerController {
         return
       }
 
-      if (!h.checkOwn(gallery, req)) {
+      if (!req.checkOwn(gallery, req)) {
         resp.unauthorized('Ez a galéria nem a tiéd.')
         return
       }
@@ -76,7 +76,7 @@ class GalleryManagerController {
       return
     }
 
-    if (!h.checkOwn(gallery, req)) {
+    if (!req.checkOwn(gallery, req)) {
       resp.unauthorized('Ez a galéria nem a tiéd.')
       return
     }
@@ -96,7 +96,7 @@ class GalleryManagerController {
         return
       }
 
-      if (!h.checkOwn(gallery, req)) {
+      if (!req.checkOwn(gallery, req)) {
         resp.unauthorized('Ez a galéria nem a tiéd.')
         return
       }

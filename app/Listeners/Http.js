@@ -1,5 +1,10 @@
 'use strict'
 
+/**
+ * This file is for the HTTP listener,
+ * and HTTP specific app-level stuff.
+ */
+
 const Env = use('Env')
 const Ouch = use('youch')
 const Http = exports = module.exports = {}
@@ -38,6 +43,23 @@ Http.handleError = function * (error, request, response) {
  * starting http server.
  */
 Http.onStart = function () {
+
+  // custom app-level stuff
+
   const custom = require('../../bootstrap/custom.js')
   custom.boot()
+
+  // HTTP specific app-level stuff
+
+  const Request = use('Adonis/Src/Request')
+
+  /**
+   * Checks if given model belongs to current user.
+   * 
+   * @param {Model} item The item to check
+   * @return {boolean}
+   */
+  Request.macro('checkOwn', function (item) {
+    return this.currentUser && item.user_id == this.currentUser.id
+  })
 }

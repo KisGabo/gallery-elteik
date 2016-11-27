@@ -6,7 +6,6 @@ const ImgPersist = use('Gallery/ImagePersistence')
 const Gallery = use('App/Model/Gallery')
 const Image = use('App/Model/Image')
 const Keyword = use('App/Model/Keyword')
-const h = require('../../helpers.js')
 
 class GalleryBrowserController {
 
@@ -22,7 +21,7 @@ class GalleryBrowserController {
 
     const gal = yield img.gallery().fetch()
 
-    if (!img.public && !h.checkOwn(gal, req)) {
+    if (!img.public && !req.checkOwn(gal, req)) {
       resp.unauthorized('Ez a kép privát.')
       return
     }
@@ -78,7 +77,7 @@ class GalleryBrowserController {
       return
     }
 
-    const isOwn = h.checkOwn(gallery, req)
+    const isOwn = req.checkOwn(gallery, req)
     if (!gallery.public && !isOwn) {
       resp.unauthorized('Ez a galéria privát.')
       return
@@ -108,7 +107,7 @@ class GalleryBrowserController {
 
     yield image.related('gallery').load()
 
-    if (!image.public && !h.checkOwn(image.relations['gallery'], req)) {
+    if (!image.public && !req.checkOwn(image.relations['gallery'], req)) {
       resp.unauthorized('Ez a kép privát.')
       return
     }
@@ -191,7 +190,7 @@ class GalleryBrowserController {
 
     yield image.related('gallery').load()
 
-    if (!image.public && !h.checkOwn(image.relations['gallery'], req)) {
+    if (!image.public && !req.checkOwn(image.relations['gallery'], req)) {
       resp.unauthorized('Ez a kép privát.')
       return
     }

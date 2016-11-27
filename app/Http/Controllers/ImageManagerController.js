@@ -19,7 +19,7 @@ class ImageManagerController {
       return
     }
 
-    if (!h.checkOwn(gallery, req)) {
+    if (!req.checkOwn(gallery, req)) {
       resp.unauthorized('Ez a galéria nem a tiéd.')
       return
     }
@@ -41,7 +41,7 @@ class ImageManagerController {
 
     yield image.related('gallery').load()
 
-    if (!h.checkOwn(image.relations['gallery'], req)) {
+    if (!req.checkOwn(image.relations['gallery'], req)) {
       resp.unauthorized('Ez a kép nem a tiéd.')
       return
     }
@@ -93,7 +93,7 @@ class ImageManagerController {
     }
 
     const gallery = yield image.gallery().fetch()
-    if (!h.checkOwn(gallery, req)) {
+    if (!req.checkOwn(gallery, req)) {
       resp.unauthorized('Ez a kép nem a tiéd.')
       return
     }
@@ -147,7 +147,7 @@ class ImageManagerController {
 
     yield image.related('gallery').load()
 
-    if (!h.checkOwn(image.relations['gallery'], req)) {
+    if (!req.checkOwn(image.relations['gallery'], req)) {
       resp.unauthorized('Ez a kép nem a tiéd.')
       return
     }
@@ -175,7 +175,7 @@ class ImageManagerController {
       return
     }
 
-    if (!h.checkOwn(gallery, req)) {
+    if (!req.checkOwn(gallery, req)) {
       resp.unauthorized('Ez a galéria nem a tiéd.')
       return
     }
