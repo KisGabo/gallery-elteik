@@ -1,5 +1,9 @@
 'use strict'
 
+/**
+ * Handles image file validation, storage and getting.
+ */
+
 const fs = require('co-fs')
 const fsx = require('co-fs-extra')
 const jimp = require('jimp')
@@ -10,15 +14,33 @@ var AdonisHelpers
 
 class ImagePersistenceService {
 
+  /**
+   * Must be called before using.
+   * 
+   * @param {Config} config Builtin Config service
+   * @param {Helpers} adonisHelpers Builtin Helpers service
+   */
   static inject(config, adonisHelpers) {
     Config = config
     AdonisHelpers = adonisHelpers
   }
 
+  /**
+   * Gets the absolute path of the folder of given gallery.
+   * 
+   * @param {Gallery} gallery 
+   * @return {string}
+   */
   static getGalleryFolder(gallery) {
     return AdonisHelpers.storagePath(`gallery/${gallery.user_id}/${gallery.id}`)
   }
 
+  /**
+   * Gets the absolute paths to all three versions of given image.
+   * 
+   * @param {Image} image
+   * @return {object} An object with 'original', 'medium' and 'thumb' props
+   */
   static * getImageFiles(image) {
     yield image.relatedNotLoaded('gallery').load()
     const galFolder = this.getGalleryFolder(image.relations['gallery'])
@@ -30,6 +52,15 @@ class ImagePersistenceService {
     }
   }
 
+  /**
+   * Gets the absolute path to demanded version of given image.
+   * If this version doesn't exist because the original
+   * image is smaller, it returns the path to the original.
+   * 
+   * @param {Image} image
+   * @param {string} which original | medium | thumb
+   * @return {string}
+   */
   static * getImageFileToServe(image, which) {
     if (!which) which = 'original'
     const files = yield this.getImageFiles(image)
@@ -42,14 +73,47 @@ class ImagePersistenceService {
     }
   }
 
+  /**
+   * Creates the storage directory for a new user.
+   * 
+   * @param {User} user Must be already saved into db
+   */
   static * createUserFolder(user) {
     yield fs.mkdir(AdonisHelpers.storagePath(`gallery/${user.id}`))
   }
 
+  /**
+   * Creates the storage directory for a new gallery.
+   * 
+   * @param {Gallery} gallery Must be already saved into db
+   */
   static * createGalleryFolder(gallery) {
     yield fs.mkdir(this.getGalleryFolder(gallery))
   }
 
+  /**
+   * Validates files as images and returns info about them.
+   * Accepts jpg files and zip of jpg files.
+   * 
+   * Saves every valid image to a temporary folder in gallery,
+   * and deletes invalid ones from their current locaion.
+   * 
+   * @param {Gallery} gallery The gallery the images will belong to
+   * @param {array} files
+   *   Array of objects: {
+   *     name: <original file name>,
+   *     ext: <original file extension>,
+   *     path: <current path of file>
+   *   }
+   * @return {object}
+   *   Info about files: {
+   *     skipped: [ <filename>, ... ],
+   *     valid: [ {
+   *       path: <temporary path to image>
+   *       dimensions: { width, height }
+   *     }, ... ]
+   *   }
+   */
   static * validateImages(gallery, files) {
     const result = { valid: [], skipped: [] }
     const galFolder = this.getGalleryFolder(gallery)
@@ -71,6 +135,7 @@ class ImagePersistenceService {
         catch (e) {
           result.skipped.push(file.name)
         }
+        yield fs.unlink(file.path)
       }
       else if (file.ext.toLowerCase() == 'jpg') {
         // it's possible that upload temp dir is on another device,
@@ -78,6 +143,7 @@ class ImagePersistenceService {
         yield fsx.move(file.path, tmpFolder + '/' + file.name)
       }
       else {
+        yield fs.unlink(file.path)
         result.skipped.push(file.name)
       }
     }
@@ -131,6 +197,14 @@ class ImagePersistenceService {
     return result
   }
 
+  /**
+   * Saves an image file to its permanent location,
+   * and creates medium-sized and thumbnail images, if necessary.
+   * 
+   * @param {string} filePath Path to a valid image file
+   * @param {Image} image Image model which the file belongs to
+   * @param {object} dimension Size of image: { width, height }
+   */
   static * saveImage(filePath, image, dimensions) {
     const imgJimp = yield jimp.read(filePath)
     let max
@@ -184,10 +258,21 @@ class ImagePersistenceService {
     yield fs.rename(filePath, savedImgPaths.original)
   }
 
+  /**
+   * Deletes the (empty) temporary folder of given gallery.
+   * Should be called after upload process is complete.
+   * 
+   * @param {Gallery} gallery
+   */
   static * deleteTempFolder(gallery) {
     yield fs.rmdir(this.getGalleryFolder(gallery) + '/tmp')
   }
 
+  /**
+   * Deletes the whole folder of given gallery.
+   * 
+   * @param {Gallery} gallery
+   */
   static * deleteGallery(gallery) {
     // TODO yield only after for
     const galFolder = this.getGalleryFolder(gallery)
@@ -198,6 +283,11 @@ class ImagePersistenceService {
     yield fs.rmdir(galFolder)
   }
 
+  /**
+   * Deletes all three versions of given image.
+   * 
+   * @param {Image} image
+   */
   static * deleteImageFiles(image) {
     const files = yield this.getImageFiles(image)
     try { yield fs.unlink(files.original) } catch(e) {}

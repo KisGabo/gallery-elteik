@@ -36,20 +36,19 @@ module.exports.boot = function() {
     })
   }, 'Wrong datetime format')
 
-
   /*** DANGER ZONE BELOW: UGLY HACKS */
 
-
   /**
-   * I can't see why Lucid formats auto timestamps with moment
-   * when getting these. What makes it more nonsense is that
-   * it does the same when setting.
+   * I don't want Lucid to convert auto dates
+   * to and from momentjs instances.
    * 
-   * Maybe I'm missing something, but anyway,
-   * this messes up my unix timestamps, because
+   * This messes up my unix timestamps, because
    * moment thinks that they're in milliseconds.
    * 
    * Moreover this gets called waaay too many times.
+   * 
+   * So this makes Lucid do nothing with auto managed
+   * dates when getting or setting them.
    */
 
   const Lucid = use('Lucid')
@@ -70,12 +69,13 @@ module.exports.boot = function() {
   Lucid.prototype.relatedNotLoaded = function() {
     const relations = _.isArray(arguments[0]) ? arguments[0] : _.toArray(arguments)
 
+    // keep only unloaded relations
     relations.filter(rel => {
         const splitted = rel.split('.')
         let data = this.relations
         for (rel of splitted) {
-        data = data[rel]
-        if (!data) return true
+          data = data[rel]
+          if (!data) return true
         }
         return false
     });

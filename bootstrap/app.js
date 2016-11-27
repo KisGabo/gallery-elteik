@@ -93,7 +93,6 @@ const aliases = {
 |
 */
 const commands = [
-  'App/Commands/Greet',
   'App/Commands/StorageDownload',
   'App/Commands/DbReset',
   'Adonis/Commands/Auth:Setup',

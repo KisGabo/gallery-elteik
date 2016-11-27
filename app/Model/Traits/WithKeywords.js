@@ -1,6 +1,11 @@
 'use strict'
 
 /**
+ * This trait should be used in models which
+ * hold keywords for items.
+ */
+
+/**
  * Note to self:
  * It's a trait.
  * It'll be provided by a provider as any other service.
@@ -15,6 +20,12 @@
 var Db
 var Keyword
 
+/**
+ * Extends the given model.
+ * This gets called by Adonis when adding the trait.
+ * 
+ * @param {Model} model
+ */
 module.exports.register = function(model) {
   // add database hook by calling .addHook on model CLASS
   model.addHook('beforeDelete', 'delete-keywords', hookBeforeDelete)
@@ -24,11 +35,24 @@ module.exports.register = function(model) {
   model.prototype.syncKeywords = syncKeywords
 }
 
+/**
+ * Must be called before using.
+ * This gets called by the provider.
+ * 
+ * @param {Database} db Builtin Database service
+ * @param {Keyword} keyword Keyword CLASS from app
+ */
 module.exports.inject = function(db, keyword) {
   Db = db
   Keyword = keyword
 }
 
+/**
+ * Deletes records from pivot table before deleting actual item.
+ * This gets called by Adonis via hooks.
+ * 
+ * @param {any} next
+ */
 function * hookBeforeDelete(next) {
   const relation = this.keywords()
   yield Db.table(relation.pivotTable)
@@ -37,6 +61,11 @@ function * hookBeforeDelete(next) {
   yield next
 }
 
+/**
+ * Creates new keywords, then synchronizes pivot table.
+ * 
+ * @param {array} names Array of keyword names
+ */
 function * syncKeywords(names) {
   const relation = this.keywords()
 
@@ -54,7 +83,25 @@ function * syncKeywords(names) {
     yield relation.sync(ids)
   }
 }
-  
+
+/**
+ * Returns a function, which can be supplied to
+ * query builder's .where(..) method to filter the result
+ * by keywords.
+ * 
+ * This is a private static helper method.
+ * It should be used in model scope functions.
+ * Since scope functions in Adonis are static,
+ * this must be also static, which means we can't
+ * access relation info (nor pivot table name and column name).
+ * 
+ * @param {array} names Array of keyword names
+ * @param {string} pivotTable Pivot table name
+ * @param {string} pivotLocalKey Name of column referencing item ID in pivot table
+ * @return {function}
+ * 
+ * @private
+ */
 function _filterByKeywords(names, pivotTable, pivotLocalKey) {
   const queryKwIds = Db
     .table('keywords')

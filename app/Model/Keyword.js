@@ -5,9 +5,13 @@ const Lucid = use('Lucid')
 class Keyword extends Lucid {
 
   /**
-   * Insert new keywords into db, then return id of every keyword.
-   * @param names Array of keyword names
-   * @return Array of ids
+   * Inserts new keywords which aren't in db,
+   * then returns the ID of every keyword given in array.
+   * 
+   * @param {array} names Array of keyword names
+   * @return {array} Array of ids
+   * 
+   * @static
    */
   static * getIds(names) {
     if (names.length == 0) return []
@@ -36,18 +40,44 @@ class Keyword extends Lucid {
     return ids
   }
 
+  /**
+   * Tells Adonis that this model doesn't store
+   * its time of creation.
+   * 
+   * @return {null}
+   * 
+   * @static
+   */
   static get createTimestamp () {
     return null
   }
 
+  /**
+   * Tells Adonis that this model doesn't store
+   * its time of update.
+   * 
+   * @return {null}
+   * 
+   * @static
+   */
   static get updateTimestamp () {
     return null
   }
 
+  /**
+   * Relation of images which have this keyword.
+   * 
+   * @return {Relation}
+   */
   images() {
     return this.belongsToMany('App/Model/Image', 'p_image_keywords')
   }
 
+  /**
+   * Relation of galleries which have this keyword.
+   * 
+   * @return {Relation}
+   */
   galleries() {
     return this.belongsToMany('App/Model/Gallery', 'p_gallery_keywords')
   }

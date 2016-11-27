@@ -1,10 +1,27 @@
 'use strict'
 
+/**
+ * This processes gallery listing filters coming in query string:
+ *   - filter_name
+ *   - filter_keywords: separated by commas
+ *   - orderby: attribute and direction (asc or desc) separated by dash
+ * 
+ * Processed filter data goes into request.galleryFilters.
+ * It can be used with gallery's filtered() scope. (see description)
+ * 
+ * Passes the filter form data back to view as 'gallery_filter_fd':
+ * {
+ *   filter_name: <name filter>,
+ *   filter_keywords: [ ... ],
+ *   orderby: <option value as string>
+ * }
+ */
+
+const moment = require('moment')
+const h = require('../../helpers.js')
 const View = use('Adonis/Src/View')
 const Keyword = use('App/Model/Keyword')
 const Gallery = use('App/Model/Image')
-const moment = require('moment')
-const h = require('../../helpers.js')
 
 class ProcGalleryFilters {
 
@@ -12,7 +29,7 @@ class ProcGalleryFilters {
     let keywords = req.input('filter_keywords')
     keywords = (keywords ? h.splitByComma(keywords) : null)
     let name = req.input('filter_name')
-    let order = req.input('orderby', 'updated_ad-desc')
+    let order = req.input('orderby', 'updated_at-desc')
     order = order.split('-')
     if (order[1] != 'asc' && order[1] != 'desc') {
       order = null

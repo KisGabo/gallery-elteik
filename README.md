@@ -43,7 +43,9 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 
 ## Tervek a közeljövőben
 
-- **doksi, kód kommentelése**
+- **doksi**
+- egy másik ImagePersistence service, ami AWS Simple Storage Service-szel dolgozik a lokál fájlrendszer helyett (mert utóbbi Herokun periodikusan resetálódik)  
+  ezzel együtt a használandó service eldöntése környezeti változóból
 - todok a kódban
 - templated hibaoldalak
 - lapozás

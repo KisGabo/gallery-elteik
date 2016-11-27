@@ -1,5 +1,9 @@
 'use strict'
 
+/**
+ * Gallery app-specific configuration file
+ */
+
 module.exports = {
 
   // first (the only admin) user inserted into database when seeding

@@ -1,5 +1,9 @@
 'use strict'
 
+/**
+ * @see app/Model/Services/ImagePersistence.js
+ */
+
 const ServiceProvider = require('adonis-fold').ServiceProvider
 const imgPersist = require('../app/Model/Services/ImagePersistence.js')
 

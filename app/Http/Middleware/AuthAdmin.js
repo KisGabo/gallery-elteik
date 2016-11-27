@@ -1,5 +1,9 @@
 'use strict'
 
+/**
+ * This middleware denies access if user is not admin.
+ */
+
 const View = use('Adonis/Src/View')
 
 class AuthAdmin {

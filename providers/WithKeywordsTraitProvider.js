@@ -1,5 +1,9 @@
 'use strict'
 
+/**
+ * @see app/Model/Traits/WithKeywords.js
+ */
+
 const ServiceProvider = require('adonis-fold').ServiceProvider
 const trait = require('../app/Model/Traits/WithKeywords.js')
 

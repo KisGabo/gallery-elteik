@@ -1,5 +1,14 @@
 'use strict'
 
+/**
+ * This seeder inserts example data into db.
+ * 
+ * Make sure you download the example images into
+ * the storage folder (`node ace storage:download`),
+ * otherwise images won't be displayed, and
+ * gallery/image operations will fail for example users.
+ */
+
 const Db = use('Database')
 const Hash = use('Hash')
 const Config = use('Config')
@@ -137,6 +146,9 @@ const gallery_keywords = [
 
 class InitialDbSeeder {
 
+  /**
+   * Seeder method called by Adonis.
+   */
   * run () {
     yield this._table('users', yield users(), true)
     yield this._table('galleries', galleries, true)
@@ -149,8 +161,12 @@ class InitialDbSeeder {
 
   /**
    * Seeds a table, if empty.
-   * @param tblname Name of table
-   * @param data Array of rows
+   * 
+   * @param {string} tblname Name of table
+   * @param {array} data Array of rows
+   * @param {boolean} timestamps True if table stores created_at and updated_at
+   * 
+   * @private
    */
   
   * _table(tblname, data, timestamps) {

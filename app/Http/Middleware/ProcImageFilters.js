@@ -1,10 +1,29 @@
 'use strict'
 
+/**
+ * This processes image listing filters coming in query string:
+ *   - filter_keywords: separated by commas
+ *   - filter_date_taken: YYYY.MM.DD.
+ *   - filter_date_taken_mode: exact | older | newer
+ *   - orderby: attribute and direction (asc or desc) separated by dash
+ * 
+ * Processed filter data goes into request.imageFilters.
+ * It can be used with image's filtered() scope. (see description)
+ * 
+ * Passes the filter form data back to view as 'gallery_filter_fd':
+ * {
+ *   filter_keywords: [ ... ],
+ *   filter_date_taken: <timestamp>,
+ *   filter_date_taken_mode: 'exact | older | newer',
+ *   orderby: <option value as string>
+ * }
+ */
+
+const moment = require('moment')
+const h = require('../../helpers.js')
 const View = use('Adonis/Src/View')
 const Keyword = use('App/Model/Keyword')
 const Image = use('App/Model/Image')
-const moment = require('moment')
-const h = require('../../helpers.js')
 
 class ProcImageFilters {
 
