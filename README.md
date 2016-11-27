@@ -2,6 +2,9 @@
 
 ## Állapotok
 
+* **nov. 27. 01:53**:
+[eb67da6](https://github.com/KisGabo/gallery-elteik/commit/eb67da6da2de5ce229b95e8caec351afeb1e36c5)  
+Akár késznek is lehet nevezni, [fut Herokun](https://gallery-elteik.herokuapp.com/). A dokumentáció és a kód kommentelése van hátra.
 * **nov. 24. 19:36**: 
 [7f3e0ab](https://github.com/KisGabo/gallery-elteik/tree/7f3e0ab33dac40d0babe9e359e5db7e6dd323ec3)  
 Na, ez már valami
@@ -10,7 +13,7 @@ Na, ez már valami
 Második beadandó viszonylag vállalható és elvileg működő változata
 * **nov. 20. 23:59**:
 [8f4c048](https://github.com/KisGabo/gallery-elteik/tree/8f4c048bf0601f58164b33dbe90b26e6d2f119aa)  
-Második beadandó lejártakor félkész, de elvileg működő állapot. Key-feature-ök hiányoznak.
+**Második beadandó lejártakor** félkész, de elvileg működő állapot. Key-feature-ök hiányoznak.
 
 **Végre megy Herokun is!** A 'deploy' branch van Herokura kötve.  
 **Admin email / pass**: admin@admin.com / pwd  
@@ -41,7 +44,6 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 ## Tervek a közeljövőben
 
 - **doksi, kód kommentelése**
-- valahogy megoldani, hogy a master brancen ne legyenek environment-dependent dolgok, pl PROCILFE meg .profile
 - todok a kódban
 - templated hibaoldalak
 - lapozás
