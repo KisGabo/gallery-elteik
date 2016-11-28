@@ -19,6 +19,10 @@ Második beadandó viszonylag vállalható és elvileg működő változata
 **Admin email / pass**: admin@admin.com / pwd  
 https://gallery-elteik.herokuapp.com/
 
+**Dokumentáció készülőben:** [lásd projekt wiki](https://github.com/KisGabo/gallery-elteik/wiki)
+
+--------------------
+
 **Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
 
 Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkalmazások fejlesztése nevű tárgyból.
@@ -31,7 +35,7 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 3. `.env.example` átnevezése `.env`-re, és tartalmának ellenőrzése
 4. Konfigurálás: `config/gallery.js` ellenőrzése (főleg az admin felhasználó adatait)
 5. Adatbázis felépítése példaadatokkal: `npm run fresh-db-force`  
-   _Ez a parancs futtatható bármikor, ha tiszta adatbázist akarunk, ekkor figyeljünk a storage könyvtárra_
+    _Ez a parancs futtatható bármikor, ha tiszta adatbázist akarunk, ekkor figyeljünk a storage könyvtárra_
 6. Példa képek letöltése: `node ace storage:download`
 7. **Indítás**: `npm start` vagy `npm run dev`
 
@@ -62,7 +66,7 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 
 --------------------
 
-## Funkcionális követelmények
+## Funkcionális követelmények (régi)
 
 ### Bejelentkezett felhasználók
 
