@@ -1,10 +1,14 @@
 # Gallery
 
+* **App kipróbálása:** [Heroku](https://gallery-elteik.herokuapp.com/)
+   - Admin email / pass: `admin@admin.com` / `pwd`
+* **Dokumentáció:** [lásd projekt wiki](https://github.com/KisGabo/gallery-elteik/wiki)
+
 ## Állapotok
 
 * **nov. 27. 01:53**:
 [eb67da6](https://github.com/KisGabo/gallery-elteik/commit/eb67da6da2de5ce229b95e8caec351afeb1e36c5)  
-Akár késznek is lehet nevezni, [fut Herokun](https://gallery-elteik.herokuapp.com/). A dokumentáció és a kód kommentelése van hátra.
+Akár késznek is lehet nevezni, [fut Herokun](https://gallery-elteik.herokuapp.com/).
 * **nov. 24. 19:36**: 
 [7f3e0ab](https://github.com/KisGabo/gallery-elteik/tree/7f3e0ab33dac40d0babe9e359e5db7e6dd323ec3)  
 Na, ez már valami
@@ -15,12 +19,6 @@ Második beadandó viszonylag vállalható és elvileg működő változata
 [8f4c048](https://github.com/KisGabo/gallery-elteik/tree/8f4c048bf0601f58164b33dbe90b26e6d2f119aa)  
 **Második beadandó lejártakor** félkész, de elvileg működő állapot. Key-feature-ök hiányoznak.
 
-**Végre megy Herokun is!** A 'deploy' branch van Herokura kötve.  
-**Admin email / pass**: admin@admin.com / pwd  
-https://gallery-elteik.herokuapp.com/
-
-**Dokumentáció készülőben:** [lásd projekt wiki](https://github.com/KisGabo/gallery-elteik/wiki)
-
 --------------------
 
 **Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
@@ -29,6 +27,7 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 **Jelenleg fejlesztés alatt.**
 
 ## Konfigurálás
+(bővebben [lásd a doksit](wiki/Implementáció#fejleszt%C5%91k%C3%B6rnyezet-fel%C3%A1ll%C3%ADt%C3%A1sa))
 
 1. Függőségek telepítése: `npm i`  
 2. Kívánt adatbázismotor telepítése, ha még nincs, pl: `npm i sqlite3`
@@ -47,7 +46,6 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 
 ## Tervek a közeljövőben
 
-- **doksi**
 - egy másik ImagePersistence service, ami AWS Simple Storage Service-szel dolgozik a lokál fájlrendszer helyett (mert utóbbi Herokun periodikusan resetálódik)  
   ezzel együtt a használandó service eldöntése környezeti változóból
 - todok a kódban
