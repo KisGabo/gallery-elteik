@@ -5,7 +5,7 @@
 
 <h1>Beállítások</h1>
 
-<form class="form-horizontal" method="post">
+<form class="form-horizontal" method="post" data-toggle="validator">
 
   <div class="form-group">
     <label class="col-lg-2 control-label">Felhasználói neved</label>
@@ -21,24 +21,29 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group has-feedback">
     <label for="password" class="col-lg-2 control-label">Jelszó</label>
     <div class="col-lg-10">
       <input type="password" class="form-control" name="password" id="password">
+      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group has-feedback">
     <label for="password_confirm" class="col-lg-2 control-label">Jelszó újra</label>
     <div class="col-lg-10">
-      <input type="password" class="form-control" name="password_confirm" id="password_confirm">
+      <input type="password" class="form-control" name="password_confirm" id="password_confirm"
+             data-match="#password" data-match-error="A két jelszó nem egyezik.">
+      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
   <div class="form-group">
     <label for="intro" class="col-lg-2 control-label">Bemutatkozás</label>
     <div class="col-lg-10">
-      <textarea class="form-control" rows="5" name="intro" id="intro" placeholder="Pár szó magadról, ha gondolod">{{ fd.intro }}</textarea>
+      <textarea class="form-control" rows="5" name="intro" id="intro" placeholder="Pár szó magadról, ha gondolod" maxlength="1024">{{ fd.intro }}</textarea>
     </div>
   </div>
 
@@ -53,4 +58,9 @@
 
 </form>
 
+{% endblock %}
+
+{% block scripts %}
+<!-- Bootstrap Validator -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 {% endblock %}

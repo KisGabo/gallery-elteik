@@ -6,8 +6,9 @@
 
 ## Állapotok
 
-* **nov. 27. 01:53**:
-[eb67da6](https://github.com/KisGabo/gallery-elteik/commit/eb67da6da2de5ce229b95e8caec351afeb1e36c5)  
+* **3. beadandó készül**
+* **nov. 27. 13:58**:
+[eb67da6](https://github.com/KisGabo/gallery-elteik/tree/eb67da6da2de5ce229b95e8caec351afeb1e36c5)  
 Akár késznek is lehet nevezni, [fut Herokun](https://gallery-elteik.herokuapp.com/).
 * **nov. 24. 19:36**: 
 [7f3e0ab](https://github.com/KisGabo/gallery-elteik/tree/7f3e0ab33dac40d0babe9e359e5db7e6dd323ec3)  

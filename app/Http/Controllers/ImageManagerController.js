@@ -26,7 +26,7 @@ class ImageManagerController {
 
     yield resp.sendView('forms/upload', {
       gallery: gallery.toJSON(),
-      fields: req.input('fields', 1),
+      fields: req.input('fields', 1) || 1,
       max_dim: Config.get('gallery.validation.max_original_dimensions'),
       max_size: Config.get('gallery.validation.max_upload_size'),
     })

@@ -7,7 +7,7 @@
 
   <div class="col-lg-6">
 
-    <form class="form-horizontal" method="post">
+    <form class="form-horizontal" method="post" data-toggle="validator">
 
       <div class="form-group">
         <label class="col-lg-2 control-label">Galéria</label>
@@ -16,21 +16,25 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <label for="title" class="col-lg-2 control-label">Cím</label>
         <div class="col-lg-10">
-          <input type="text" class="form-control" name="title" id="title" value="{{ image.title }}">
+          <input type="text" class="form-control" name="title" id="title" value="{{ image.title }}" maxlength="254">
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <div class="help-block with-errors"></div>
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <label for="date_taken" class="col-lg-2 control-label">Fotózva</label>
         <div class="col-lg-10">
           <input type="text" class="form-control" name="date_taken" id="date_to" placeholder="pl. 2016.11.20. 12:15:00" value="{{ image.date_taken | date() }}">
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <div class="help-block with-errors"></div>
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <label for="keywords" class="col-lg-2 control-label">
           Kulcsszavak
           <br>
@@ -38,6 +42,8 @@
         </label>
         <div class="col-lg-10">
           <input type="text" class="form-control" name="keywords" id="keywords" placeholder="szó1, szó2, satöbbi" value="{{ keywordNames | join(', ') if keywordNames }}">
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <div class="help-block with-errors"></div>
         </div>
       </div>
 
@@ -56,10 +62,12 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <label for="about" class="col-lg-2 control-label">Leírás</label>
         <div class="col-lg-10">
-          <textarea class="form-control" rows="5" name="about" id="about" placeholder="Pár szó, ha van mit mesélni">{{ image.about }}</textarea>
+          <textarea class="form-control" rows="5" name="about" id="about" placeholder="Pár szó, ha van mit mesélni" maxlength="1024">{{ image.about }}</textarea>
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+          <div class="help-block with-errors"></div>
         </div>
       </div>
 
