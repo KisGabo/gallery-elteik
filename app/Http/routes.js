@@ -39,3 +39,9 @@ Route.get   ('/image/:id/force',    'ImageManagerController.forcePrivate')      
 
 Route.get   ('/keyword/:id/gallery','GalleryBrowserController.showKeywordPage') .as('gallery_keyword').middleware('proc_gallery_filters')
 Route.get   ('/keyword/:id/image',  'GalleryBrowserController.showKeywordPage') .as('image_keyword') .middleware('proc_img_filters')
+
+Route.group('ajax', function () {
+
+  Route.get    ('/user/exists',     'AjaxController.checkUserExists')           .as('a_user_exists')
+
+}).prefix('/ajax')

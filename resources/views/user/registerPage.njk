@@ -11,8 +11,9 @@
     <label for="username" class="col-lg-2 control-label">Felhasználói név *</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" name="username" id="username" placeholder="Felhasználói név" value="{{ fd.username }}"
-             required data-minlength="2" maxlength="80" pattern="[a-zA-Z0-9]*"
-             data-pattern-error="Csak az angol ábécé betűit és számokat tartalmazhat." data-minlength-error="Minimum 2 karakter hosszú legyen.">
+             required data-minlength="2" maxlength="80" pattern="[a-zA-Z0-9]*" data-remote="{{ 'a_user_exists' | route() }}"
+             data-pattern-error="Csak az angol ábécé betűit és számokat tartalmazhat." data-minlength-error="Minimum 2 karakter hosszú legyen."
+             data-remote-error="A felhasználói név már létezik. Kérlek, válassz másikat.">
       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
       <div class="help-block with-errors"></div>
     </div>
@@ -22,7 +23,8 @@
     <label for="email" class="col-lg-2 control-label">E-mail *</label>
     <div class="col-lg-10">
       <input type="email" class="form-control" name="email" id="email" placeholder="E-mail cím" value="{{ fd.email }}"
-             required maxlength="254">
+             required maxlength="254" data-remote="{{ 'a_user_exists' | route() }}"
+             data-remote-error="Az e-mail cím már foglalt. Kérlek, válassz másikat.">
       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
       <div class="help-block with-errors"></div>
     </div>
