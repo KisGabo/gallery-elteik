@@ -12,7 +12,7 @@
   </small>
 </h1>
 
-<form class="form-horizontal" method="get">
+<form class="form-horizontal" method="get" id="form-field-count">
   <fieldset>
     <legend>Mezők száma</legend>
 
@@ -48,15 +48,21 @@
     </div>
 
     {% for i in range(fields) %}
-    <div class="form-group">
-      <div class="col-lg-12">
-        <input type="file" class="form-control" name="files[]" id="file{{ i }}">
+    <div class="form-group upload-field">
+      <div class="col-xs-8">
+        <input type="file" class="form-control" name="files[]" multiple>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" class="btn btn-danger btn-remove-upload-field" style="display:none">
+          <i class="glyphicon glyphicon-trash"></i>
+        </button>
       </div>
     </div>
     {% endfor %}
 
     <div class="form-group">
       <div class="col-lg-12">
+        <button type="button" class="btn btn-success btn-add-upload-field" style="display:none">Még egy fájl</button>
         <button type="reset" class="btn btn-default">Alaphelyzet</button>
         <button type="submit" class="btn btn-primary">Mentés</button>
       </div>
@@ -67,4 +73,8 @@
   </fieldset>
 </form>
 
+{% endblock %}
+
+{% block scripts %}
+<script src="/scripts/upload.js"></script>
 {% endblock %}
