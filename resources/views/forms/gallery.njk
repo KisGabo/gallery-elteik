@@ -18,7 +18,8 @@
   <div class="form-group has-feedback">
     <label for="date_from" class="col-lg-2 control-label">Kezdő dátum</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" name="date_from" id="date_from" placeholder="pl. 2016.11.20. 12:15:00" value="{{ gallery.date_from | date() }}">
+      <input type="text" class="form-control" name="date_from" id="date_from" placeholder="pl. 2016.11.20. 12:15:00"
+             value="{{ gallery.date_from | date() }}" data-datetime="y" data-delay="1500">
       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
       <div class="help-block with-errors"></div>
     </div>
@@ -27,7 +28,8 @@
   <div class="form-group has-feedback">
     <label for="date_to" class="col-lg-2 control-label">Befejező dátum</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" name="date_to" id="date_to" placeholder="pl. 2016.11.20. 12:15:00" value="{{ gallery.date_to | date() }}">
+      <input type="text" class="form-control" name="date_to" id="date_to" placeholder="pl. 2016.11.20. 12:15:00"
+             value="{{ gallery.date_to | date() }}" data-datetime="y" data-delay="1500">
       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
       <div class="help-block with-errors"></div>
     </div>
@@ -83,4 +85,8 @@
 {% block scripts %}
 <!-- Bootstrap Validator -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+<!-- Moment.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
+<!-- Custom validators -->
+<script src="/scripts/custom-validators.js"></script>
 {% endblock %}
