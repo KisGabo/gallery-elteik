@@ -42,6 +42,11 @@ Route.get   ('/keyword/:id/image',  'GalleryBrowserController.showKeywordPage') 
 
 Route.group('ajax', function () {
 
-  Route.get    ('/user/exists',     'AjaxController.checkUserExists')           .as('a_user_exists')
+  Route.get    ('/user/exists',         'AjaxController.checkUserExists')       .as('a_user_exists')
+
+  Route.delete ('/gallery/:id/delete',  'GalleryManagerController.delete')      .as('a_gallery_delete')      .middleware('auth')
+  Route.delete ('/image/:id/delete',    'ImageManagerController.delete')        .as('a_image_delete')        .middleware('auth')
+  Route.post   ('/image/:id/like',      'GalleryBrowserController.likeImage')   .as('a_like')                .middleware('auth')
+  Route.patch  ('/image/:id/force',     'ImageManagerController.forcePrivate')  .as('a_image_force')         .middleware('mod')
 
 }).prefix('/ajax')

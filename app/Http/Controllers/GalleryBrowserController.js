@@ -202,7 +202,7 @@ class GalleryBrowserController {
       yield image.save()
     }
 
-    resp.route('image', { id: image.id })
+    !req.ajax() ? resp.redirect('back') : resp.send('ok')
   }
 
 }

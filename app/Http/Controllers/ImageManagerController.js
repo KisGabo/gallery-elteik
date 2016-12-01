@@ -153,7 +153,7 @@ class ImageManagerController {
     }
 
     yield image.delete()
-    resp.redirect('back')
+    !req.ajax() ? resp.redirect('back') : resp.send('ok')
   }
 
   * forcePrivate(req, resp) {
@@ -165,7 +165,7 @@ class ImageManagerController {
 
     image.force_private = true
     yield image.save()
-    resp.redirect('back')
+    !req.ajax() ? resp.redirect('back') : resp.send('ok')
   }
 
   * handleUpload(req, resp) {
