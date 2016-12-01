@@ -2,6 +2,7 @@
 {% set headTitle = 'Saját galériák' %}
 {% from 'galleryBrowser/galleryTable.njk' import m as galleryTable %}
 {% from 'galleryBrowser/galleryTableControls.njk' import m as controls %}
+{% from 'galleryBrowser/confirmDialog.njk' import m as confirm %}
 
 {% block content %}
 
@@ -16,4 +17,14 @@
 
 {{ galleryTable(galleries, true) }}
 
+{{ confirm() }}
+
+{% endblock %}
+
+{% block scripts %}
+<!-- delete buttons -->
+<script src="/scripts/button-actions.js"></script>
+<script>
+  $('.btn-gallery-delete').on('click', btnGalleryDelete_click)
+</script>
 {% endblock %}

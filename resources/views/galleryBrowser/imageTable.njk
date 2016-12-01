@@ -24,13 +24,13 @@
       <a href="{{ 'image_edit' | route({id: img.id}) }}" title="Szerkesztés" class="btn btn-primary btn-xs">
         <i class="glyphicon glyphicon-pencil"></i>
       </a>
-      <a href="{{ 'image_delete' | route({id: img.id}) }}" title="Törlés" class="btn btn-danger btn-xs">
+      <a href="{{ 'image_delete' | route({id: img.id}) }}" title="Törlés" class="btn btn-danger btn-xs btn-image-delete">
         <i class="glyphicon glyphicon-trash"></i>
       </a>
       {% endif %}
 
       {% if moderatorControls %}
-      <a href="{{ 'image_force' | route({id: img.id}) }}" title="Ne legyen publikus" class="btn btn-warning btn-xs">
+      <a href="{{ 'image_force' | route({id: img.id}) }}" title="Ne legyen publikus" class="btn btn-warning btn-xs btn-force">
         <i class="glyphicon glyphicon-eye-close"></i>
       </a>
       {% endif %}
@@ -45,5 +45,7 @@
 {% if images.length == 0 %}
 <p><em>Nincs megjeleníthető kép.</em></p>
 {% endif %}
+
+{{ csrfField | safe }}
 
 {% endmacro %}

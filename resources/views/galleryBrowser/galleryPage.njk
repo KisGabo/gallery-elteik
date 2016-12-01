@@ -3,6 +3,7 @@
 {% from 'galleryBrowser/imageTable.njk' import m as imageTable %}
 {% from 'galleryBrowser/imageTableControls.njk' import m as controls %}
 {% from 'galleryBrowser/keywordList.njk' import m as keywordList %}
+{% from 'galleryBrowser/confirmDialog.njk' import m as confirm %}
 
 {% block content %}
 
@@ -34,7 +35,8 @@
   <li>
     <a href="{{ 'gallery_upload' | route({id: gallery.id}) }}" class="btn btn-success btn-xs">Feltöltés</a>
     <a href="{{ 'gallery_edit' | route({id: gallery.id}) }}" class="btn btn-primary btn-xs">Módosítás</a>
-    <a href="{{ 'gallery_delete' | route({id: gallery.id}) }}" class="btn btn-danger btn-xs">Törlés</a>
+    <a href="{{ 'gallery_delete' | route({id: gallery.id}) }}" class="btn btn-danger btn-xs btn-gallery-delete"
+       data-redirect="/own">Törlés</a>
   </li>
   {% endif %}
 
@@ -46,6 +48,18 @@
 
 {{ controls(image_filter_fd) }}
 
-{{ imageTable(images, gallery.user_id == currentUser.id, currentUser.role >= 1) }}
+{{ imageTable(images, gallery.user_id == currentUser.id, currentUser.role >= 1 and gallery.user_id != currentUser.id) }}
 
+{{ confirm() }}
+
+{% endblock %}
+
+{% block scripts %}
+<!-- buttons -->
+<script src="/scripts/button-actions.js"></script>
+<script>
+  $('.btn-gallery-delete').on('click', btnGalleryDelete_click)
+  $('.btn-force').on('click', btnForce_click)
+  $('.btn-image-delete').on('click', btnImageDelete_click)
+</script>
 {% endblock %}

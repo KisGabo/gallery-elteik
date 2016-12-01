@@ -1,6 +1,7 @@
 {% extends 'master' %}
 {% set headTitle = image.title if image.title else 'Kép' %}
 {% from 'galleryBrowser/keywordList.njk' import m as keywordList %}
+{% from 'galleryBrowser/confirmDialog.njk' import m as confirm %}
 
 {% block content %}
 
@@ -60,7 +61,7 @@
     {% if likeStatus == 'can-like' %}
     <p>
       <strong>
-        <a href="{{ 'like' | route({id: image.id}) }}">
+        <a href="{{ 'like' | route({id: image.id}) }}" class="btn-like">
           Like
         </a>
       </strong>
@@ -87,13 +88,15 @@
     <a href="{{ 'image_edit' | route({id: image.id}) }}" title="Szerkesztés" class="btn btn-primary btn-xs">
       <i class="glyphicon glyphicon-pencil"></i>
     </a>
-    <a href="{{ 'image_delete' | route({id: image.id}) }}" title="Törlés" class="btn btn-danger btn-xs">
+    <a href="{{ 'image_delete' | route({id: image.id}) }}" title="Törlés" class="btn btn-danger btn-xs btn-image-delete"
+       data-redirect="{{ 'gallery' | route({id: image.gallery.id}) }}">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
     {% endif %}
 
     {% if currentUser.role >= 1 %}
-    <a href="{{ 'image_force' | route({id: image.id}) }}" title="Ne legyen publikus" class="btn btn-warning btn-xs">
+    <a href="{{ 'image_force' | route({id: image.id}) }}" title="Ne legyen publikus" class="btn btn-warning btn-xs btn-force"
+       data-redirect="{{ 'gallery' | route({id: image.gallery.id}) }}">
       <i class="glyphicon glyphicon-eye-close"></i>
     </a>
     {% endif %}
@@ -102,4 +105,17 @@
 
 </div>
 
+{{ confirm() }}
+{{ csrfField | safe }}
+
+{% endblock %}
+
+{% block scripts %}
+<!-- buttons -->
+<script src="/scripts/button-actions.js"></script>
+<script>
+  $('.btn-like').on('click', btnLike_click)
+  $('.btn-force').on('click', btnForce_click)
+  $('.btn-image-delete').on('click', btnImageDelete_click)
+</script>
 {% endblock %}

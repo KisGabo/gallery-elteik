@@ -38,7 +38,7 @@
       <td>
         <a href="{{ 'gallery_upload' | route({id: gal.id}) }}" class="btn btn-success btn-xs">Feltöltés</a>
         <a href="{{ 'gallery_edit' | route({id: gal.id}) }}" class="btn btn-primary btn-xs">Módosítás</a>
-        <a href="{{ 'gallery_delete' | route({id: gal.id}) }}" class="btn btn-danger btn-xs">Törlés</a>
+        <a href="{{ 'gallery_delete' | route({id: gal.id}) }}" class="btn btn-danger btn-xs btn-gallery-delete">Törlés</a>
       </td>
       {% endif %}
       
@@ -52,5 +52,7 @@
 {% if galleries.length == 0 %}
 <p><em>Nincs megjeleníthető galéria.</em></p>
 {% endif %}
+
+{{ csrfField | safe }}
 
 {% endmacro %}
