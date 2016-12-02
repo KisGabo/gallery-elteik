@@ -153,7 +153,7 @@ class ImageManagerController {
     }
 
     yield image.delete()
-    !req.ajax() ? resp.redirect('back') : resp.send('ok')
+    !req.ajax() ? resp.route('gallery', { id: image.relations['gallery'].id }) : resp.send('ok')
   }
 
   * forcePrivate(req, resp) {

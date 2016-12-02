@@ -24,7 +24,7 @@ Route.post  ('/gallery/:id/edit',   'GalleryManagerController.save')            
 Route.get   ('/gallery/:id/delete', 'GalleryManagerController.delete')          .as('gallery_delete').middleware('auth')
 Route.get   ('/gallery/:id/upload', 'ImageManagerController.showUploadPage')    .as('gallery_upload').middleware('auth')
 Route.post  ('/gallery/:id/upload', 'ImageManagerController.handleUpload')                           .middleware('auth')
-Route.get   ('/own',                'GalleryBrowserController.showOwnPage')                          .middleware('auth', 'proc_gallery_filters')
+Route.get   ('/own',                'GalleryBrowserController.showOwnPage')     .as('own')           .middleware('auth', 'proc_gallery_filters')
 
 Route.get   ('/image',              'GalleryBrowserController.showImageListPage')                    .middleware('proc_img_filters')
 Route.get   ('/image/:id',          'GalleryBrowserController.showImagePage')   .as('image')

@@ -82,7 +82,7 @@ class GalleryManagerController {
     }
 
     yield gallery.delete()
-    !req.ajax() ? resp.redirect('back') : resp.send('ok')
+    !req.ajax() ? resp.route('own') : resp.send('ok')
   }
 
   * showFormPage(req, resp) {

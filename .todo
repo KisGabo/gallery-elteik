@@ -11,7 +11,7 @@
 - galériáknál kijelezni, hány kép van bennük (rendezés aszerint)
 - template változók nincsenek összevissza?
 - named route-ok használata mindenhol
-- törlés után redirect
 - settings oldalon password confirm required if
 - image-size modul bug, orientation
 - .fetch() nélkül sima objectet kapok!!!
+- még kommentelni
