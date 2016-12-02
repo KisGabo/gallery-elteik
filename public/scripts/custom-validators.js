@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Custom validator functions for Bootstrap validator.
  */

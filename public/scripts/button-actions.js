@@ -1,8 +1,10 @@
+'use strict'
+
 function btnGalleryDelete_click(e) {
   e.preventDefault()
-  $a = $(this)
-  $modal = $('.confirm-modal')
-  $ok = $modal.find('.modal-ok')
+  const $a = $(this)
+  const $modal = $('.confirm-modal')
+  const $ok = $modal.find('.modal-ok')
   $modal.modal('show')
 
   // perform delete on OK
@@ -23,9 +25,9 @@ function btnGalleryDelete_click(e) {
 
 function btnImageDelete_click(e) {
   e.preventDefault()
-  $a = $(this)
-  $modal = $('.confirm-modal')
-  $ok = $modal.find('.modal-ok')
+  const $a = $(this)
+  const $modal = $('.confirm-modal')
+  const $ok = $modal.find('.modal-ok')
   $modal.modal('show')
 
   // perform delete on OK
@@ -46,11 +48,10 @@ function btnImageDelete_click(e) {
 
 function btnLike_click(e) {
   e.preventDefault()
-  $a = $(this)
+  const $a = $(this)
 
   _ajaxOp($a, 'POST', resp => {
     // remove 'Like' link
-    $parent = $a.parent()
     $a.after('<strong>Megtörtént!</strong>')
     $a.remove()
   })
@@ -58,7 +59,7 @@ function btnLike_click(e) {
 
 function btnForce_click(e) {
   e.preventDefault()
-  $a = $(this)
+  const $a = $(this)
 
   _ajaxOp($a, 'PATCH', resp => {
     if ($a.data('redirect')) {

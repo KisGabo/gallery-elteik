@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Add or remove file fields on image upload page.
  */
