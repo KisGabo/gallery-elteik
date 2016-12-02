@@ -225,7 +225,7 @@ class ImageManagerController {
 
     yield ImgPersist.deleteTempFolder(gallery)
 
-    // redirect with message
+    // result
 
     if (firstId == 0) {
       // no files could be uploaded :(
@@ -245,8 +245,16 @@ class ImageManagerController {
         { type: 'success', message: 'A feltöltés sikeres.' }
         ]}).flash()
     }
-
-    resp.route('image_edit', { id: firstId })
+      
+    if (!req.ajax()) {
+      resp.route('image_edit', { id: firstId })
+    }
+    else {
+      resp.json({
+        firstId,
+        skipped: validationResult.skipped,
+      })
+    }
   }
 
 }
