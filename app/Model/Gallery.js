@@ -3,6 +3,7 @@
 const Db = use('Database')
 const Lucid = use('Lucid')
 const ImgPersist = use('Gallery/ImagePersistence')
+const Keyword = use('App/Model/Keyword')
 
 class Gallery extends Lucid {
 
@@ -174,6 +175,30 @@ class Gallery extends Lucid {
    */
   setPublic(val) {
     return (val ? 1 : 0)
+  }
+
+  /**
+   * Returns all keywords which are related
+   * to this gallery or its images.
+   * 
+   * @return {Collection} Keyword model collection
+   */
+  * getRelatedKeywords() {
+    yield this.relatedNotLoaded('images').load()
+    const imgIds = []
+    const galId = this.id
+    this.relations['images'].forEach(img => imgIds.push(img.id))
+
+    const keywordIdsQuery = Db.table('p_image_keywords')
+      .whereIn('image_id', imgIds)
+      .select('keyword_id')
+      .union(function() {
+        this.table('p_gallery_keywords')
+          .where('gallery_id', galId)
+          .select('keyword_id')
+      })
+
+    return yield Keyword.query().whereIn('id', keywordIdsQuery).fetch()
   }
 
   /**

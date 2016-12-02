@@ -49,4 +49,7 @@ Route.group('ajax', function () {
   Route.post   ('/image/:id/like',      'GalleryBrowserController.likeImage')   .as('a_like')                .middleware('auth')
   Route.patch  ('/image/:id/force',     'ImageManagerController.forcePrivate')  .as('a_image_force')         .middleware('mod')
 
+  Route.get    ('/keyword/search',      'KeywordController.ajaxSuggestions')    .as('a_keyword_search')
+  Route.get    ('/gallery/:id/keywords','KeywordController.ajaxSuggestionsForGallery').as('a_gallery_keywords').middleware('auth')
+
 }).prefix('/ajax')

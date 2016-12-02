@@ -35,14 +35,11 @@
         </div>
       </div>
 
-      <div class="form-group has-feedback">
-        <label for="keywords" class="col-lg-2 control-label">
-          Kulcsszavak
-          <br>
-          <small>Vesszővel elválasztva</small>
-        </label>
+      <div class="form-group">
+        <label for="keywords" class="col-lg-2 control-label">Kulcsszavak</label>
         <div class="col-lg-10">
-          <input type="text" class="form-control" name="keywords" id="keywords" placeholder="szó1, szó2, satöbbi" value="{{ keywordNames | join(', ') if keywordNames }}">
+          <input type="text" class="form-control" name="keywords" id="keywords" data-gallery="{{ image.gallery.id }}"
+                 placeholder="szó1,szó2,satöbbi" value="{{ keywordNames | join(',') if keywordNames }}">
           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
           <div class="help-block with-errors"></div>
         </div>
@@ -106,11 +103,19 @@
 
 {% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.min.css" />
+{% endblock %}
+
 {% block scripts %}
 <!-- Bootstrap Validator -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <!-- Moment.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
+<!-- Selectize -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js"></script>
+<!-- Enhanced keyword field -->
+<script src="/scripts/smart-keywords.js"></script>
 <!-- Custom validators -->
 <script src="/scripts/custom-validators.js"></script>
 {% endblock %}
