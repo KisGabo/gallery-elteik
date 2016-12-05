@@ -42,6 +42,7 @@ Route.get   ('/keyword/:id/image',  'GalleryBrowserController.showKeywordPage') 
 
 Route.group('ajax', function () {
 
+  Route.post   ('/login',               'UserController.ajaxLogin')             .as('a_login')
   Route.get    ('/user/exists',         'UserController.checkUserExists')       .as('a_user_exists')
 
   Route.delete ('/gallery/:id/delete',  'GalleryManagerController.delete')      .as('a_gallery_delete')      .middleware('auth')

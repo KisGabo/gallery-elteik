@@ -26,6 +26,19 @@ class UserController {
     }
   }
 
+  * ajaxLogin(req, resp) {
+    const email = req.input('email')
+    const password = req.input('password')
+
+    try {
+      yield req.auth.attempt(email, password)
+      resp.ok('ok')
+    }
+    catch (e) {
+      resp.status(403).send('denied')
+    }
+  }
+
   * logout(req, resp) {
     yield req.auth.logout()
     resp.redirect('/')

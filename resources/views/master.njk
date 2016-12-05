@@ -29,60 +29,62 @@
 
     <!-- NAVBAR -->
 
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Menü</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Gallery</a>
+    <div id="navbar-container">
+      <nav class="navbar navbar-default" id="navbar-main">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Menü</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Gallery</a>
+          </div>
+
+          <!-- LEFT SIDE MENU -->
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav">
+              <li><a href="/gallery">Galériák</a></li>
+              <li><a href="/image">Képek</a></li>
+              <li><a href="/user">Felhasználók</a></li>
+              {% if currentUser %}
+              <li><a href="/own">Saját gyűjtemény</a></li>
+              {% endif %}
+            </ul>
+
+            <!--
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            -->
+
+            <!-- RIGHT SIDE MENU -->
+
+            <ul class="nav navbar-nav navbar-right">
+              {% if currentUser %}
+              <li>
+                <a href="{{ 'profile' | route({id: currentUser.id}) }}">
+                  <strong>{{ currentUser.username }}</strong>
+                </a>
+              </li>
+              <li><a href="/usersettings">Beállítások</a></li>
+              <li><a href="/logout">Logout</a></li>
+              {% else %}
+              <li><a href="/login" id="btn-login">Login</a></li>
+              <li><a href="/register">Regisztráció</a></li>
+              {% endif %}
+            </ul>
+
+          </div>
         </div>
-
-        <!-- LEFT SIDE MENU -->
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-          <ul class="nav navbar-nav">
-            <li><a href="/gallery">Galériák</a></li>
-            <li><a href="/image">Képek</a></li>
-            <li><a href="/user">Felhasználók</a></li>
-            {% if currentUser %}
-            <li><a href="/own">Saját gyűjtemény</a></li>
-            {% endif %}
-          </ul>
-
-          <!--
-          <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
-          -->
-
-          <!-- RIGHT SIDE MENU -->
-
-          <ul class="nav navbar-nav navbar-right">
-            {% if currentUser %}
-            <li>
-              <a href="{{ 'profile' | route({id: currentUser.id}) }}">
-                <strong>{{ currentUser.username }}</strong>
-              </a>
-            </li>
-            <li><a href="/usersettings">Beállítások</a></li>
-            <li><a href="/logout">Logout</a></li>
-            {% else %}
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Regisztráció</a></li>
-            {% endif %}
-          </ul>
-
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
 
     <!-- MESSAGES -->
 
@@ -101,10 +103,31 @@
       {% block content %}{% endblock %}      
     </div>
 
+    {% if not currentUser %}
+    <!-- LOGIN MODAL -->
+    <div class="modal fade confirm-modal" tabindex="-1" role="dialog" id="login-modal">
+      <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+          <div class="modal-header">Belépés</div>
+          <div class="modal-body">
+            <div class="alert alert-danger">Az e-mail vagy jelszó nem stimmel!</div>
+            <div class="alert alert-success">Sikeres bejelentkezés!</div>
+            <div class="form-area"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    {% if not currentUser %}
+    <!-- Login form modal -->
+    <script src="/scripts/login.js"></script>
+    {% endif %}
 
     {% block scripts %}{% endblock %}
 
