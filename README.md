@@ -1,51 +1,33 @@
 # Gallery
 
+**Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
+
+Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkalmazások fejlesztése nevű tárgyból.
+
 * **App kipróbálása:** [Heroku](https://gallery-elteik.herokuapp.com/)
    - Admin email / pass: `admin@admin.com` / `pwd`
 * **Dokumentáció:** [lásd projekt wiki](https://github.com/KisGabo/gallery-elteik/wiki)
 
-## Állapotok
+## Beadandók
 
-* **3. beadandó készül**
-* **nov. 27. 13:58**:
-[eb67da6](https://github.com/KisGabo/gallery-elteik/tree/eb67da6da2de5ce229b95e8caec351afeb1e36c5)  
-Akár késznek is lehet nevezni, [fut Herokun](https://gallery-elteik.herokuapp.com/).
-* **nov. 24. 19:36**: 
-[7f3e0ab](https://github.com/KisGabo/gallery-elteik/tree/7f3e0ab33dac40d0babe9e359e5db7e6dd323ec3)  
-Na, ez már valami
-* **nov. 23. 15:07**:
-[bb7aedd](https://github.com/KisGabo/gallery-elteik/tree/bb7aeddc80eda155f0d7ab0c4ce3a12319aa0d52)  
-Második beadandó viszonylag vállalható és elvileg működő változata
-* **nov. 20. 23:59**:
-[8f4c048](https://github.com/KisGabo/gallery-elteik/tree/8f4c048bf0601f58164b33dbe90b26e6d2f119aa)  
-**Második beadandó lejártakor** félkész, de elvileg működő állapot. Key-feature-ök hiányoznak.
-
---------------------
-
-**Egyszerű fotókatalogizáló app, ahol a képek galériákba sorolhatók, és a képekhez és galériákhoz különböző információkat tárolhatunk el, valamint a publikus képek böngészhetőek a látogatók számára.**
-
-Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkalmazások fejlesztése nevű tárgyból.
-**Jelenleg fejlesztés alatt.**
+* **Első beadandó**: [bead-1.0](https://github.com/KisGabo/gallery-elteik/tree/bead-1.0)
+* **Második beadandó határidőre**: [bead-2.0](https://github.com/KisGabo/gallery-elteik/tree/bead-2.0)
+* **Második beadandó kész:** [bead-2.3](https://github.com/KisGabo/gallery-elteik/tree/bead-2.3)
+  ([pótlások](https://github.com/KisGabo/gallery-elteik/wiki/P%C3%B3tl%C3%A1sok))
+* **Harmadik beadandó**: [bead-3.0](https://github.com/KisGabo/gallery-elteik/tree/bead-3.0)
 
 ## Konfigurálás
-(bővebben [lásd a doksit](wiki/Implementáció#fejleszt%C5%91k%C3%B6rnyezet-fel%C3%A1ll%C3%ADt%C3%A1sa))
+(bővebben [lásd a doksit](https://github.com/KisGabo/gallery-elteik/wiki/Implement%C3%A1ci%C3%B3#fejleszt%C5%91k%C3%B6rnyezet-fel%C3%A1ll%C3%ADt%C3%A1sa))
 
-1. Függőségek telepítése: `npm i`  
+1. Függőségek telepítése: `npm i`
 2. Kívánt adatbázismotor telepítése, ha még nincs, pl: `npm i sqlite3`
 3. `.env.example` átnevezése `.env`-re, és tartalmának ellenőrzése
 4. Konfigurálás: `config/gallery.js` ellenőrzése (főleg az admin felhasználó adatait)
-5. Adatbázis felépítése példaadatokkal: `npm run fresh-db-force`  
-    _Ez a parancs futtatható bármikor, ha tiszta adatbázist akarunk, ekkor figyeljünk a storage könyvtárra_
+5. Adatbázis felépítése példaadatokkal: `npm run fresh-db-force`
 6. Példa képek letöltése: `node ace storage:download`
 7. **Indítás**: `npm start` vagy `npm run dev`
 
-* _(opcionális)_ express-admin telepítése:
-  1. Telepítés: `npm i express-admin`
-  2. Konfigurálás / indítás: `npm run sqladmin`
-    - Adatbázis típusa: `sqlite`
-    - Adatbázisfájl: `database/db.sqlite`
-
-## Tervek a közeljövőben
+## Tervek a ~~közel~~távoli jövőben
 
 - egy másik ImagePersistence service, ami AWS Simple Storage Service-szel dolgozik a lokál fájlrendszer helyett (mert utóbbi Herokun periodikusan resetálódik)  
   ezzel együtt a használandó service eldöntése környezeti változóból
@@ -62,6 +44,10 @@ Ez egy gyakorló projekt, beadandó feladat az ELTE Informatikai Karon, az Alkal
 - galériáknál kijelezni, hány kép van bennük (rendezés aszerint)
 - template változók nincsenek összevissza?
 - named route-ok használata mindenhol
+- settings oldalon a jelszónál valamilyen required-if féleség
+- image-size modul bug, orientációt nem veszi figyelembe
+- Lucid: .fetch() kigyomlálása, ahol nem szükséges
+- még kommentelés
 
 --------------------
 
