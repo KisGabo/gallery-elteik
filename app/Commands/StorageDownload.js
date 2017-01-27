@@ -9,7 +9,7 @@
  * because of missing folders.
  */
 
-const https = require('https')
+const http = require('http')
 const fs = require('fs')
 const extract = require('extract-zip')
 const Command = use('Command')
@@ -51,7 +51,7 @@ class StorageDownload extends Command {
 
     this.info('Downloading example images...')
     var file = fs.createWriteStream(storage + '/storage.zip');
-    var request = https.get("https://dl.dropboxusercontent.com/u/69565179/k%C3%BCld-nagyg%C3%A9p/gallery-elteik/storage.zip", (resp) => {
+    var request = http.get("http://share.srv.kisgabo.com/public/gallery-elteik-storage.zip", (resp) => {
       resp.pipe(file);
       resp.on('end', () => {
         this.info('Extracting example images...')
