@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x \"node --harmony_proxies\" server.js",
-    "start": "node --harmony_proxies server.js",
+    "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x \"node\" server.js",
+    "start": "node server.js",
     "sqladmin": "node node_modules/express-admin/app.js config/express-admin",
     "fresh-db-force": "node ace db:reset -f && node ace migration:run -f && node ace db:seed -f",
     "heroku-postbuild": "npm i pg && node ace db:reset -f && node ace migration:run -f && node ace db:seed -f && node ace storage:download"
